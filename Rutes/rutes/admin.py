@@ -1,3 +1,6 @@
 from django.contrib import admin
+from rutes.models import Categoria, Dades_Mapa, Post
 
-# Register your models here.
+admin.site.register(Categoria)
+admin.site.register(Dades_Mapa)
+admin.site.register(Post)

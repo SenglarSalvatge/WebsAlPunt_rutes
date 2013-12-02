@@ -1,3 +1,5 @@
 from django.contrib import admin
+from social.models import Comentari, Puntuacio
 
-# Register your models here.
+admin.site.register(Comentari)
+admin.site.register(Puntuacio)
