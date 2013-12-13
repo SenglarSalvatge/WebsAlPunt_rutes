@@ -1,3 +1,6 @@
 eclipse.preferences.version=1
 encoding//Rutes/usuaris/models.py=utf-8
 encoding//Rutes/usuaris/views.py=utf-8
+encoding//posts/models.py=utf-8
+encoding//social/models.py=utf-8
+encoding//usuaris/models.py=utf-8

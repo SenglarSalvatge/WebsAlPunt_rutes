@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
-from rutes.models import Post
+from posts.models import Post
 from usuaris.models import Perfil
 
 class Comentari(models.Model):
