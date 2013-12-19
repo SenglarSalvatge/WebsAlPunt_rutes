@@ -9,7 +9,7 @@ class Comentari(models.Model):
     perfil = models.ForeignKey(Perfil,  related_name="comentariUsuari")
     
     class Meta:
-        app_label = 'social'
+        app_label = 'socials'
 
 class Puntuacio(models.Model):
     
@@ -26,4 +26,4 @@ class Puntuacio(models.Model):
     perfil = models.ForeignKey(Perfil, related_name="puntuacioUsuari")
     
     class Meta:
-        app_label = 'social'
+        app_label = 'socials'
