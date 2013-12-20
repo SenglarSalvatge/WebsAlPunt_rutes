@@ -17,5 +17,6 @@ urlpatterns = patterns('',
     #directori d'administració: /admin/
     url(r'^admin/$', include(admin.site.urls)),
 
+    #Auth d'usuaris /usuaris/login
     url('', include('social.apps.django_app.urls', namespace='social'))
 )
