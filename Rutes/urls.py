@@ -8,8 +8,12 @@ urlpatterns = patterns('',
     #arrel de la web: /
     url(r'^$', 'Rutes.views.index', name='index'),
     
-    #url(r'^usuaris/', include('usuaris.urls')),
+    #mostrem l'apartat de rutes: /rutes/
+    url(r'^rutes/$', include('posts.urls', namespace='posts')),
     
-    #directori d'administració: /admin
-    url(r'^admin/', include(admin.site.urls)),
+    #mostrem el perfil de l'usuari: /perfil/
+    url(r'^perfil/$', include('usuaris.urls', namespace='usuaris')),
+    
+    #directori d'administració: /admin/
+    url(r'^admin/$', include(admin.site.urls)),
 )

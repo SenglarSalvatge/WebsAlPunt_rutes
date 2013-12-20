@@ -1,9 +1,7 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 
-from django.contrib import admin
-admin.autodiscover()
+from posts import views
 
 urlpatterns = patterns('',
-    url(r'$', name="index")
-
+    url(r'^$', views.mostrarRutes, name='mostrarRutes')
 )
