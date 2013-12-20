@@ -84,6 +84,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+<<<<<<< HEAD
 #Correus que ens voldrem fer login
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
@@ -115,3 +116,8 @@ except ImportError:
 #Codi facebook
 #SOCIAL_AUTH_FACEBOOK_KEY = ''
 #SOCIAL_AUTH_FACEBOOK_SECRET = ''
+
+TEMPLATE_DIRS = (
+                  os.path.join( BASE_DIR,  'templates') ,
+                 )
+

@@ -1,5 +1,5 @@
-#-*- coding: utf-8 -*-
-from django.http import HttpResponse
+# -*- coding: utf-8 -*-
+from django.shortcuts import render
 
-def index(request):
-    return HttpResponse(u"Benvingut a la pàgina principal de Activi.cat.")
+def mostrarPerfil(request):
+    return render(request, 'mostrarPerfil.html')
