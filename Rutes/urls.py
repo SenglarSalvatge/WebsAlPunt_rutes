@@ -11,8 +11,8 @@ urlpatterns = patterns('',
     #mostrem l'apartat de rutes: /rutes/
     url(r'^rutes/$', include('posts.urls', namespace='posts')),
     
-    #mostrem el perfil de l'usuari: /perfil/
-    url(r'^perfil/$', include('usuaris.urls', namespace='usuaris')),
+    #mostrem el perfil de l'usuari: /usuaris/
+    url(r'^usuaris/$', include('usuaris.urls', namespace='usuaris')),
     
     #directori d'administració: /admin/
     url(r'^admin/$', include(admin.site.urls)),
