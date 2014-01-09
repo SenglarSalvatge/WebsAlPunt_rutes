@@ -84,7 +84,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-<<<<<<< HEAD
 #Correus que ens voldrem fer login
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
