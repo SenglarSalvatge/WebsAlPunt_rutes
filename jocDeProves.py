@@ -98,7 +98,20 @@ for user in users:
 #Puntuacions
 ###########################################################################################
     
-    
+from usuaris.models import Perfil
+
+perfiles = [('Hola me llamo Josele', '1'),
+               ('Soy manoli','2'),
+               ('Lo peta floreta','3'),
+               ('Alex se soba en HTTP y jmeter','4'),
+               ('Jodido GitHub ','5'), 
+               ]
+
+for per in perfiles:
+    p = Perfil()
+    p.descripcio = per[0]
+    p.puntuacio = per[1]
+    p.save()
     
     
     

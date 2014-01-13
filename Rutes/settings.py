@@ -84,7 +84,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-<<<<<<< HEAD
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "staticEnrutcat"),
+)
+
 #Correus que ens voldrem fer login
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
