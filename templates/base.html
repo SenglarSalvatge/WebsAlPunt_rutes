@@ -29,30 +29,78 @@
 	</head>
 
 	<body>
-		<div>
+		<div class="container">
 			<header>
-				<h1>new_file</h1>
-			</header>
-			<nav>
-				<p>
-					<a href="/">Home</a>
-				</p>
-				<p>
-					<a href="/contact">Contact</a>
-				</p>
+			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
+			  <!-- Brand and toggle get grouped for better mobile display -->
+			  <div class="navbar-header">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			      <span class="sr-only">Toggle navigation</span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			    </button>
+			    <a class="navbar-brand" href="#">Enrutcat</a>
+			  </div>
+			  <!-- Collect the nav links, forms, and other content for toggling -->
+			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			    <ul class="nav navbar-nav">
+			      <li class="active"><a href="#">Rutes</a></li>
+			      <li><a href="#">Activitats</a></li>
+			      <li><a href="nova_ruta.html">Crear Ruta</a></li>
+			      <li class="dropdown">
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">La meva activitat<b class="caret"></b></a>
+			        <ul class="dropdown-menu">
+			          <li><a href="#">Les meves rutes</a></li>
+			          <li><a href="#">Rutes on participaré</a></li>
+			          <li><a href="#">Rutes finalitzades</a></li>
+			        </ul>
+			      </li>
+			    </ul>
+			    <form class="navbar-form navbar-left" role="search">
+			      <div class="form-group">
+			        <input type="text" class="form-control" placeholder="Cerca">
+			      </div>
+			      <button type="submit" class="btn btn-success">Cercar</button>
+			    </form>
+			    <ul class="nav navbar-nav navbar-right">
+			      <li><a href="#">Rodrigo Saulis</a></li>
+			      <li class="dropdown">
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuració<b class="caret"></b></a>
+			        <ul class="dropdown-menu">
+			          <li><a href="#">Compte</a></li>
+			          <li><a href="#">Perfil</a></li>
+			          <li class="divider"></li>
+			          <li><a href="#">Sortir</a></li>
+			        </ul>
+			      </li>
+			    </ul>
+			  </div><!-- /.navbar-collapse -->
 			</nav>
-
+			</header>
+			<br>
+			<br>
+			<h1>Base</h1>
 			<div>
-
+				{% block novaRuta %}
+				{% endblock %}
 			</div>
-
+			<hr>
 			<footer>
 				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-			    <script src="{% static 'bootstrap/js/jquery.js' %}"></script>
+			    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 			    <!-- Include all compiled plugins (below), or include individual files as needed -->
 			    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 				<p>
-					&copy; Copyright  by Rodrigo
+					<span class="col-md-offset-2">
+						&copy; Copyright  by Enrut.cat , 2014	
+					</span>
+					<span class="col-md-offset-4" >
+						<b>Segueix-nos!</b>
+					<a href="https://twitter.com/EnrutCat"><img src="{% static 'bootstrap/imatges/facebook-icon.jpg' %}" width="25px" height="25px"></a>
+					<a href="https://twitter.com/EnrutCat"><img src="{% static 'bootstrap/imatges/twitter-icon.jpg' %}" width="25px" height="25px"></a>
+					<a href="https://plus.google.com/u/0/105295444224518300998/posts"><img src="{% static 'bootstrap/imatges/google-icon.png' %}" width="25px" height="25px"></a>
+					</span>	
 				</p>
 			</footer>
 		</div>
