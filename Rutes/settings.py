@@ -92,7 +92,7 @@ STATICFILES_DIRS = (
 #Correus que ens voldrem fer login
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
-    'social_auth.backends.facebook.FacebookBackend',
+    #'social_auth.backends.facebook.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
