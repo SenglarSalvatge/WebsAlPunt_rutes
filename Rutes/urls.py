@@ -22,6 +22,4 @@ urlpatterns = patterns('',
     #auntenticacio de social auth
     url('', include('social.apps.django_app.urls', namespace='social')),
     
-    #proves per a google maps versio client
-    url('', include('posts.urls', namespace='googlemaps')),
 )
