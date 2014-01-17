@@ -33,9 +33,5 @@ class Post(models.Model):
     puntuacions = models.ManyToManyField(Perfil, through='socials.Puntuacio', related_name="puntuacioPost")
     comentaris = models.ManyToManyField(Perfil, through='socials.Comentari', related_name="comentariPost")
     
-    
     def __unicode__(self):  
         return self.titol
-
-
-

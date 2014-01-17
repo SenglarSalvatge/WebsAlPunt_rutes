@@ -1,3 +1,12 @@
 {% extends "base.html" %}
-<a href="{% url 'social:begin' 'facebook' %}">Facebook OAuth2</a> <br />
-<a href="{% url 'social:begin' 'google-oauth2' %}">Google OAuth2</a> <br />
+{% block content %}
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. Thanks for logging in.</p>
+    <a href="{% url 'usuaris:exit_login' %}">Exit</a>
+{% else %} 
+	<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
+	<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
+	<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
+{% endif %}
+{% endblock %}

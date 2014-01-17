@@ -13,6 +13,8 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
+LOGIN_REDIRECT_URL = r'/'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
@@ -87,7 +89,8 @@ STATIC_URL = '/static/'
 #Correus que ens voldrem fer login
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
-    'social_auth.backends.facebook.FacebookBackend',
+#    'social_auth.backends.facebook.FacebookBackend',
+    'social.backends.twitter.TwitterOAuth',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -106,15 +109,19 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 
-try:
-    from settings_locals import *
-except ImportError:
-    pass
-
-
 #Codi facebook
 #SOCIAL_AUTH_FACEBOOK_KEY = ''
 #SOCIAL_AUTH_FACEBOOK_SECRET = ''
+
+#Codi twitter
+SOCIAL_AUTH_TWITTER_KEY = ''
+SOCIAL_AUTH_TWITTER_SECRET = ''
+
+try:
+    from settings_local import *
+except ImportError, e:
+    print( "Error important settings local", e )
+    pass
 
 TEMPLATE_DIRS = (
                   os.path.join( BASE_DIR,  'templates') ,

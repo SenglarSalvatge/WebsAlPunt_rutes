@@ -12,7 +12,7 @@ urlpatterns = patterns('',
     url(r'^rutes/$', include('posts.urls', namespace='posts')),
     
     #mostrem el perfil de l'usuari: /usuaris/
-    url(r'^usuaris/$', include('usuaris.urls', namespace='usuaris')),
+    url(r'', include('usuaris.urls', namespace='usuaris')),
     
     #directori d'administració: /admin/
     url(r'^admin/$', include(admin.site.urls)),
