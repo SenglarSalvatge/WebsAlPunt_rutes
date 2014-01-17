@@ -84,12 +84,17 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "staticEnrutcat"),
+)
+
+
 #Correus que ens voldrem fer login
-#AUTHENTICATION_BACKENDS = (
-#    'social.backends.google.GoogleOAuth2',
-#    'social_auth.backends.facebook.FacebookBackend',
-#    'django.contrib.auth.backends.ModelBackend',
-#)
+AUTHENTICATION_BACKENDS = (
+    'social.backends.google.GoogleOAuth2',
+    'social_auth.backends.facebook.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
     'django.core.context_processors.debug',
