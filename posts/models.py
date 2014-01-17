@@ -28,7 +28,7 @@ class Post(models.Model):
     categoria = models.ForeignKey(Categoria, help_text="Categoria")
     administrador = models.ForeignKey(Perfil, help_text="Administrador", related_name="postAdministrats")
     apuntats = models.ManyToManyField(Perfil, help_text="Apuntats", related_name="postOnEsticApuntat")
-    mapa = models.OneToOneField(Dades_Mapa, help_text="Mapa")
+    #mapa = models.OneToOneField(Dades_Mapa, help_text="Mapa")
     
     puntuacions = models.ManyToManyField(Perfil, through='socials.Puntuacio', related_name="puntuacioPost")
     comentaris = models.ManyToManyField(Perfil, through='socials.Comentari', related_name="comentariPost")

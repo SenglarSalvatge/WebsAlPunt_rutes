@@ -84,6 +84,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "staticEnrutcat"),
+)
+
+
 #Correus que ens voldrem fer login
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
@@ -103,8 +108,8 @@ TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
 )
 
 #Codi google
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+#SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
+#SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
 
 try:
     from settings_locals import *

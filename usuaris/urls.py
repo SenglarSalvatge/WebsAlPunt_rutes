@@ -3,9 +3,12 @@ from django.conf.urls import patterns, url
 from usuaris import views
 
 urlpatterns = patterns('',
-
-    url(r'^perfil/$', views.mostrarPerfil, name='mostrarPerfil') ,
-    url(r'^autenticacio/$', views.login, name='login')
+    
+    #mostrem el perfil d'usuari: /usuaris/perfil
+    url(r'perfil/$', views.mostrarPerfil, name='mostrarPerfil'),
+    
+    #mostrem l'autenticacio per social auth: /usuaris/autenticacio
+    url(r'autenticacio/$', views.login, name='login')
 
 )
 
