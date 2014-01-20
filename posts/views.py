@@ -7,10 +7,10 @@ from django.http.response import HttpResponse
 
 
 def mostrarRutes(request):
-    return render(request, 'mostrarRutes.html')
+    return render(request, 'posts/mostrarRutes.html')
 
 def google(request):
-    return render(request, 'provesgooglemaps.html')
+    return render(request, 'posts/provesgooglemaps.html')
 
 def googleResultats(request, coordenades):
     #url valida
