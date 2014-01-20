@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Remove Markers</title>
+    <title>Mapa part visual</title>
     <style>
       html, body {
         height: 100%;
@@ -87,13 +87,17 @@
 		 */
 		function serialitzarCoords(coordenades) {
 			
+			for(c in coordenades) {
+				document.getElementById('postCoordenades').value += c;
+			}
+			
 		}
 		/*
 		 * Funcions del control del panell
 		 */
 		function pintarLiniesAlMapa(map) {
 			liniaPath = new google.maps.Polyline({
-			    path: coordenadesLinia,
+			    path: [],
 			    geodesic: true,
 			    strokeColor: '#FF0000',
 			    strokeOpacity: 1.0,
@@ -116,6 +120,10 @@
 		  amagarLinia();
 		  var coordenadesLinia = [];
 		  borrarMarca();
+		  
+		  /*
+		   * falta implementar borrar la Polyline
+		   */ 
 		}
 		
 		function borrarMarca() {
@@ -141,6 +149,8 @@
       <input onclick="borrarUltimaMarca();" type='button' value="Borrar Última Marca">
     </div>
     <div id="map-canvas"></div>
+    
+    <input type="text" id="postCoordenades">
     
     <a href="">Calcular distancia</a>
   </body>
