@@ -1,6 +1,12 @@
 {% extends "base.html" %}
-
-<p>Rutes</p>
+{% block title %}
+	<title>Pagina inici</title>
+{% endblock %}
 {% block content %}
-
+	<h1>Rutes</h1>
+	<ul>
+		{% for ruta in rutes %}
+			<li>{{ruta.titol}} ----- {{ruta.data}} ----- {{ruta.descripcio}} ----- {{ruta.categoria}} </li>
+		{% endfor %}
+	</ul>
 {% endblock %}
