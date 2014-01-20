@@ -21,6 +21,7 @@
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css'%}">		
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+		<script src="{% static 'bootstrap/js/js.js' %}"></script>
 		{% block links-comple %}
 		
 		{% endblock %}
@@ -43,7 +44,7 @@
 			  </div>
 			  <!-- Collect the nav links, forms, and other content for toggling -->
 			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-			    <ul class="nav navbar-nav">
+			    <ul class="nav navbar-nav">	
 			      <li class="active"><a href="#">Rutes</a></li>
 			      <li><a href="#">Activitats</a></li>
 			      <li><a href="nova_ruta.html">Crear Ruta</a></li>
@@ -89,7 +90,8 @@
 				{% endblock %}
 			</div>
 			<hr>
-			<footer>
+			<input type="button" value="Prova" onclick="medidaPantalla();" />
+			<footer >
 				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 			    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 			    <!-- Include all compiled plugins (below), or include individual files as needed -->
