@@ -30,7 +30,7 @@
 		//un array per guardar coordenades de linia
 		//un objecte linia
 		var map;
-		var marca = 0;
+		var marca;
 		var coordenadesLinia = [];
 		var liniaPath;
 		
@@ -56,8 +56,8 @@
 		//afegim les coordenades a un array,
 		//per a generar una objecte Polyline
 		function afegirMarca(location) {
-			//el primer clic hi posem una amrca d'inici
-		  	if(marca == 0) {
+			//el primer clic hi posem una marca d'inici
+		  	if(marca == null) {
 		  		marca = new google.maps.Marker({
 					position: location,
 					map: map
@@ -67,18 +67,21 @@
 		  	
 		  	//aquí muntem la linia
 			coordenadesLinia.push(location);
-			liniaPath = new google.maps.Polyline({
-			    path: coordenadesLinia,
-			    geodesic: true,
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-			    strokeWeight: 2,
-			    map: map
-			  });
+			if (liniaPath == null) {
+				liniaPath = new google.maps.Polyline({
+				    path: coordenadesLinia,
+				    geodesic: true,
+				    strokeColor: '#FF0000',
+				    strokeOpacity: 1.0,
+				    strokeWeight: 2,
+				    map: map
+				  });
+			} else {
+				liniaPath.setPath(coordenadesLinia);
+			}
 		  	liniaPath.setMap(map);
 		  	
-		  	//serialitzem coordenadesLinia
-		  	serialitzarCoords(coordenadesLinia);
+		  	serialitzarCoords(location);
 		  	
 		}
 		
@@ -86,26 +89,14 @@
 		 * Funció per serialitzar dades
 		 */
 		function serialitzarCoords(coordenades) {
-			
-			for(c in coordenades) {
-				document.getElementById('postCoordenades').value += c;
-			}
-			
+			document.getElementById('postCoordenades').value += coordenades.toString();
 		}
 		/*
 		 * Funcions del control del panell
 		 */
 		function pintarLiniesAlMapa(map) {
-			liniaPath = new google.maps.Polyline({
-			    path: [],
-			    geodesic: true,
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-			    strokeWeight: 2,
-			    map: map
-			  });
 		  	liniaPath.setMap(map);
-		  	
+		  	marca.setMap(map);
 		}
 		
 		function amagarLinia() {
@@ -150,7 +141,7 @@
     </div>
     <div id="map-canvas"></div>
     
-    <input type="text" id="postCoordenades">
+    <input type="text" id="postCoordenades" value=''>
     
     <a href="">Calcular distancia</a>
   </body>
