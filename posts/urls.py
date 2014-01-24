@@ -10,4 +10,9 @@ urlpatterns = patterns('',
     
     #proves per a google maps: CLIENT
     url(r'^mapes/resultats/$', views.googleResultats, name='googleResultats'),
+    # crear ruta
+    url(r'^novaRuta/$', views.editaRuta, name='novaRuta'),
+    # edita ruta
+    url(r'^editaRuta/(?P<ruta_id>\d+)/$', views.editaRuta, name='editaRuta'),
+    
 )

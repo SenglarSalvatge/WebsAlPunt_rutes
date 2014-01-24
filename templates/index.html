@@ -5,6 +5,9 @@
 {% block content %}
 	<h1>Rutes</h1>
 	<ul>
+		{% for a in user %}
+		{{ a }}
+		{% endfor %}
 		{% for ruta in rutes %}
 			<li>{{ruta.titol}} ----- {{ruta.data}} ----- {{ruta.descripcio}} ----- {{ruta.categoria}} </li>
 		{% endfor %}
