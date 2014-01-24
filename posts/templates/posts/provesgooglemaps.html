@@ -2,7 +2,7 @@
 
 <html>
   <head>
-    <title>Remove Markers</title>
+    <title>Mapa part visual</title>
     <style>
       html, body {
         height: 100%;
@@ -21,6 +21,10 @@
         padding: 5px;
         border: 1px solid #999;
       }
+      
+      #postCoordenades {
+      	width: 1000px;
+      }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClNhahi1_H8Tmdb7_WeuGpd4YA1cfOPwk&sensor=false"></script>
     <script language="javascript">
@@ -30,7 +34,7 @@
 		//un array per guardar coordenades de linia
 		//un objecte linia
 		var map;
-		var marca = 0;
+		var marca;
 		var coordenadesLinia = [];
 		var liniaPath;
 		
@@ -38,6 +42,7 @@
 		
 		//aquesta funcion controla els events que li entren per 'click'
 		function inici() {
+		  document.getElementById('postCoordenades').value = '';
 		  var centreMapa = new google.maps.LatLng(42.5673, 3);
 		  var mapOptions = {
 		    zoom: 8,
@@ -56,29 +61,34 @@
 		//afegim les coordenades a un array,
 		//per a generar una objecte Polyline
 		function afegirMarca(location) {
-			//el primer clic hi posem una amrca d'inici
-		  	if(marca == 0) {
+			//el primer clic hi posem una marca d'inici
+		  	if(marca == null) {
 		  		marca = new google.maps.Marker({
 					position: location,
 					map: map
 				});
 				marca.setMap(map);
+		  	} else {
+		  		marca.setMap(map);
 		  	}
 		  	
 		  	//aquí muntem la linia
 			coordenadesLinia.push(location);
-			liniaPath = new google.maps.Polyline({
-			    path: coordenadesLinia,
-			    geodesic: true,
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-			    strokeWeight: 2,
-			    map: map
-			  });
+			if (liniaPath == null) {
+				liniaPath = new google.maps.Polyline({
+				    path: coordenadesLinia,
+				    geodesic: true,
+				    strokeColor: '#FF0000',
+				    strokeOpacity: 1.0,
+				    strokeWeight: 2,
+				    map: map
+				  });
+			} else {
+				liniaPath.setPath(coordenadesLinia);
+			}
 		  	liniaPath.setMap(map);
 		  	
-		  	//serialitzem coordenadesLinia
-		  	serialitzarCoords(coordenadesLinia);
+		  	serialitzarCoords(location);
 		  	
 		}
 		
@@ -86,22 +96,14 @@
 		 * Funció per serialitzar dades
 		 */
 		function serialitzarCoords(coordenades) {
-			
+			document.getElementById('postCoordenades').value += coordenades.toString();
 		}
 		/*
 		 * Funcions del control del panell
 		 */
 		function pintarLiniesAlMapa(map) {
-			liniaPath = new google.maps.Polyline({
-			    path: coordenadesLinia,
-			    geodesic: true,
-			    strokeColor: '#FF0000',
-			    strokeOpacity: 1.0,
-			    strokeWeight: 2,
-			    map: map
-			  });
 		  	liniaPath.setMap(map);
-		  	
+		  	marca.setMap(map);
 		}
 		
 		function amagarLinia() {
@@ -113,19 +115,44 @@
 		}
 		
 		function borrarLinia() {
+		  if(liniaPath != null) {
+		  	document.getElementById('postCoordenades').value = '';
 		  amagarLinia();
-		  var coordenadesLinia = [];
+		  coordenadesLinia = [];
+		  liniaPath = null;
 		  borrarMarca();
+		  }
+		  
+		  /*
+		   * falta implementar borrar la Polyline
+		   */ 
 		}
 		
 		function borrarMarca() {
 			marca.setMap(null);
+			marca = null;
 		}
 		
 		function borrarUltimaMarca() {
-			coordenadesLinia.pop();
-			pintarLiniesAlMapa(null);
-			pintarLiniesAlMapa(map);
+			if(liniaPath != null) {
+				if(coordenadesLinia.length == 1) {
+				borrarMarca();
+				liniaPath = null;
+				coordenadesLinia = [];
+				document.getElementById('postCoordenades').value = '';
+				} else {
+					coordenadesLinia.pop();
+					pintarLiniesAlMapa(null);
+					pintarLiniesAlMapa(map);
+					
+					document.getElementById('postCoordenades').value = '';
+					
+					for(var c in coordenadesLinia) {
+						document.getElementById('postCoordenades').value += coordenadesLinia[c].toString();
+					}
+				}
+			}
+			
 		}
 
 
@@ -142,7 +169,9 @@
     </div>
     <div id="map-canvas"></div>
     
-    <a href="">Calcular distancia</a>
+    <input type="text" id="postCoordenades" value=''>
+    
+    <a href="{% usuaris:googleResultats  %}">Calcular distancia</a>
   </body>
 </html>
 
