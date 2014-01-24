@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from usuaris.utils_usuaris import inventat_un_nou_nick
 
 class Perfil(models.Model):
-    foto = models.FileField()
+    #foto //encara en fase de desenvolupament
     descripcio = models.CharField(max_length=800, help_text="Descripció", blank=True)
     puntuacio = models.IntegerField(help_text="Puntuació", default = 0)
     nick = models.CharField(max_length=50, help_text="El teu nick", blank=False)
@@ -24,7 +24,7 @@ def create_user_profile(sender, instance, created, **kwargs):
     if created:
         #generar nick
         nick = inventat_un_nou_nick()
-        Perfil.objects.create(usuari=instance, descripcio="descripcio", nick=nick )
+        Perfil.objects.create(usuari=instance, descripcio="", nick=nick )
 
 # connectem event: després de que es crea l'usuari s'invoca la funció 'create_user_profile'
 post_save.connect(create_user_profile, sender=User)
