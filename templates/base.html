@@ -11,12 +11,15 @@
 		{% endblock %}
 		<meta name="description" content="">
 		<meta name="author" content="Rodrigo">
-
+		<!--{% block redirect %}
+		{% endblock %}-->
 		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<!-- Latest compiled and minified CSS -->
-		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">		
+		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="{% static 'bootstrap/css/css.css'%}">			
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css'%}">		
 		<!-- Latest compiled and minified JavaScript -->
@@ -64,14 +67,18 @@
 			      <button type="submit" class="btn btn-success">Cercar</button>
 			    </form>
 			    <ul class="nav navbar-nav navbar-right">
-			      <li><a href="#">Rodrigo Saulis</a></li>
+			      {% block nom_usuari%}
+			      
+			      {% endblock %}
 			      <li class="dropdown">
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuració<b class="caret"></b></a>
 			        <ul class="dropdown-menu">
 			          <li><a href="{% url 'usuaris:login' %}">Compte</a></li>
 			          <li><a href="#">Perfil</a></li>
 			          <li class="divider"></li>
-			          <li><a href="#">Sortir</a></li>
+			          {% block sortir%}
+			      
+			      	  {% endblock %}
 			        </ul>
 			      </li>
 			    </ul>
@@ -86,8 +93,11 @@
 				{% endblock %}
 			</div>
 			<hr>
-			<input type="button" value="Prova" onclick="medidaPantalla();" />
-			<footer >
+			<div>
+				{% block mostrarRequest %}
+				{% endblock %}
+			</div>
+			<footer style="position: fixed; bottom: 0; width: 100%; height: 60px;">
 				<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 			    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 			    <!-- Include all compiled plugins (below), or include individual files as needed -->
@@ -96,11 +106,11 @@
 					<span class="col-md-offset-2">
 						&copy; Copyright  by Enrut.cat , 2014	
 					</span>
-					<span class="col-md-offset-4" >
+					<span class="col-md-offset-3" >
 						<b>Segueix-nos!</b>
-					<a href="https://twitter.com/EnrutCat"><img src="{% static 'bootstrap/imatges/facebook-icon.jpg' %}" width="25px" height="25px"></a>
-					<a href="https://twitter.com/EnrutCat"><img src="{% static 'bootstrap/imatges/twitter-icon.jpg' %}" width="25px" height="25px"></a>
-					<a href="https://plus.google.com/u/0/105295444224518300998/posts"><img src="{% static 'bootstrap/imatges/google-icon.png' %}" width="25px" height="25px"></a>
+					<a href="https://twitter.com/EnrutCat"><img class="logos" src="{% static 'bootstrap/imatges/facebook-icon.jpg' %}" width="45px" height="45px"></a>
+					<a href="https://twitter.com/EnrutCat"><img class="logos" src="{% static 'bootstrap/imatges/twitter-icon.jpg' %}" width="45px" height="45px"></a>
+					<a href="https://plus.google.com/u/0/105295444224518300998/posts"><img class="logos" src="{% static 'bootstrap/imatges/google-icon.png' %}" width="45px" height="45px"></a>
 					</span>	
 				</p>
 			</footer>
