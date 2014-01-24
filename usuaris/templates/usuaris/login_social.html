@@ -1,7 +1,14 @@
 {% extends "base.html" %}
+{% block redirect %}
+
+{% if user.is_authenticated %}
+	<meta http-equiv="refresh" content="0;{% url 'usuaris:iniciUsuari' %}" />
+{% endif %}
+
+{% endblock %}
+
 {% block content %}
 {% if user.is_authenticated %}
-
 {% else %} 
 	<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
 	<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />

@@ -11,9 +11,10 @@ class Perfil(models.Model):
     usuari = models.OneToOneField(User, help_text="Usuari")
     
     def __unicode__(self):  
-        return self.usuari.username
+        return self.nick
 
 
+#Antes de crear usuarios chupis
 from django.db.models.signals import post_save
 
 # definition of UserProfile from above
@@ -25,5 +26,5 @@ def create_user_profile(sender, instance, created, **kwargs):
         nick = inventat_un_nou_nick()
         Perfil.objects.create(usuari=instance, descripcio="", nick=nick )
 
-#connectem event: després de que es crea l'usuari s'invoca la funció 'create_user_profile'
+# connectem event: després de que es crea l'usuari s'invoca la funció 'create_user_profile'
 post_save.connect(create_user_profile, sender=User)

@@ -1,0 +1,3 @@
+def crearNick():
+    return "hola"
+    
