@@ -21,6 +21,10 @@
         padding: 5px;
         border: 1px solid #999;
       }
+      
+      #postCoordenades {
+      	width: 1000px;
+      }
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClNhahi1_H8Tmdb7_WeuGpd4YA1cfOPwk&sensor=false"></script>
     <script language="javascript">
@@ -38,6 +42,7 @@
 		
 		//aquesta funcion controla els events que li entren per 'click'
 		function inici() {
+		  document.getElementById('postCoordenades').value = '';
 		  var centreMapa = new google.maps.LatLng(42.5673, 3);
 		  var mapOptions = {
 		    zoom: 8,
@@ -63,6 +68,8 @@
 					map: map
 				});
 				marca.setMap(map);
+		  	} else {
+		  		marca.setMap(map);
 		  	}
 		  	
 		  	//aquí muntem la linia
@@ -108,9 +115,13 @@
 		}
 		
 		function borrarLinia() {
+		  if(liniaPath != null) {
+		  	document.getElementById('postCoordenades').value = '';
 		  amagarLinia();
-		  var coordenadesLinia = [];
+		  coordenadesLinia = [];
+		  liniaPath = null;
 		  borrarMarca();
+		  }
 		  
 		  /*
 		   * falta implementar borrar la Polyline
@@ -119,12 +130,29 @@
 		
 		function borrarMarca() {
 			marca.setMap(null);
+			marca = null;
 		}
 		
 		function borrarUltimaMarca() {
-			coordenadesLinia.pop();
-			pintarLiniesAlMapa(null);
-			pintarLiniesAlMapa(map);
+			if(liniaPath != null) {
+				if(coordenadesLinia.length == 1) {
+				borrarMarca();
+				liniaPath = null;
+				coordenadesLinia = [];
+				document.getElementById('postCoordenades').value = '';
+				} else {
+					coordenadesLinia.pop();
+					pintarLiniesAlMapa(null);
+					pintarLiniesAlMapa(map);
+					
+					document.getElementById('postCoordenades').value = '';
+					
+					for(var c in coordenadesLinia) {
+						document.getElementById('postCoordenades').value += coordenadesLinia[c].toString();
+					}
+				}
+			}
+			
 		}
 
 
@@ -143,7 +171,7 @@
     
     <input type="text" id="postCoordenades" value=''>
     
-    <a href="">Calcular distancia</a>
+    <a href="{% usuaris:googleResultats  %}">Calcular distancia</a>
   </body>
 </html>
 

@@ -9,5 +9,5 @@ urlpatterns = patterns('',
     url(r'^mapes/$', views.google, name='google'),
     
     #proves per a google maps: CLIENT
-    url(r'^mapes/resultats/$', views.googleResultats, name='googleResultats'),
+    url(r'^mapes/resultats/(?P<coordenades>\d+)$', views.googleResultats, name='googleResultats'),
 )
