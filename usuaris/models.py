@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from usuaris.utils_usuaris import inventat_un_nou_nick
 
 class Perfil(models.Model):
-    #foto //encara en fase de desenvolupament
+    foto = models.FileField()
     descripcio = models.CharField(max_length=800, help_text="Descripció", blank=True)
     puntuacio = models.IntegerField(help_text="Puntuació", default = 0)
     nick = models.CharField(max_length=50, help_text="El teu nick", blank=False)
