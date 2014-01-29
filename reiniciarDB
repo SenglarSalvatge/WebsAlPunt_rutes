@@ -1,0 +1,34 @@
+#!/usr/bin/expect -f
+
+######
+#borrem la base de dades
+######
+spawn rm db.sqlite3
+
+######
+#executem un syncdb
+######
+spawn python manage.py syncdb  
+expect "): " 
+send "yes\r"
+expect "): "
+send "admin\r"
+expect "address: "
+send "enrut.cat@gmail.com\r"
+expect "Password: "
+send "admin\r"
+expect "(again): "
+send "admin\r"
+
+######
+#importem el joc de dades
+######
+spawn python manage.py shell
+expect ">>>"
+send "from jocDeProves import crea_dades\r"
+expect ">>>"
+send "crea_dades()\r"
+expect ">>>"
+send "exit()\r"
+
+spawn clear

@@ -1,5 +1,12 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 
+{% block links-comple %}
+		<!-- js i css per a mapa de API google MAPS-->	
+		<link rel="stylesheet" href="{% static 'maps/maps.css' %}">
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClNhahi1_H8Tmdb7_WeuGpd4YA1cfOPwk&sensor=false"></script>	
+		<script src="{% static 'maps/maps.js' %}"></script>
+{% endblock %}
 {% block content %}
 
 
@@ -14,6 +21,23 @@
     {% endfor %}
     <p><input type="submit" value="Send message" /></p>
 </form>
+
+
+<!-- -------------------------------------------------------------------------------------- -->
+
+<!-- PANELL DE CONTROL DE LINIES DE GOOGLE MAPS -->
+<div id="panel">
+  <input onclick="amagarLinia();" type='button' value="Amagar Marca">
+  <input onclick="mostrarLinia();" type='button' value="Mostrar Marca">
+  <input onclick="borrarLinia();" type='button' value="Borrar Totes les Marques">
+  <input onclick="borrarUltimaMarca();" type='button' value="Borrar Última Marca">
+</div>
+<div id="map-canvas"></div>
+
+<input type="text" id="postCoordenades" value=''>
+
+<a href="{% comment %}{% usuaris:googleResultats  %}{% endcomment %}">Calcular distancia</a>
+
 
 
 {% endblock %}
