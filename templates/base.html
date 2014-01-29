@@ -67,7 +67,7 @@
 			    </form>
 			    <ul class="nav navbar-nav navbar-right">
 				{% if user.is_authenticated %}
-					<li><a href="#">{{ user.username }}</a></li>
+					<li><a href="#">{{ user.perfil.nick }}</a></li>
 				{% endif %}
 				{% if user.is_authenticated %}
 			      <li class="dropdown">
