@@ -22,8 +22,4 @@ class Puntuacio(models.Model):
     )
     
     puntuacio = models.CharField(max_length=1, choices=PUNTUACIO_CHOICES, help_text="Puntuació")
-    post = models.ForeignKey(Post)
-    perfil = models.ForeignKey(Perfil, related_name="puntuacioUsuari")
-    
-    class Meta:
-        app_label = 'socials'
+

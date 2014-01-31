@@ -4,7 +4,7 @@ import urllib2
 from django.utils.encoding import smart_str
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from posts.forms import PostForm
+from posts.forms import PostForm, FiltreRutaForm
 from posts.models import Post
 from django.http.response import HttpResponseRedirect
 from django.contrib import messages
@@ -64,3 +64,8 @@ def editaRuta(request, ruta_id=None):
     return render(request, 'posts/novaRuta.html', {
         'form':form,
         })
+    
+def filtreDeRutes(request):
+    
+    form = FiltreRutaForm()
+    return render(request, 'posts/filtreDeRutes.html', {'form':form})

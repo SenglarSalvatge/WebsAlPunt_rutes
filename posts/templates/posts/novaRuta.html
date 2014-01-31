@@ -10,34 +10,52 @@
 {% block content %}
 
 
-<p>Estem a la vista de <b>Nova Ruta</b>, tot és fabulós!</p>
-
 <form action="" method="post">{% csrf_token %}
-    {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
-        </div>
-    {% endfor %}
-    <p><input type="submit" value="Send message" /></p>
+	<div id="formRuta">
+	    {{ form.non_field_errors }}
+	    <div class="fieldWrapper">
+	        {{ form.titol.errors }}
+			{{ form.titol.label_tag }}{{ form.titol }}
+	    </div>
+	    <div class="fieldWrapper">
+	        {{ form.data.errors }}
+			{{ form.data.label_tag }}{{ form.data }}
+	    </div>
+	    <div class="fieldWrapper">
+	        {{ form.descripcio.errors }}
+	        {{ form.descripcio.label_tag }}{{ form.descripcio }}
+	    </div>
+	    <div class="fieldWrapper">
+	        {{ form.dificultat.errors }}
+	        {{ form.dificultat.label_tag }}{{ form.dificultat }}
+	    </div>
+	    <div class="fieldWrapper">
+	        {{ form.categoria.errors }}
+	        {{ form.categoria.label_tag }}{{ form.categoria }}
+	    </div>
+	</div>
+
+
+	<!-- -------------------------------------------------------------------------------------- -->
+	
+	<!-- PANELL DE CONTROL DE LINIES DE GOOGLE MAPS -->
+	<div id="mapaDiv">
+		<div id="panel">
+		  <input onclick="amagarLinia();" type='button' value="Amagar Marca">
+		  <input onclick="mostrarLinia();" type='button' value="Mostrar Marca">
+		  <input onclick="borrarLinia();" type='button' value="Borrar Totes les Marques">
+		  <input onclick="borrarUltimaMarca();" type='button' value="Borrar Última Marca">
+		</div>
+		<div id="map-canvas"></div>
+	</div>
+	
+	
+	<input type="text" id="postCoordenades" value=''>
+	
+	
+	<p><input type="submit" value="Send message" /></p>
+
 </form>
-
-
-<!-- -------------------------------------------------------------------------------------- -->
-
-<!-- PANELL DE CONTROL DE LINIES DE GOOGLE MAPS -->
-<div id="panel">
-  <input onclick="amagarLinia();" type='button' value="Amagar Marca">
-  <input onclick="mostrarLinia();" type='button' value="Mostrar Marca">
-  <input onclick="borrarLinia();" type='button' value="Borrar Totes les Marques">
-  <input onclick="borrarUltimaMarca();" type='button' value="Borrar Última Marca">
-</div>
-<div id="map-canvas"></div>
-
-<input type="text" id="postCoordenades" value=''>
-
-<a href="{% comment %}{% usuaris:googleResultats  %}{% endcomment %}">Calcular distancia</a>
-
 
 
 {% endblock %}

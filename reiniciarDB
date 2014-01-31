@@ -31,4 +31,3 @@ send "crea_dades()\r"
 expect ">>>"
 send "exit()\r"
 
-spawn clear
