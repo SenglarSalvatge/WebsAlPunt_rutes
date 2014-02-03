@@ -33,7 +33,7 @@ class Post(models.Model):
     apuntats = models.ManyToManyField(Perfil, help_text="Apuntats", related_name="postOnEsticApuntat")
     mapa = models.ForeignKey(Dades_Mapa, help_text="Mapa", null=True)
     
-    puntuacions = models.ForeignKey(Puntuacio, null=True)
+    puntuacions = models.ForeignKey(Puntuacio, help_text="Puntuacions", null=True)
     comentaris = models.ManyToManyField(Perfil, through='socials.Comentari', related_name="comentariPost")
     
     def __unicode__(self):  

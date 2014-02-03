@@ -8,7 +8,7 @@ class PostForm(ModelForm):
         model = Post
         fields = ['titol','data','descripcio','dificultat','categoria']
         widgets = {
-            'descripcio': Textarea(attrs={'cols': 20, 'rows': 5}),
+            'descripcio': Textarea(attrs={'cols': 20, 'rows': 5, 'class':'form-control'}),
         }
         
 class CoordenadesForm(ModelForm):
@@ -20,4 +20,4 @@ class CoordenadesForm(ModelForm):
 class FiltreRutaForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['titol', 'data', 'dificultat', 'categoria', 'administrador', 'administrador', 'puntuacions']
+        fields = ['titol', 'data', 'dificultat', 'categoria', 'administrador', 'puntuacions']

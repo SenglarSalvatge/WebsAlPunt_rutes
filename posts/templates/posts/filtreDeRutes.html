@@ -19,4 +19,12 @@
 	<input type="submit" value="Enviar" />
 </form>
 
+<hr>
+
+{% if rutes %}
+{% for ruta in rutes %}
+	<li>{{ruta.titol}}</li>
+{% endfor %}
+{% endif %} 
+
 {% endblock %}

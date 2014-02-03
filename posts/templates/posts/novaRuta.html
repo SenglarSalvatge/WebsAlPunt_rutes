@@ -22,16 +22,16 @@
 			{{ form.data.label_tag }}{{ form.data }}
 	    </div>
 	    <div class="fieldWrapper">
-	        {{ form.descripcio.errors }}
-	        {{ form.descripcio.label_tag }}{{ form.descripcio }}
-	    </div>
-	    <div class="fieldWrapper">
 	        {{ form.dificultat.errors }}
 	        {{ form.dificultat.label_tag }}{{ form.dificultat }}
 	    </div>
 	    <div class="fieldWrapper">
 	        {{ form.categoria.errors }}
 	        {{ form.categoria.label_tag }}{{ form.categoria }}
+	    </div>
+	    <div class="fieldWrapper">
+	        {{ form.descripcio.errors }}
+	        {{ form.descripcio.label_tag }}{{ form.descripcio }}
 	    </div>
 	</div>
 
@@ -53,7 +53,7 @@
 	<input type="text" id="postCoordenades" value=''>
 	
 	
-	<p><input type="submit" value="Send message" /></p>
+	<p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" /></p>
 
 </form>
 
