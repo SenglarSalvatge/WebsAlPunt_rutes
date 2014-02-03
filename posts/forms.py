@@ -1,5 +1,6 @@
 from django.forms import ModelForm
 from posts.models import Post, Dades_Mapa, Categoria
+from django import forms
 from django.forms.widgets import Textarea
 from django import forms
 from django.utils.datetime_safe import datetime
@@ -7,6 +8,7 @@ from usuaris.models import Perfil
 
   
 class PostForm(ModelForm):
+    postCoordenades = forms.CharField()
     class Meta:
         model = Post
         fields = ['titol','data','descripcio','dificultat','categoria']
@@ -30,3 +32,4 @@ class FiltreRutaForm(forms.Form):
     categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), required=False)
     administrador = forms.ModelChoiceField(queryset=Perfil.objects.filter(postAdministrats__isnull = False).distinct(), required=False)
     
+
