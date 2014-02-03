@@ -3,12 +3,12 @@ import urllib2
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from posts.models import Post, Dades_Mapa
-from posts.forms import PostForm, FiltreRutaForm
 from django.http.response import HttpResponseRedirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
+from posts.forms import PostForm, FiltreRutaForm
 
 
 def google(request):
