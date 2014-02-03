@@ -1,7 +1,7 @@
 
 #map-canvas { 
 	height: 500px;
-  	width: 1000px;
+  	width: 100%;
 }
 
 #panel {
@@ -14,4 +14,14 @@
   
 #postCoordenades {
 	width: 1000px;
+}
+
+#mapaDiv {
+    float: left;
+    margin-left: 70px;
+    width: 70%;
+}
+
+#formRuta {
+	float: left;
 }

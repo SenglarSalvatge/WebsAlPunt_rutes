@@ -15,7 +15,7 @@ google.maps.event.addDomListener(window, 'load', inici);
 
 //aquesta funcion controla els events que li entren cada cop que cliquem
 function inici() {
-	document.getElementById('postCoordenades').value = '';
+	$('#postCoordenades').val = '';
 	var centreMapa = new google.maps.LatLng(42.5673, 3);
 	var mapOptions = {
 		zoom: 15,
@@ -66,7 +66,7 @@ function afegirMarca(location) {
  * Funció per serialitzar dades
  */
 function serialitzarCoords(coordenades) {
-	document.getElementById('postCoordenades').value += coordenades.toString();
+	$('#postCoordenades').val($('#postCoordenades').val() + coordenades.toString());
 }
 
 /*
@@ -87,7 +87,7 @@ function mostrarLinia() {
 
 function borrarLinia() {
 	if(liniaPath != null) {
-		document.getElementById('postCoordenades').value = '';
+		$('#postCoordenades').val('');
 		amagarLinia();
 		coordenadesLinia = [];
 		liniaPath = null;
@@ -106,16 +106,16 @@ function borrarUltimaMarca() {
 		borrarMarca();
 		liniaPath = null;
 		coordenadesLinia = [];
-		document.getElementById('postCoordenades').value = '';
+		$('#postCoordenades').val('');
 		} else {
 			coordenadesLinia.pop();
 			pintarLiniesAlMapa(null);
 			pintarLiniesAlMapa(map);
 			
-			document.getElementById('postCoordenades').value = '';
+			$('#postCoordenades').val('');
 			
 			for(var c in coordenadesLinia) {
-				document.getElementById('postCoordenades').value += coordenadesLinia[c].toString();
+				$('#postCoordenades').val($('#postCoordenades').val() + coordenadesLinia[c].toString());
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
 from usuaris.models import Perfil
+from socials.models import Puntuacio
 
 class Categoria(models.Model):
     nom = models.CharField(max_length=200, help_text="Nom de la Categoria")
@@ -32,7 +33,7 @@ class Post(models.Model):
     apuntats = models.ManyToManyField(Perfil, help_text="Apuntats", related_name="postOnEsticApuntat")
     mapa = models.ForeignKey(Dades_Mapa, help_text="Mapa", null=True)
     
-    puntuacions = models.ManyToManyField(Perfil, through='socials.Puntuacio', related_name="puntuacioPost")
+    puntuacions = models.ForeignKey(Puntuacio, help_text="Puntuacions", null=True)
     comentaris = models.ManyToManyField(Perfil, through='socials.Comentari', related_name="comentariPost")
     
     def __unicode__(self):  

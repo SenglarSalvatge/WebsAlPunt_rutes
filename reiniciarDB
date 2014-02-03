@@ -30,3 +30,7 @@ expect ">>>"
 send "crea_dades()\r"
 expect ">>>"
 send "exit()\r"
+<<<<<<< HEAD
+=======
+
+>>>>>>> 817bdaa13f0a73e9b688d3f933ee99f68469e79a
