@@ -1,12 +1,11 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
-from posts.models import Post
 from usuaris.models import Perfil
 
 class Comentari(models.Model):
     comentari = models.CharField(max_length=800, help_text="Comentari")
-    post = models.ForeignKey(Post)
-    perfil = models.ForeignKey(Perfil,  related_name="comentariUsuari")
+    post = models.ForeignKey('posts.Post', related_name="Ruta")
+    perfil = models.ForeignKey(Perfil, related_name="comentariUsuari")
     
     class Meta:
         app_label = 'socials'
@@ -22,8 +21,4 @@ class Puntuacio(models.Model):
     )
     
     puntuacio = models.CharField(max_length=1, choices=PUNTUACIO_CHOICES, help_text="Puntuació")
-    post = models.ForeignKey(Post)
-    perfil = models.ForeignKey(Perfil, related_name="puntuacioUsuari")
-    
-    class Meta:
-        app_label = 'socials'
+

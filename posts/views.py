@@ -4,11 +4,12 @@ import urllib2
 from django.utils.encoding import smart_str
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from posts.forms import PostForm
 from posts.models import Post, Dades_Mapa
+from posts.forms import PostForm, FiltreRutaForm
 from django.http.response import HttpResponseRedirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -106,3 +107,39 @@ def editaRuta(request, ruta_id=None):
     return render(request, 'posts/novaRuta.html', {
         'form':form,
         })
+
+@login_required(login_url='usuaris:login') 
+def filtreDeRutes(request):
+    rutes = "No hi ha resultats..."
+    
+    if request.method == 'POST': 
+        form = FiltreRutaForm(request.POST) 
+
+        if form.is_valid():
+            
+            rutes = Post.objects.all();
+            #'titol', 'data', 'dificultat', 'categoria', 'administrador', 'puntuacions']
+            if form.cleaned_data['titol']:
+                rutes = rutes.objects.filter(titol = form.cleaned_data['titol'])
+                
+            if form.cleaned_data['data']:
+                rutes = rutes.objects.filter(titol = form.cleaned_data['data'])
+                
+            if form.cleaned_data['dificultat']:
+                rutes = rutes.objects.filter(titol = form.cleaned_data['dificultat'])
+                
+            if form.cleaned_data['categoria']:
+                rutes = rutes.objects.filter(titol = form.cleaned_data['categoria'])
+                
+            if form.cleaned_data['administrador']:
+                rutes = rutes.objects.filter(titol = form.cleaned_data['administrador'])
+                
+            if form.cleaned_data['puntuacions']:
+                rutes = rutes.objects.filter(titol = form.cleaned_data['puntuacions'])
+         
+        
+        return render(request, 'posts/filtreDeRutes.html', {'form':form, 'rutes':rutes})
+        
+    else:
+        form = FiltreRutaForm()
+    return render(request, 'posts/filtreDeRutes.html', {'form':form})
