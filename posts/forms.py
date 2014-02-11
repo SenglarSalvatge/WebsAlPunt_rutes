@@ -15,7 +15,8 @@ class PostForm(ModelForm):
             'descripcio': Textarea(attrs={'cols': 20, 'rows': 5, 'class':'form-control'}),
             'dificultat': Select(attrs={'class':'form-control'}),
             'categoria': Select(attrs={'class':'form-control'}),
-            'coordenades': TextInput(attrs={'class':'form-control'}),
+            'coordenades': HiddenInput(attrs={}),
+            'data': DateInput(attrs={'class':'datepicker'}),
         }
         
         
