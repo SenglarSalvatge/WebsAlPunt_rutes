@@ -1,8 +1,9 @@
 from django.forms import ModelForm
 from posts.models import Post, Categoria
 from django import forms
-from django.forms.widgets import Textarea, TextInput, Select, HiddenInput
+from django.forms.widgets import Textarea, TextInput, Select, HiddenInput, DateInput
 from usuaris.models import Perfil
+
 
 class PostForm(ModelForm):
     postCoordenades = forms.CharField()
@@ -14,6 +15,8 @@ class PostForm(ModelForm):
             'descripcio': Textarea(attrs={'cols': 20, 'rows': 5, 'class':'form-control'}),
             'dificultat': Select(attrs={'class':'form-control'}),
             'categoria': Select(attrs={'class':'form-control'}),
+            'coordenades': HiddenInput(attrs={}),
+            'data': DateInput(attrs={'class':'datepicker'}),
         }
         
         

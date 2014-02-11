@@ -6,6 +6,12 @@
 		<link rel="stylesheet" href="{% static 'maps/maps.css' %}">
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClNhahi1_H8Tmdb7_WeuGpd4YA1cfOPwk&sensor=false"></script>	
 		<script src="{% static 'maps/maps.js' %}"></script>
+		<!-- js i css per a plugin del calendari -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="{% static 'calendar/calendar.js' %}"></script>
 {% endblock %}
 {% block content %}
 
@@ -37,7 +43,7 @@
 	    </div>
 	    <div class="fieldWrapper">
 	        {{ form.coordenades.errors }}
-	        {{ form.coordenades.label_tag }}{{ form.coordenades}}
+	        {{ form.coordenades}}
 	    </div>
 	</div>
 
