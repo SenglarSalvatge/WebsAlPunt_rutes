@@ -9,10 +9,6 @@ class Categoria(models.Model):
     def __unicode__(self):  
         return self.nom
 
-class Dades_Mapa(models.Model):
-    coordenades = models.CharField(max_length=50000, help_text="Coordenades de la linea que marca la ruta")
-    km = models.CharField(max_length=100, help_text="Kilometres del punt d'inici al punt de fi de la ruta")
-    durada = models.CharField(max_length=50000, help_text="Diferents durades de la ruta en format de JSON")
 
 class Post(models.Model):
     
@@ -31,7 +27,9 @@ class Post(models.Model):
     categoria = models.ForeignKey(Categoria, help_text="Categoria")
     administrador = models.ForeignKey(Perfil, help_text="Administrador", related_name="postAdministrats")
     apuntats = models.ManyToManyField(Perfil, help_text="Apuntats", related_name="postOnEsticApuntat")
-    mapa = models.ForeignKey(Dades_Mapa, help_text="Mapa", null=True)
+    coordenades = models.CharField(max_length=50000, help_text="Coordenades de la linea que marca la ruta")
+    km = models.CharField(max_length=100, help_text="Kilometres del punt d'inici al punt de fi de la ruta")
+    durada = models.CharField(max_length=50000, help_text="Diferents durades de la ruta en format de JSON")
     
     puntuacions = models.ForeignKey(Puntuacio, help_text="Puntuacions", null=True)
     comentaris = models.ManyToManyField(Perfil, through='socials.Comentari', related_name="comentariPost")

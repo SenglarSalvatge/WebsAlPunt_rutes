@@ -4,58 +4,20 @@ import urllib2
 from django.utils.encoding import smart_str
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from posts.models import Post, Dades_Mapa
-from posts.forms import PostForm, FiltreRutaForm, CoordenadesForm
+from posts.models import Post
+from posts.forms import PostForm, FiltreRutaForm
 from django.http.response import HttpResponseRedirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 import math
 
-
-
-def google(request):
-    return render(request, 'posts/provesgooglemaps.html')
-
-def googleResultats(request, coordenades):
-    #url valida
-    #http://maps.googleapis.com/maps/api/directions/json?origin=*&destination=*&sensor=false
-    url = 'http://maps.googleapis.com/maps/api/directions/json?'
-    parametres = {'origin':'(40,3)',
-                  'destination':'(40,2)',
-                  'sensor':'false',
-                  }
-    url_final = url+parametres
-    request = urllib2.Request(url_final)
-    response = urllib2.urlopen(request)
-    html = response.read()
-    
-    return HttpResponse(html)
-
 def mostrarRutes(request):
     Rutes = Post.objects.all()
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
 
-
-def editaRuta(request, ruta_id=None):
-
-    if ruta_id is not None:
-        ruta=get_object_or_404(Post, pk=ruta_id)
-        mapa = get_object_or_404(Dades_Mapa, pk=ruta.mapa.pk )
-    else:
-        ruta=Post()
-        mapa=Dades_Mapa()
-    if request.method == 'POST':
-        form=PostForm(request.POST, instance=ruta)
-        form2=CoordenadesForm(request.POST, instance=mapa)
-        if form.is_valid() and form2.is_valid():
-            #print "---<",form.cleaned_data['postCoordenades']
-            # solucion correcta:
-            m=form2.save(commit=False)
-            r=form.save(commit=False)
-            #agafa coordenades
-            listCoordenades = list()
-            frase=m.coordenades
+def calcularDistanciaMapa(frase):
+            listCoordenades = list()  
             #frase="(20,12)(12,12)(2,4)(5,3)"
             frase=frase[1:]
             frase=frase[:-1]
@@ -82,9 +44,9 @@ def editaRuta(request, ruta_id=None):
                 i=i-1
                 resultado =math.sqrt((x2-x1)^2+(y2-y1)^2)
                 distancia= distancia +resultado
-                
-            # calcular tiempo 
-            modo = ruta.categoria
+            return distancia
+        
+def calcularDuradaMapa(modo, distancia):     
             tiempo = 0
             if modo == "andar": 
                 tiempo = distancia/5
@@ -94,18 +56,30 @@ def editaRuta(request, ruta_id=None):
                 tiempo = distancia/10
             elif modo == "caballo": 
                 tiempo = distancia/7
-                
-            # guardar dades
-            
-            m.km=distancia
-            m.durada = tiempo
-            m.save()
-            
-            r.mapa=mapa
+            return tiempo
+
+def editaRuta(request, ruta_id=None):
+
+    if ruta_id is not None:
+        ruta=get_object_or_404(Post, pk=ruta_id)
+    else:
+        ruta=Post()
+    if request.method == 'POST':
+        form=PostForm(request.POST, instance=ruta)
+        if form.is_valid():
+            # solucion correcta:
+            r=form.save(commit=False)
+            #agafa coordenades
+            frase=r.coordenades
+            distancia=calcularDistanciaMapa(frase);
+            # calcular tiempo 
+            modo = ruta.categoria
+            tiempo=calcularDuradaMapa(modo, distancia)
+            #save
+            r.km= distancia
+            r.durada = tiempo
             r.save()
     
-                
-             
             messages.info(request, 'Ruta guardada. ')
             url_next= reverse('posts:mostrarRutes', kwargs={})
             return HttpResponseRedirect(url_next)
@@ -114,11 +88,9 @@ def editaRuta(request, ruta_id=None):
         
     else:
         form=PostForm(instance=ruta)
-        form2=CoordenadesForm(instance=mapa)
-    
     
     return render(request, 'posts/novaRuta.html', {
-        'form':form, 'form2':form2,
+        'form':form,
         })
 
 @login_required(login_url='usuaris:login') 
