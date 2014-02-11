@@ -5,7 +5,7 @@
  	-o-transition: 2.5s ease; /* Opera */
  	border-radius: 30px;
  	border-style: solid;
- 	border-color: black;
+ 	border-color: black; 	
 }
  
 .logos:hover{
@@ -13,4 +13,8 @@
 	-moz-transform : rotate(360deg); /* Firefox */
 	-webkit-transform : rotate(360deg); /* Chrome - Safari */
 	-o-transform : rotate(360deg); /* Opera */
+}
+
+.linea{
+	display: inline-block;
 }

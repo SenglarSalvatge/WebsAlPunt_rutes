@@ -21,6 +21,8 @@
 		<link rel="shortcut icon" href="/favicon.ico">
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<!-- Latest compiled and minified CSS -->
+		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="{% static 'bootstrap/css/css.css'%}">			
@@ -28,7 +30,9 @@
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css'%}">		
 		<!-- Latest compiled and minified JavaScript -->
 		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-		<script src="{% static 'bootstrap/js/js.js' %}"></script>
+		<script src="{% static 'bootstrap/js/js.js' %}"></script>		
+		<!-- Include all compiled plugins (below), or include individual files as needed -->
+		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 		{% block links-comple %}
 		
 		{% endblock %}
@@ -40,7 +44,7 @@
 			<nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
 			  <!-- Brand and toggle get grouped for better mobile display -->
 			  <div class="navbar-header">
-			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-1">
 			      <span class="sr-only">Toggle navigation</span>
 			      <span class="icon-bar"></span>
 			      <span class="icon-bar"></span>
@@ -49,7 +53,7 @@
 			    <a class="navbar-brand" href="#">Enrutcat</a>
 			  </div>
 			  <!-- Collect the nav links, forms, and other content for toggling -->
-			  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
 			    <ul class="nav navbar-nav">	
 			    	{% if user.is_authenticated %}
 				      <li class="active"><a href="#">Rutes</a></li>
@@ -103,19 +107,39 @@
 				{% block mostrarRequest %}
 				{% endblock %}
 			</div>
-			<footer style="position: fixed; bottom: 0; width: 100%; height: 60px;">
-				<p>
-					<span class="col-md-offset-2">
-						&copy; Copyright  by Enrut.cat , 2014	
-					</span>
-					<span class="col-md-offset-3" >
-						<b>Segueix-nos!</b>
-					<a href="https://twitter.com/EnrutCat"><img class="logos" src="{% static 'bootstrap/imatges/facebook-icon.jpg' %}" width="45px" height="45px"></a>
-					<a href="https://twitter.com/EnrutCat"><img class="logos" src="{% static 'bootstrap/imatges/twitter-icon.jpg' %}" width="45px" height="45px"></a>
-					<a href="https://plus.google.com/u/0/105295444224518300998/posts"><img class="logos" src="{% static 'bootstrap/imatges/google-icon.png' %}" width="45px" height="45px"></a>
-					</span>	
-				</p>
-			</footer>
+			<br><br><br>
+			<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse" role="navigation">
+			  <!-- Brand and toggle get grouped for better mobile display -->
+			  <div class="navbar-header">
+			    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-navbar-collapse-2">
+			      <span class="sr-only">Toggle navigation</span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			      <span class="icon-bar"></span>
+			    </button>			    
+			  </div>
+			  <!-- Collect the nav links, forms, and other content for toggling -->
+			  <div class="collapse navbar-collapse" id="bs-navbar-collapse-2">
+					<div class="container">
+						<footer class="row">
+							<section class="col-xs-12 col-sd-2 col-md-4" style="color:white; text-align: center;">								
+								 <ul class="nav navbar-nav">										
+									<li><a>&copy; Copyright  by Enrut.cat , 2014</a></li>
+								</ul>	
+							</section>
+							<section class="col-xs-12 col-sd-2 col-md-4 " style="text-align: center;" >
+								<ul style="padding: 0px;">
+									<li class="linea"><b style="color:white;">Segueix-nos!</b></li>									
+									<li class="linea"><a href="https://twitter.com/EnrutCat"><img class="logos" src="{% static 'bootstrap/imatges/facebook-icon.jpg' %}" width="45px" height="45px"></a></li>
+									<li class="linea"><a href="https://twitter.com/EnrutCat"><img class="logos" src="{% static 'bootstrap/imatges/twitter-icon.jpg' %}" width="45px" height="45px"></a></li>
+									<li class="linea"><a href="https://plus.google.com/u/0/105295444224518300998/posts"><img class="logos" src="{% static 'bootstrap/imatges/google-icon.png' %}" width="45px" height="45px"></a></li>
+								</ul>
+							</section>	
+						</footer>
+					</div>
+				</div>
+			    
+			  </div><!-- /.navbar-collapse -->  			
 		</div>
 	</body>
 </html>
