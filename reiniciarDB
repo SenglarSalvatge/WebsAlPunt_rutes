@@ -1,5 +1,6 @@
 #!/usr/bin/expect -f
 
+
 ######
 #borrem la base de dades
 ######
@@ -30,3 +31,4 @@ expect ">>>"
 send "crea_dades()\r"
 expect ">>>"
 send "exit()\r"
+

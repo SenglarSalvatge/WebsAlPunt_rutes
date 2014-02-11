@@ -1,7 +1,8 @@
 from django.forms import ModelForm
-from posts.models import Post, Dades_Mapa
+from posts.models import Post, Dades_Mapa, Categoria
 from django import forms
-from django.forms.widgets import Textarea, TextInput, Select
+from django.forms.widgets import Textarea, TextInput, Select, HiddenInput
+from usuaris.models import Perfil
 
 class PostForm(ModelForm):
     postCoordenades = forms.CharField()
@@ -18,11 +19,14 @@ class PostForm(ModelForm):
 class CoordenadesForm(ModelForm):
     class Meta:
         model = Dades_Mapa
+        widgets = {
+                   'coordenades':HiddenInput
+                   }
         fields = ['coordenades']
         
-        
-class FiltreRutaForm(ModelForm):
-    class Meta:
-        model = Post
-        fields = ['titol', 'data', 'dificultat', 'categoria', 'administrador', 'puntuacions']
-        
+class FiltreRutaForm(forms.Form):
+    titol = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'autocomplete':'on'}))
+    data = forms.DateField(required=False)
+    dificultat = forms.ChoiceField(choices=Post.DIFICULTAT_CHOICES ,required=False)
+    categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), required=False)
+    administrador = forms.ModelChoiceField(queryset=Perfil.objects.filter(postAdministrats__isnull = False).distinct(), required=False)

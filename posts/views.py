@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
-import urllib
 import urllib2
-from django.utils.encoding import smart_str
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from posts.models import Post, Dades_Mapa
-from posts.forms import PostForm, FiltreRutaForm
+from posts.forms import PostForm, FiltreRutaForm, CoordenadesForm
 from django.http.response import HttpResponseRedirect
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
+import math
 
 
 
@@ -43,20 +43,19 @@ def editaRuta(request, ruta_id=None):
         mapa = get_object_or_404(Dades_Mapa, pk=ruta.mapa.pk )
     else:
         ruta=Post()
-        mapa=Post()
+        mapa=Dades_Mapa()
     if request.method == 'POST':
-        form=PostForm(request, instance=ruta)
-        if form.is_valid():
-            print "---<",form.cleaned_data['postCoordenades']
+        form=PostForm(request.POST, instance=ruta)
+        form2=CoordenadesForm(request.POST, instance=mapa)
+        if form.is_valid() and form2.is_valid():
+            #print "---<",form.cleaned_data['postCoordenades']
             # solucion correcta:
-            
-            #r=form.save(commit=False)
-            #r.mapa=lala
-            #r.save()
-
+            m=form2.save(commit=False)
+            r=form.save(commit=False)
             #agafa coordenades
             listCoordenades = list()
-            frase="(20,12)(12,12)(2,4)(5,3)"
+            frase=m.coordenades
+            #frase="(20,12)(12,12)(2,4)(5,3)"
             frase=frase[1:]
             frase=frase[:-1]
             arrayFrase=frase.split(")(")
@@ -80,11 +79,11 @@ def editaRuta(request, ruta_id=None):
                 i=i+1
                 y2 = float(listCoordenades[i])
                 i=i-1
-                #resultado =SQR((x2-x1)^2+(y2-y1)^2
-                #distancia= distancia +resultado
+                resultado =math.sqrt((x2-x1)^2+(y2-y1)^2)
+                distancia= distancia +resultado
                 
             # calcular tiempo 
-            modo = "avion"
+            modo = ruta.categoria
             tiempo = 0
             if modo == "andar": 
                 tiempo = distancia/5
@@ -94,6 +93,17 @@ def editaRuta(request, ruta_id=None):
                 tiempo = distancia/10
             elif modo == "caballo": 
                 tiempo = distancia/7
+                
+            # guardar dades
+            
+            m.km=distancia
+            m.durada = tiempo
+            m.save()
+            
+            r.mapa=mapa
+            r.save()
+    
+                
              
             messages.info(request, 'Ruta guardada. ')
             url_next= reverse('posts:mostrarRutes', kwargs={})
@@ -103,40 +113,41 @@ def editaRuta(request, ruta_id=None):
         
     else:
         form=PostForm(instance=ruta)
-        
+        form2=CoordenadesForm(instance=mapa)
+    
+    
     return render(request, 'posts/novaRuta.html', {
-        'form':form,
+        'form':form, 'form2':form2,
         })
 
 @login_required(login_url='usuaris:login') 
 def filtreDeRutes(request):
-    rutes = "No hi ha resultats..."
     
     if request.method == 'POST': 
         form = FiltreRutaForm(request.POST) 
 
         if form.is_valid():
+            q = Q()
             
-            rutes = Post.objects.all();
-            #'titol', 'data', 'dificultat', 'categoria', 'administrador', 'puntuacions']
+            #['titol', 'data', 'dificultat', 'categoria', 'administrador']
             if form.cleaned_data['titol']:
-                rutes = rutes.objects.filter(titol = form.cleaned_data['titol'])
+                q &= Q(titol = form.cleaned_data['titol'])
                 
             if form.cleaned_data['data']:
-                rutes = rutes.objects.filter(titol = form.cleaned_data['data'])
-                
-            if form.cleaned_data['dificultat']:
-                rutes = rutes.objects.filter(titol = form.cleaned_data['dificultat'])
+                q &= Q(data = form.cleaned_data['data'])
+            
+            if form.cleaned_data['dificultat'] != '':
+                if form.cleaned_data['dificultat']:
+                    q &= Q(dificultat = form.cleaned_data['dificultat'])
                 
             if form.cleaned_data['categoria']:
-                rutes = rutes.objects.filter(titol = form.cleaned_data['categoria'])
+                q &= Q(categoria = form.cleaned_data['categoria'])
                 
             if form.cleaned_data['administrador']:
-                rutes = rutes.objects.filter(titol = form.cleaned_data['administrador'])
+                q &= Q(administrador = form.cleaned_data['administrador'])
                 
-            if form.cleaned_data['puntuacions']:
-                rutes = rutes.objects.filter(titol = form.cleaned_data['puntuacions'])
-         
+        
+            rutes = Post.objects.filter( q )
         
         return render(request, 'posts/filtreDeRutes.html', {'form':form, 'rutes':rutes})
         

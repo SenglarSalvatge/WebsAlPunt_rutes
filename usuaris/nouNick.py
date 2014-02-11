@@ -1,3 +1,0 @@
-def crearNick():
-    return "hola"
-    
