@@ -49,10 +49,10 @@
 	<!-- PANELL DE CONTROL DE LINIES DE GOOGLE MAPS -->
 	<div id="mapaDiv">
 		<div id="panel">
-		  <input onclick="amagarLinia();" type='button' value="Amagar Marca">
-		  <input onclick="mostrarLinia();" type='button' value="Mostrar Marca">
-		  <input onclick="borrarLinia();" type='button' value="Borrar Totes les Marques">
-		  <input onclick="borrarUltimaMarca();" type='button' value="Borrar Última Marca">
+		  <input onclick="amagarLinia();" type='button' value="Amagar Marca" class="btn btn-success">
+		  <input onclick="mostrarLinia();" type='button' value="Mostrar Marca" class="btn btn-success">
+		  <input onclick="borrarLinia();" type='button' value="Borrar Totes les Marques" class="btn btn-success">
+		  <input onclick="borrarUltimaMarca();" type='button' value="Borrar Última Marca" class="btn btn-success">
 		</div>
 		<div id="map-canvas"></div>
 	</div>
@@ -61,7 +61,12 @@
 	<!--<input type="text" id="id_coordenades" value=''>-->
 	
 	
+
+	<p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" class="btn btn-success"/></p>
+
+
 	<!--p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" /></p>-->
+
 
 	<p><input type="submit" value="Desar" /></p>
 </form>

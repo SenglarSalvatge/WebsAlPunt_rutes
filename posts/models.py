@@ -13,6 +13,7 @@ class Categoria(models.Model):
 class Post(models.Model):
     
     DIFICULTAT_CHOICES = (
+        ('', '---------'),
         ('BA', 'Baix'),
         ('IN', 'Intermig'),
         ('AL', 'Alt'),
