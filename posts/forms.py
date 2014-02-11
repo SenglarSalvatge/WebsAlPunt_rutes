@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from posts.models import Post, Dades_Mapa
 from django import forms
-from django.forms.widgets import Textarea
+from django.forms.widgets import Textarea, HiddenInput
 
   
 class PostForm(ModelForm):
@@ -16,8 +16,10 @@ class PostForm(ModelForm):
 class CoordenadesForm(ModelForm):
     class Meta:
         model = Dades_Mapa
+        widgets = {
+                   'coordenades':HiddenInput
+                   }
         fields = ['coordenades']
-        
         
 class FiltreRutaForm(ModelForm):
     class Meta:

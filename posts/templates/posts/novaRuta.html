@@ -10,11 +10,14 @@
 {% block content %}
 
 
+
+
 <form action="" method="post">{% csrf_token %}
 
 
 	<div id="formRuta">
 	    {{ form.non_field_errors }}
+	    {{ form2.non_field_errors }}
 	    <div class="fieldWrapper">
 	        {{ form.titol.errors }}
 			{{ form.titol.label_tag }}{{ form.titol }}
@@ -36,7 +39,13 @@
 	        {{ form.descripcio.label_tag }}{{ form.descripcio }}
 	    </div>
 	</div>
-
+	<div id="formMapa">
+	    
+	    <div class="fieldWrapper" id="postCoordenades">
+	        {{ form2.coordenades.errors }}
+			{{ form2.coordenades.label_tag }}{{ form2.coordenades }}
+	    </div>
+	 </div>  
 
 	<!-- -------------------------------------------------------------------------------------- -->
 	
@@ -52,12 +61,12 @@
 	</div>
 	
 	
-	<input type="text" id="postCoordenades" value=''>
+	<!--<input type="text" id="id_coordenades" value=''>-->
 	
 	
-	<p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" /></p>
+	<!--p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" /></p>-->
 
-
+	<p><input type="submit" value="Desar" /></p>
 </form>
 
 
