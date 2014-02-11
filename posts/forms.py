@@ -3,7 +3,6 @@ from posts.models import Post, Dades_Mapa
 from django import forms
 from django.forms.widgets import Textarea, HiddenInput
 
-  
 class PostForm(ModelForm):
     postCoordenades = forms.CharField()
     class Meta:

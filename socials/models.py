@@ -3,7 +3,7 @@ from django.db import models
 from usuaris.models import Perfil
 
 class Comentari(models.Model):
-    comentari = models.CharField(max_length=800, help_text="Comentari")
+    comentari = models.CharField(max_length=800)
     post = models.ForeignKey('posts.Post', related_name="Ruta")
     perfil = models.ForeignKey(Perfil, related_name="comentariUsuari")
     

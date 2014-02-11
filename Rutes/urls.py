@@ -20,6 +20,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     
     #auntenticacio de social auth
-    url('', include('social.apps.django_app.urls', namespace='social')),
+    url('', include('social.apps.django_app.urls', namespace='social')),    
     
+    #mostrem els comentaris
+    url(r'^socials/', include('socials.urls', namespace='socials')),
 )

@@ -5,10 +5,9 @@ from usuaris.utils_usuaris import inventat_un_nou_nick
 
 class Perfil(models.Model):
     #foto //encara en fase de desenvolupament
-    descripcio = models.CharField(max_length=800, help_text="Descripció", blank=True)
-    puntuacio = models.IntegerField(help_text="Puntuació", default = 0)
-    nick = models.CharField(max_length=50, help_text="El teu nick", blank=False)
-    usuari = models.OneToOneField(User, help_text="Usuari")
+    descripcio = models.CharField(max_length=800, blank=True)
+    nick = models.CharField(max_length=50, blank=False)
+    usuari = models.OneToOneField(User)
     
     def __unicode__(self):  
         return self.nick
