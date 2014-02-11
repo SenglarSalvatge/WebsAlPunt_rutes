@@ -8,7 +8,6 @@ from django.contrib import messages
 from django.core.urlresolvers import reverse
 
 def editarPerfil(request):
-
     perfil = request.user.perfil
         
     if request.method == 'POST':
