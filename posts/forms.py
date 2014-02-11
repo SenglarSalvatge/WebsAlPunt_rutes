@@ -1,10 +1,10 @@
 from django.forms import ModelForm
 from posts.models import Post, Dades_Mapa, Categoria
 from django import forms
-from django.forms.widgets import Textarea
 from usuaris.models import Perfil
+from django.forms.widgets import Textarea, HiddenInput
 
-  
+
 class PostForm(ModelForm):
     postCoordenades = forms.CharField()
     class Meta:
@@ -17,6 +17,9 @@ class PostForm(ModelForm):
 class CoordenadesForm(ModelForm):
     class Meta:
         model = Dades_Mapa
+        widgets = {
+                   'coordenades':HiddenInput
+                   }
         fields = ['coordenades']
         
         
@@ -28,5 +31,6 @@ class FiltreRutaForm(forms.Form):
     categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), required=False)
     administrador = forms.ModelChoiceField(queryset=Perfil.objects.filter(postAdministrats__isnull = False).distinct(), required=False)
     
+
 
 
