@@ -120,16 +120,17 @@ def filtreDeRutes(request):
                 q &= Q(titol = form.cleaned_data['titol'])
                 
             if form.cleaned_data['data']:
-                q &= Q(titol = form.cleaned_data['data'])
-                
-            if form.cleaned_data['dificultat']:
-                q &= Q(titol = form.cleaned_data['dificultat'])
+                q &= Q(data = form.cleaned_data['data'])
+            
+            if form.cleaned_data['dificultat'] != '':
+                if form.cleaned_data['dificultat']:
+                    q &= Q(dificultat = form.cleaned_data['dificultat'])
                 
             if form.cleaned_data['categoria']:
-                q &= Q(titol = form.cleaned_data['categoria'])
+                q &= Q(categoria = form.cleaned_data['categoria'])
                 
             if form.cleaned_data['administrador']:
-                q &= Q(titol = form.cleaned_data['administrador'])
+                q &= Q(administrador = form.cleaned_data['administrador'])
                 
         
             rutes = Post.objects.filter( q )
