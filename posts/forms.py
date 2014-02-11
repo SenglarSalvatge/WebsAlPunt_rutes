@@ -1,8 +1,9 @@
 from django.forms import ModelForm
 from posts.models import Post, Categoria
 from django import forms
-from django.forms.widgets import Textarea, TextInput, Select, HiddenInput
+from django.forms.widgets import Textarea, TextInput, Select, HiddenInput, DateInput
 from usuaris.models import Perfil
+
 
 class PostForm(ModelForm):
     postCoordenades = forms.CharField()
