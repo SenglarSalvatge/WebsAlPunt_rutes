@@ -6,11 +6,18 @@
 		<link rel="stylesheet" href="{% static 'maps/maps.css' %}">
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClNhahi1_H8Tmdb7_WeuGpd4YA1cfOPwk&sensor=false"></script>	
 		<script src="{% static 'maps/maps.js' %}"></script>
+		<!-- js i css per a plugin del calendari -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="{% static 'calendar/calendar.js' %}"></script>
 {% endblock %}
 {% block content %}
 
 <form action="" method="post">{% csrf_token %}
 
+<<<<<<< HEAD
 
 	<div id="formRuta">
 	    {{ form.non_field_errors }}
@@ -45,19 +52,61 @@
 </form>
 
 	<!-- -------------------------------------------------------------------------------------- -->
-	
-	<!-- PANELL DE CONTROL DE LINIES DE GOOGLE MAPS -->
-	<div id="mapaDiv">
-		<div id="panel">
-		  <input onclick="amagarLinia();" type='button' value="Amagar Marca" class="btn btn-success">
-		  <input onclick="mostrarLinia();" type='button' value="Mostrar Marca" class="btn btn-success">
-		  <input onclick="borrarLinia();" type='button' value="Borrar Totes les Marques" class="btn btn-success">
-		  <input onclick="borrarUltimaMarca();" type='button' value="Borrar Última Marca" class="btn btn-success">
+=======
+	<div class="row">
+		<div id="formRuta" class="col-xs-4 col-md-2">
+		    {{ form.non_field_errors }}
+		    {{ form2.non_field_errors }}
+		    <div class="fieldWrapper">
+		        {{ form.titol.errors }}
+				{{ form.titol.label_tag }}{{ form.titol }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.data.errors }}
+				{{ form.data.label_tag }}{{ form.data }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.dificultat.errors }}
+		        {{ form.dificultat.label_tag }}{{ form.dificultat }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.categoria.errors }}
+		        {{ form.categoria.label_tag }}{{ form.categoria }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.descripcio.errors }}
+		        {{ form.descripcio.label_tag }}{{ form.descripcio }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.coordenades.errors }}
+		        {{ form.coordenades}}
+		    </div>
+		    <br>
+		    <p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" class="btn btn-success"/></p>
 		</div>
-		<div id="map-canvas"></div>
+>>>>>>> 89ede5440495dcce3c4a5043c1c4d80b995ee7f3
+	
+		<!-- -------------------------------------------------------------------------------------- -->
+		
+		<!-- PANELL DE CONTROL DE LINIES DE GOOGLE MAPS -->
+		<div id="mapaDiv" class="col-xs-12 col-sm-6 col-md-8">
+			<div id="panel">
+			  <input onclick="amagarLinia();" type='button' value="Amagar Marca" class="btn btn-success">
+			  <input onclick="mostrarLinia();" type='button' value="Mostrar Marca" class="btn btn-success">
+			  <input onclick="borrarLinia();" type='button' value="Borrar Totes les Marques" class="btn btn-success">
+			  <input onclick="borrarUltimaMarca();" type='button' value="Borrar Última Marca" class="btn btn-success">
+			</div>
+			<div id="map-canvas"></div>
+		</div>
 	</div>
+<<<<<<< HEAD
 	
 	
+=======
+	<!--<input type="text" id="id_coordenades" value=''>--
+	<!--p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" /></p>-->
+</form>
+>>>>>>> 89ede5440495dcce3c4a5043c1c4d80b995ee7f3
 
 
 {% endblock %}

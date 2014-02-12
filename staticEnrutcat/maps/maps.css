@@ -10,18 +10,15 @@
     background-color: #fff;
     padding: 5px;
     border: 1px solid #999;
-}
-  
-#postCoordenades {
-	width: 1000px;
+    text-align: center;
 }
 
 #mapaDiv {
     float: left;
-    margin-left: 70px;
     width: 70%;
 }
 
 #formRuta {
 	float: left;
 }
+
