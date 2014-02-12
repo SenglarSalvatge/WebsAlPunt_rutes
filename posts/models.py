@@ -32,7 +32,7 @@ class Post(models.Model):
     km = models.CharField(max_length=100, help_text="Kilometres del punt d'inici al punt de fi de la ruta")
     durada = models.CharField(max_length=50000, help_text="Diferents durades de la ruta en format de JSON")
     
-    puntuacions = models.ForeignKey(Puntuacio, help_text="Puntuacions", null=True)
+    #puntuacions = models.ForeignKey(Puntuacio, help_text="Puntuacions", null=True)
     comentaris = models.ManyToManyField(Perfil, through='socials.Comentari', related_name="comentariPost")
     
     def __unicode__(self):  

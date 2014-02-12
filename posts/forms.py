@@ -8,7 +8,7 @@ class PostForm(ModelForm):
     postCoordenades = forms.CharField()
     class Meta:
         model = Post
-        fields = ['titol','data','descripcio','dificultat','categoria', 'coordenades']
+        fields = ['titol','data','descripcio','dificultat','categoria', 'coordenades',]
         widgets = {
             'titol': TextInput(attrs={'class':'form-control'}),
             'descripcio': Textarea(attrs={'cols': 20, 'rows': 5, 'class':'form-control'}),

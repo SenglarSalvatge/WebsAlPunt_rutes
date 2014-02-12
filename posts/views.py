@@ -43,6 +43,7 @@ def calcularDistanciaMapa(frase):
                 i=i-1
                 resultado =math.sqrt((x2-x1)^2+(y2-y1)^2)
                 distancia= distancia +resultado
+            print distancia
             return distancia
         
 def calcularDuradaMapa(modo, distancia):     
@@ -55,6 +56,7 @@ def calcularDuradaMapa(modo, distancia):
                 tiempo = distancia/10
             elif modo == "caballo": 
                 tiempo = distancia/7
+            print tiempo
             return tiempo
 
 def editaRuta(request, ruta_id=None):
@@ -65,6 +67,8 @@ def editaRuta(request, ruta_id=None):
         ruta=Post()
     if request.method == 'POST':
         form=PostForm(request.POST, instance=ruta)
+        for f in form:
+            print f
         if form.is_valid():
             # solucion correcta:
             r=form.save(commit=False)
@@ -76,6 +80,8 @@ def editaRuta(request, ruta_id=None):
             tiempo=calcularDuradaMapa(modo, distancia)
             #save
             r.km= distancia
+            r.administrador=request.user.perfil
+            r.apuntats= r.administrador
             r.durada = tiempo
             r.save()
     
@@ -83,7 +89,7 @@ def editaRuta(request, ruta_id=None):
             url_next= reverse('posts:mostrarRutes', kwargs={})
             return HttpResponseRedirect(url_next)
         else:
-            messages.error(request, 'error en el formulari. ')
+            messages.error(request, 'marti en mula. ')
         
     else:
         form=PostForm(instance=ruta)
