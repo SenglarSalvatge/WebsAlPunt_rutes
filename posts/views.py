@@ -48,13 +48,13 @@ def calcularDistanciaMapa(frase):
         
 def calcularDuradaMapa(modo, distancia):     
             tiempo = 0
-            if modo == "andar": 
+            if modo == "Caminada": 
                 tiempo = distancia/5
-            elif modo == "bicicleta":
+            elif modo == "Bicicleta":
                 tiempo = distancia/25
-            elif modo == "correr": 
+            elif modo == "Fotting": 
                 tiempo = distancia/10
-            elif modo == "caballo": 
+            elif modo == "Cavall": 
                 tiempo = distancia/7
             
             return tiempo
