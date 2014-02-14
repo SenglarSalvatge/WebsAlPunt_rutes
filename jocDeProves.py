@@ -2,33 +2,7 @@
 
 def crea_dades():
     
-    ###########################################################################################
-    #Usuaris
-    ###########################################################################################
-    
-    from django.contrib.auth.models import User
-    users = [('john',
-              'john@lennon.com',
-              'john',
-              ),
-             ('pere',
-              'pere@peret.net',
-              'pere',
-              ),
-             ('manoli',
-              'destruccioninfernal@hotmail.es',
-              'manoli',
-              ),
-             ('elpicdesallafort',
-              None,
-              'elpicadesallafort'),
-             ('william',
-              'w12@gmail.com',
-              'william'),]
-    
-    for user in users:
-        u = User.objects.create_user(username=user[0], email=user[1], password=user[2])
-        u.save()
+
     ###########################################################################################
     #Categories
     ###########################################################################################
@@ -37,9 +11,10 @@ def crea_dades():
     
     categories = ['A Peu',
                   'Bicicleta',
+                  'Fotting',
+                  'Cavall',
+                  'Moto',
                   '4x4',
-                  'Avioneta',
-                  'Cabra mecànica',
                   ]
     
     for i in categories:
