@@ -13,7 +13,6 @@ class Categoria(models.Model):
 class Post(models.Model):
     
     DIFICULTAT_CHOICES = (
-        ('', '---------'),
         ('BA', 'Baix'),
         ('IN', 'Intermig'),
         ('AL', 'Alt'),
@@ -27,12 +26,12 @@ class Post(models.Model):
     
     categoria = models.ForeignKey(Categoria, help_text="Categoria")
     administrador = models.ForeignKey(Perfil, help_text="Administrador", related_name="postAdministrats")
-    apuntats = models.ManyToManyField(Perfil, help_text="Apuntats", related_name="postOnEsticApuntat")
+    apuntats = models.ManyToManyField(Perfil, blank = True, help_text="Apuntats", related_name="postOnEsticApuntat")
     coordenades = models.CharField(max_length=50000, help_text="Coordenades de la linea que marca la ruta")
-    km = models.CharField(max_length=100, help_text="Kilometres del punt d'inici al punt de fi de la ruta")
-    durada = models.CharField(max_length=50000, help_text="Diferents durades de la ruta en format de JSON")
+    km = models.CharField(max_length=100, help_text="Kilometres de distancia")
+    durada = models.CharField(max_length=50000, help_text="Durada de la ruta")
     
-    #puntuacions = models.ForeignKey(Puntuacio, help_text="Puntuacions", null=True)
+    puntuacions = models.ForeignKey(Puntuacio, blank = True, help_text="Puntuacions", null=True)
     comentaris = models.ManyToManyField(Perfil, through='socials.Comentari', related_name="comentariPost")
     
     def __unicode__(self):  
