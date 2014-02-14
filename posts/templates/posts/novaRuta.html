@@ -17,39 +17,54 @@
 
 <form action="" method="post">{% csrf_token %}
 
-	<div id="formRuta">
-	    {{ form.non_field_errors }}
-	    {{ form2.non_field_errors }}
-	    <div class="fieldWrapper">
-	        {{ form.titol.errors }}
-			{{ form.titol.label_tag }}{{ form.titol }}
-	    </div>
-	    <div class="fieldWrapper">
-	        {{ form.data.errors }}
-			{{ form.data.label_tag }}{{ form.data }}
-	    </div>
-	    <div class="fieldWrapper">
-	        {{ form.dificultat.errors }}
-	        {{ form.dificultat.label_tag }}{{ form.dificultat }}
-	    </div>
-	    <div class="fieldWrapper">
-	        {{ form.categoria.errors }}
-	        {{ form.categoria.label_tag }}{{ form.categoria }}
-	    </div>
-	    <div class="fieldWrapper">
-	        {{ form.descripcio.errors }}
-	        {{ form.descripcio.label_tag }}{{ form.descripcio }}
-	    </div>
-	    <div class="fieldWrapper">
-	        {{ form.coordenades.errors }}
-	        {{ form.coordenades.label_tag }}{{ form.coordenades}}
-	    </div>
-	</div>
-	<p><input type="submit"  value="Confimar" class="btn btn-success"/></p>
-
-</form>
 
 	<!-- -------------------------------------------------------------------------------------- -->
+	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+	        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+	        {{ message }}
+	    </li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
+	<div class="row">
+		<div id="formRuta" class="col-xs-4 col-md-2">
+		    {% if form.non_field_errors %}
+		       Errors -> {{ form.non_field_errors }}
+		    {% endif %}
+		    
+		    {{ form.errors }}
+		    
+		    <div class="fieldWrapper">
+		        {{ form.titol.errors }}
+				{{ form.titol.label_tag }}{{ form.titol }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.data.errors }}
+				{{ form.data.label_tag }}{{ form.data }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.dificultat.errors }}
+		        {{ form.dificultat.label_tag }}{{ form.dificultat }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.categoria.errors }}
+		        {{ form.categoria.label_tag }}{{ form.categoria }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.descripcio.errors }}
+		        {{ form.descripcio.label_tag }}{{ form.descripcio }}
+		    </div>
+		    <div class="fieldWrapper">
+		        {{ form.coordenades.errors }}
+		        {{ form.coordenades}}
+		    </div>
+		    <br>
+		    <p><input type="submit" value="Confimar" class="btn btn-success"/></p>
+		</div>
+
 
 	
 		<!-- -------------------------------------------------------------------------------------- -->
@@ -66,7 +81,12 @@
 		</div>
 	</div>
 
+<<<<<<< HEAD
 	
+=======
+</form>
+
+>>>>>>> 799f73f84341add85a642d7cf8106dc0ad8682cf
 
 
 {% endblock %}
