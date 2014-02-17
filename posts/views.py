@@ -89,7 +89,7 @@ def editaRuta(request, ruta_id=None):
             url_next= reverse('index', kwargs={})
             return HttpResponseRedirect(url_next)
         else:
-            messages.error(request, request.POST)
+            messages.error(request, 'petada general')
     else:
         form=PostForm(instance=ruta)
     

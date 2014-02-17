@@ -27,7 +27,7 @@ class Post(models.Model):
     categoria = models.ForeignKey(Categoria, help_text="Categoria")
     administrador = models.ForeignKey(Perfil, help_text="Administrador", related_name="postAdministrats")
     apuntats = models.ManyToManyField(Perfil, blank = True, help_text="Apuntats", related_name="postOnEsticApuntat")
-    coordenades = models.CharField(max_length=50000, help_text="Coordenades de la linea que marca la ruta")
+    coordenades = models.CharField(max_length=50000, help_text="Coordenades de la linea que marca la ruta", null=True)
     km = models.CharField(max_length=100, help_text="Kilometres de distancia")
     durada = models.CharField(max_length=50000, help_text="Durada de la ruta")
     

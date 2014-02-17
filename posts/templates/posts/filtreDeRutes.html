@@ -21,11 +21,24 @@
 
 <hr>
 
-
-<p>Hola , hi sóc!</p>
 {% for ruta in rutes %}
-	<li>{{ruta.titol}}</li>
+	<article class="panel panel-success">
+		    <div class="panel-heading">
+			<h3 class="panel-title">
+			    {{ruta.titol}}
+			</h3>
+		    </div>
+			<div class="panel-body">
+				<li>{{ruta.data}}</li>
+				<li>{{ruta.dificultat}}</li>
+				<li>{{ruta.categoria}}</li>
+				<li>{{ruta.descripcio}}</li>	
+			</div> 
+		</article>
 {% endfor %}
+
+
+
 
 
 {% endblock %}
