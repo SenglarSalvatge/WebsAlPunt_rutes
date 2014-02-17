@@ -43,7 +43,7 @@
 		    </div>
 		    <div class="fieldWrapper">
 		        {{ form.data.errors }}
-				{{ form.data.label_tag }}{{ form.data }}
+				{% comment %}{{ form.data.label_tag }}{{ form.data }}{% endcomment %}
 		    </div>
 		    <div class="fieldWrapper">
 		        {{ form.dificultat.errors }}
@@ -81,12 +81,10 @@
 		</div>
 	</div>
 
-<<<<<<< HEAD
-	
-=======
+
 </form>
 
->>>>>>> 799f73f84341add85a642d7cf8106dc0ad8682cf
+
 
 
 {% endblock %}

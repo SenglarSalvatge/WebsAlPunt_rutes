@@ -10,8 +10,8 @@ $(function() {
 	  'Jul','Ago','Sep','Oct','Nov','Des'],
 	  monthStatus: 'Veure un altre mes', yearStatus: 'Veure un altre any',
 	  dayNames: ['Diumenge','Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte'],
-	  dayNamesShort: ['Dium','Dill','Dim','Dime','Dij','Div','Dis'],
-	  dayNamesMin: ['Dium','Dill','Dim','Dime','Dij','Div','Dis'],
+	  dayNamesShort: ['Dg','Dl','Dm','Dc','Dj','Dv','Ds'],
+	  dayNamesMin: ['Dg','Dl','Dm','Dc','Dj','Dv','Ds'],
 	  dateFormat: 'dd/mm/yy', firstDay: 1,
 	  initStatus: 'Selecciona La data', isRTL: false};
 	  
