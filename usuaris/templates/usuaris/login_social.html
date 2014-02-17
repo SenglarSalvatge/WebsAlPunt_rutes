@@ -1,17 +1,22 @@
-{% extends "base.html" %}
-{% block redirect %}
-
-{% if user.is_authenticated %}
-	<meta http-equiv="refresh" content="0;{% url 'usuaris:iniciUsuari' %}" />
-{% endif %}
-
-{% endblock %}
-
-{% block content %}
-{% if user.is_authenticated %}
-{% else %} 
-	<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
-	<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
-	<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
-{% endif %}
-{% endblock %} 
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Uneix-te</h4>
+      </div>
+      <div class="modal-body">
+        {% if user.is_authenticated %}
+			<meta http-equiv="refresh" content="0; {% url 'usuaris:iniciUsuari' %}" />
+		{% endif %}
+		{% if user.is_authenticated %}
+		{% else %} 
+			<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
+			<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
+			<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
+		{% endif %}
+      </div>
+    </div>
+  </div>
+</div>
