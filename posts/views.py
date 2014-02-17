@@ -12,7 +12,7 @@ from django.db.models import Q
 import math
 
 def mostrarRutes(request):
-    Rutes = Post.objects.all()
+    Rutes = Post.objects.filter(administrador = request.user.perfil)
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
 
 def calcularDistanciaMapa(frase):
