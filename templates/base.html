@@ -137,7 +137,6 @@
 							</section>	
 						</footer>
 					</div>
-<<<<<<< HEAD
 				</div>
 			 </div><!-- /.navbar-collapse -->  			
 		</div>
@@ -149,57 +148,17 @@
 		        <h4 class="modal-title" id="myModalLabel">Uneix-te</h4>
 		      </div>
 		      <div class="modal-body">
-
-				{% if user.is_authenticated %}
-				{% else %} 
-					<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
-					<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
-					<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
-				{% endif %}
+				<div>
+					{% if user.is_authenticated %}
+					{% else %} 
+						<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
+						<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
+						<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
+					{% endif %}
+				</div>
 		      </div>
 		    </div>
 		  </div>
 		</div>
-=======
-			  </div><!-- /.navbar-collapse -->
-		</nav>			
-			<!-- Modal Informació Nostra -->
-			<div class="modal fade" id="modalInformacio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content">
-			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			        <h4 class="modal-title" id="myModalLabel">Enrut.cat</h4>
-			      </div>
-			      <div class="modal-body">
-			       	<span>
-			       		<h4>
-			       			Aquest projecte forma part del concurs <a href="http://websalpunt.cat/">Webs Al Punt</a>.<br>
-			       			El tema triat, és la creació d'una aplicació web que permeti a un usuari crear 
-			       			rutes (Per córrer, per fer a peu, amb bicicleta etc...). A aquestes rutes, s'hi podràn 
-			       			apuntar altres usuaris de l'aplicació.
-			       			També es podrà comentar una activitat, generar debat entre usuaris, modificar-la etc...
-			       		</h4>
-			       		<hr>
-			       		<h4>
-			       			L'aplicació està desenvolupada amb el Framework de Python Django (v. 1.6) per a la creació dels models, els formularis
-			       			d'entrada de dades i la gestió d'usuaris.<br>
-			       			El disseny està fet amb Twiter Bootstrap 3.			       			
-			       		</h4>
-			       		<hr>
-			       		<h4>
-			       			Aplicació creada pels alumnes Álex Ramírez, Darwin López, Martí Peris i Rodrigo Saulis. <br>
-			       			Actualment cursant segón de CFGS de Desenvolupament D'Aplicacions Web (DAW) a l'INS Cendrassos de Figueres
-			       			(17600, Girona).
-			       		</h4>			       		
-			       	</span>
-			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-success" data-dismiss="modal">D'acord</button>
-			      </div>
-			    </div>
-			  </div>
-			</div>  			
->>>>>>> 78d503a104e9574d04c6b78a33264998dbb4de20
 	</body>
 </html>
