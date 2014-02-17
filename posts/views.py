@@ -32,7 +32,7 @@ def calcularDistanciaMapa(frase):
             # calculo la distancia    
             i =0
             distancia=0
-            while i < len(listCoordenades):
+            while i < len(listCoordenades)-3:
                 x1 = float(listCoordenades[i])
                 i=i+1
                 y1 = float(listCoordenades[i])
@@ -41,7 +41,7 @@ def calcularDistanciaMapa(frase):
                 i=i+1
                 y2 = float(listCoordenades[i])
                 i=i-1
-                resultado =math.sqrt((x2-x1)^2+(y2-y1)^2)
+                resultado =math.sqrt((x2-x1)**2+(y2-y1)**2)
                 distancia= distancia +resultado
             
             return distancia
@@ -81,7 +81,7 @@ def editaRuta(request, ruta_id=None):
             #save
             r.km= distancia
             r.administrador=request.user.perfil
-            r.apuntats= r.administrador
+            #r.apuntats= r.administrador
             r.durada = tiempo
             r.save()
     
