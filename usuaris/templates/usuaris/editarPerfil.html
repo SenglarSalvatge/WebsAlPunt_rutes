@@ -1,8 +1,10 @@
 {% extends "base.html" %}
-
+{% block title %}
+<title>Modificar Perfil</title>
+{% endblock %}
 {% block content %}
 <h1>Modificar perfil</h1>
-
+<hr>
 	<form action="" method="post">{% csrf_token %}
 		{{ form.as_p }}
 		<input type="submit" value="Guardar dades" class="btn btn-success"/>

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load staticfiles %}
-
+{% block title %}
+<title>Ruta Nova</title>
+{% endblock %}
 {% block links-comple %}
 		<!-- js i css per a mapa de API google MAPS-->	
 		<link rel="stylesheet" href="{% static 'maps/maps.css' %}">
@@ -14,7 +16,8 @@
 		<script src="{% static 'calendar/calendar.js' %}"></script>
 {% endblock %}
 {% block content %}
-
+<h1>Crear una nova ruta</h1>
+<hr>
 <form action="" method="post">{% csrf_token %}
 
 
