@@ -23,6 +23,7 @@
 
 <hr>
 
+{% if rutes %} 
 {% for ruta in rutes %}
 	<article class="panel panel-success">
 		    <div class="panel-heading">
@@ -35,10 +36,31 @@
 				<li>{{ruta.dificultat}}</li>
 				<li>{{ruta.categoria}}</li>
 				<li>{{ruta.descripcio}}</li>	
+				<a href="#"><button>edita</button></a>
 			</div> 
 		</article>
 {% endfor %}
 
+
+
+
+<div class="pagination">
+    <span class="step-links">
+        {% if rutes.has_previous %}
+            <a href="?page={{ rutes.previous_page_number }}&q={{q}}"><< anterior | </a>
+        {% endif %}
+
+        <span class="current">
+            Pàgina {{ rutes.number }} de {{ rutes.paginator.num_pages }}
+        </span>
+
+        {% if rutes.has_next %}
+            <a href="?page={{ rutes.next_page_number }}&q={{q}}"> | següent >></a>
+        {% endif %}
+    </span>
+</div>
+
+{% endif %}
 
 
 
