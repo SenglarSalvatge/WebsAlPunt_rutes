@@ -59,6 +59,24 @@ def calcularDuradaMapa(modo, distancia):
             
             return tiempo
 
+
+def eliminarRuta(request, ruta_id):
+    ruta=get_object_or_404(Post, pk=ruta_id)
+    ruta.delete()
+    
+    url_next= reverse('posts:mostrarRutes', kwargs={})
+    return HttpResponseRedirect(url_next)
+
+def apuntarRuta(request, ruta_id):
+    ruta=get_object_or_404(Post, pk=ruta_id)
+    ruta.apuntats = request.user.perfil
+    ruta.save()
+    messages.info(request, 'Apuntat. ')
+        
+    url_next= reverse('posts:mostrarRutes', kwargs={})
+    return HttpResponseRedirect(url_next)
+
+
 def editaRuta(request, ruta_id=None):
 
     if ruta_id is not None:

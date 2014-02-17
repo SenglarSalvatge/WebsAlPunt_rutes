@@ -3,7 +3,11 @@
 {% block content %}
 <h1>Les meves rutes</h1>
 {% for ruta in Rutes %}
- 	{{ ruta.titol }}
+ 	<p></p>{{ ruta.titol }} 
+ 	<a href="{% url 'posts:editaRuta' ruta.id %}"><button>Edita</button></a>
+ 	<a href="{% url 'posts:eliminarRuta' ruta.id %}"><button>Delete</button></a>
+ 	<a href="{% url 'posts:novaRuta' %}"><button>Crear</button></a>
+ 	<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button>Apuntar-se</button></a>
 {% endfor %}
 
 {% endblock %}
