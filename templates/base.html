@@ -3,8 +3,6 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		{% block title%}
 		
@@ -13,26 +11,22 @@
 		<meta name="author" content="Rodrigo">
 		<!--{% block redirect %}
 		{% endblock %}-->
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<!-- Llibreria jQuery per a Bootstrap -->
 	    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
-	    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	    <!-- JavaScript de Bootstrap -->
 		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-		<!-- Latest compiled and minified CSS -->
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<!-- Icona de pestanya-->
+		<link rel="shortcut icon" href="{% static 'bootstrap/imatges/images.jpg'%}">
+		<link rel="apple-touch-icon" href="{% static 'bootstrap/imatges/images.jpg'%}">
+		<!-- Fitxer amb última versió de jQuery -->
 		<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
-		<!-- Latest compiled and minified CSS -->
+		<!-- Link al nostre fitxer de CSS-->
 		<link rel="stylesheet" href="{% static 'bootstrap/css/css.css'%}">			
-		<!-- Optional theme -->
+		<!-- Altres fitxers de Bootstrap -->
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css'%}">		
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+		<!-- Link al nostre fitxer de JavaScript-->
 		<script src="{% static 'bootstrap/js/js.js' %}"></script>		
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 		{% block links-comple %}
 		
 		{% endblock %}
@@ -56,9 +50,12 @@
 			  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
 			    <ul class="nav navbar-nav">	
 			    	{% if user.is_authenticated %}
-				      <li class="active"><a href="#">Rutes</a></li>
-				      <li><a href="#">Activitats</a></li>
-				      <li><a href="{% url 'posts:novaRuta' %}">Crear Ruta</a></li>
+				      <li class="dropdown">
+				      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rutes<b class="caret"></b></a>
+					    <ul class="dropdown-menu">
+						    <li><a href="{% url 'posts:novaRuta' %}">Crear Ruta</a></li>
+					    </ul>
+					  </li>
 				      <li class="dropdown">
 					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Comentaris<b class="caret"></b></a>
 					    <ul class="dropdown-menu">
@@ -68,7 +65,7 @@
 					  <li class="dropdown">
 					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">La meva activitat<b class="caret"></b></a>
 					    <ul class="dropdown-menu">
-						    <li><a href="#">Les meves rutes</a></li>
+						    <li><a href="{% url 'posts:mostrarRutes' %}">Les meves rutes</a></li>
 						    <li><a href="#">Rutes on participaré</a></li>
 						    <li><a href="#">Rutes finalitzades</a></li>
 					    </ul>
@@ -97,7 +94,10 @@
 			</header>
 			<br>
 			<br>
-			<h1>Base</h1>
+<<<<<<< HEAD
+			<h1></h1>
+=======
+>>>>>>> a78c8d975ad03fdfd5f09e262f44a82e42610411
 			<div>
 				{% block content %}
 				{% endblock %}
@@ -122,21 +122,22 @@
 			  <div class="collapse navbar-collapse" id="bs-navbar-collapse-2">
 					<div class="container">
 						<footer class="row">
-							<section class="col-xs-12 col-sd-2 col-sd-offset-2 col-md-4 col-md-offset-2" style="color:white; text-align: center;">								
-								 <ul class="nav navbar-nav" style="text-align: center;">										
+							<section class="col-xs-12 col-sd-2 col-sd-offset-2 col-md-4 col-md-offset-2" class="textoBlanco centrarText">								
+								 <ul class="nav navbar-nav" class="centrarText">										
 									<li><a data-toggle="modal" data-target="#modalInformacio">&copy; Copyright  by Enrut.cat , 2014</a></li>
 								</ul>	
 							</section>
-							<section class="col-xs-12 col-sd-2 col-md-4 " style="text-align: center;" >
-								<ul style="padding: 0px;">
-									<li class="linea"><b style="color:white;">Segueix-nos!</b></li>									
-									<li class="linea"><a href="https://twitter.com/EnrutCat"><img class="logos" src="{% static 'bootstrap/imatges/facebook-icon.jpg' %}" width="45px" height="45px"></a></li>
-									<li class="linea"><a href="https://twitter.com/EnrutCat"><img class="logos" src="{% static 'bootstrap/imatges/twitter-icon.jpg' %}" width="45px" height="45px"></a></li>
-									<li class="linea"><a href="https://plus.google.com/u/0/105295444224518300998/posts"><img class="logos" src="{% static 'bootstrap/imatges/google-icon.png' %}" width="45px" height="45px"></a></li>
+							<section class="col-xs-12 col-sd-2 col-md-4 " class="centrarText" >
+								<ul class="listadoFooter">
+									<li><b class="textoBlanco">Segueix-nos!</b></li>									
+									<li id="facebookLogo"><a href="https://twitter.com/EnrutCat"></a></li>
+									<li id="twitterLogo"><a href="https://twitter.com/EnrutCat"></a></li>
+									<li id="googleLogo"><a href="https://plus.google.com/u/0/105295444224518300998/posts"></a></li>
 								</ul>
 							</section>	
 						</footer>
 					</div>
+
 				</div>
 			 </div><!-- /.navbar-collapse -->  			
 		</div>
@@ -154,8 +155,8 @@
 						{% if user.is_authenticated %}
 						{% else %} 
 							<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
-							<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
-							<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
+							<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-danger btn-lg centrarText" >Accedeix amb Google</button></a><br /><hr>
+							<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-info btn-lg centrarText">Accedeix amb Twitter</button></a> 
 						{% endif %}
 				      </div>
 				    </div>
@@ -202,5 +203,6 @@
 			  </div>
 			</div>  			
 		</div>
+
 	</body>
 </html>

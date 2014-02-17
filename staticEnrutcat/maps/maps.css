@@ -2,6 +2,7 @@
 #map-canvas { 
 	height: 500px;
   	width: 100%;
+  	border: 1px solid black;
 }
 
 #panel {
@@ -9,7 +10,6 @@
     z-index: 5;
     background-color: #fff;
     padding: 5px;
-    border: 1px solid #999;
     text-align: center;
 }
 

@@ -1,20 +1,81 @@
-.logos{
+#twitterLogo{
+	display: inline-block;
+	background-image: url('../imatges/twitter-icon.jpg');
+	height: 42px;
+	width: 42px;
 	transition: 2.5s ease;
  	-moz-transition: 2.5s ease; /* Firefox */
  	-webkit-transition: 2.5s ease; /* Chrome - Safari */
  	-o-transition: 2.5s ease; /* Opera */
- 	border-radius: 30px;
+ 	border-radius: 28px;
  	border-style: solid;
- 	border-color: black; 	
+ 	border-width: 1px;
+ 	border-color: black;
 }
- 
-.logos:hover{
+
+#twitterLogo:hover{
+	background-image: url('../imatges/twitter-icon-inverse.jpg');
 	transform : rotate(360deg);
 	-moz-transform : rotate(360deg); /* Firefox */
 	-webkit-transform : rotate(360deg); /* Chrome - Safari */
 	-o-transform : rotate(360deg); /* Opera */
 }
 
-.linea{
+#facebookLogo{
 	display: inline-block;
+	background-image: url('../imatges/facebook-icon.jpg');
+	height: 42px;
+	width: 42px;
+	transition: 2.5s ease;
+ 	-moz-transition: 2.5s ease; /* Firefox */
+ 	-webkit-transition: 2.5s ease; /* Chrome - Safari */
+ 	-o-transition: 2.5s ease; /* Opera */
+ 	border-radius: 28px;
+ 	border-style: solid;
+ 	border-width: 1px;
+ 	border-color: black;
+}
+
+#facebookLogo:hover{
+	background-image: url('../imatges/facebook-icon-inverse.jpg');
+	transform : rotate(360deg);
+	-moz-transform : rotate(360deg); /* Firefox */
+	-webkit-transform : rotate(360deg); /* Chrome - Safari */
+	-o-transform : rotate(360deg); /* Opera */
+}
+
+#googleLogo{
+	display: inline-block;
+	background-image: url('../imatges/google-icon.jpg');
+	height: 42px;
+	width: 42px;
+	transition: 2.5s ease;
+ 	-moz-transition: 2.5s ease; /* Firefox */
+ 	-webkit-transition: 2.5s ease; /* Chrome - Safari */
+ 	-o-transition: 2.5s ease; /* Opera */
+ 	border-radius: 25px;
+ 	border-style: solid;
+ 	border-width: 1px;
+ 	border-color: black;
+}
+
+#googleLogo:hover{
+	background-image: url('../imatges/google-icon-inverse.jpg');
+	transform : rotate(360deg);
+	-moz-transform : rotate(360deg); /* Firefox */
+	-webkit-transform : rotate(360deg); /* Chrome - Safari */
+	-o-transform : rotate(360deg); /* Opera */
+}
+
+.centrarText{
+	text-align: center;
+}
+
+.textoBlanco{
+	color: white;
+	display: inline-block;
+}
+
+.listadoFooter{
+	padding: 0px;
 }
