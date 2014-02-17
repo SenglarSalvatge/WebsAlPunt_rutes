@@ -3,8 +3,6 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-		Remove this if you use the .htaccess -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		{% block title%}
 		
@@ -13,26 +11,22 @@
 		<meta name="author" content="Rodrigo">
 		<!--{% block redirect %}
 		{% endblock %}-->
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<!-- Llibreria jQuery per a Bootstrap -->
 	    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
-	    <!-- Include all compiled plugins (below), or include individual files as needed -->
+	    <!-- JavaScript de Bootstrap -->
 		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-		<!-- Latest compiled and minified CSS -->
-		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+		<!-- Icona de pestanya-->
+		<link rel="shortcut icon" href="{% static 'bootstrap/imatges/images.jpg'%}">
+		<link rel="apple-touch-icon" href="{% static 'bootstrap/imatges/images.jpg'%}">
+		<!-- Fitxer amb última versió de jQuery -->
 		<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
-		<!-- Latest compiled and minified CSS -->
+		<!-- Link al nostre fitxer de CSS-->
 		<link rel="stylesheet" href="{% static 'bootstrap/css/css.css'%}">			
-		<!-- Optional theme -->
+		<!-- Altres fitxers de Bootstrap -->
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css'%}">		
-		<!-- Latest compiled and minified JavaScript -->
-		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+		<!-- Link al nostre fitxer de JavaScript-->
 		<script src="{% static 'bootstrap/js/js.js' %}"></script>		
-		<!-- Include all compiled plugins (below), or include individual files as needed -->
-		<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 		{% block links-comple %}
 		
 		{% endblock %}
@@ -100,7 +94,6 @@
 			</header>
 			<br>
 			<br>
-			<h1>Base</h1>
 			<div>
 				{% block content %}
 				{% endblock %}
@@ -125,14 +118,14 @@
 			  <div class="collapse navbar-collapse" id="bs-navbar-collapse-2">
 					<div class="container">
 						<footer class="row">
-							<section class="col-xs-12 col-sd-2 col-sd-offset-2 col-md-4 col-md-offset-2" style="color:white; text-align: center;">								
-								 <ul class="nav navbar-nav" style="text-align: center;">										
+							<section class="col-xs-12 col-sd-2 col-sd-offset-2 col-md-4 col-md-offset-2" class="textoBlanco centrarText">								
+								 <ul class="nav navbar-nav" class="centrarText">										
 									<li><a data-toggle="modal" data-target="#modalInformacio">&copy; Copyright  by Enrut.cat , 2014</a></li>
 								</ul>	
 							</section>
-							<section class="col-xs-12 col-sd-2 col-md-4 " style="text-align: center;" >
-								<ul style="padding: 0px;">
-									<li><b style="color:white; display: inline-block">Segueix-nos!</b></li>									
+							<section class="col-xs-12 col-sd-2 col-md-4 " class="centrarText" >
+								<ul class="listadoFooter">
+									<li><b class="textoBlanco">Segueix-nos!</b></li>									
 									<li id="facebookLogo"><a href="https://twitter.com/EnrutCat"></a></li>
 									<li id="twitterLogo"><a href="https://twitter.com/EnrutCat"></a></li>
 									<li id="googleLogo"><a href="https://plus.google.com/u/0/105295444224518300998/posts"></a></li>
@@ -158,8 +151,8 @@
 						{% if user.is_authenticated %}
 						{% else %} 
 							<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
-							<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-danger btn-lg" >Accedeix amb Google</button></a><br /><hr>
-							<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-info btn-lg">Accedeix amb Twitter</button></a> 
+							<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-danger btn-lg centrarText" >Accedeix amb Google</button></a><br /><hr>
+							<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-info btn-lg centrarText">Accedeix amb Twitter</button></a> 
 						{% endif %}
 				      </div>
 				    </div>

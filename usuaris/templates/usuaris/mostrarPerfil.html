@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-
+{% block title %}
+<title>El Meu Perfil</title>
+{% endblock %}
 {% block content %}
 
 
-<h1>Perfil del usuari</h1>
+<h1>{{user.perfil.nick}}</h1>
 	<br>
 	<p>Descripció del usuari => {{user.perfil.descripcio}}</p><br>
 	<p>Nick del usuari => {{user.perfil.nick}}</p><br>

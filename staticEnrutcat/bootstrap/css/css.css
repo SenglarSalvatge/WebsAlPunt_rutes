@@ -66,3 +66,16 @@
 	-webkit-transform : rotate(360deg); /* Chrome - Safari */
 	-o-transform : rotate(360deg); /* Opera */
 }
+
+.centrarText{
+	text-align: center;
+}
+
+.textoBlanco{
+	color: white;
+	display: inline-block;
+}
+
+.listadoFooter{
+	padding: 0px;
+}
