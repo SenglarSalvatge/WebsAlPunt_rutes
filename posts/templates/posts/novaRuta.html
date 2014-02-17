@@ -17,10 +17,25 @@
 
 <form action="" method="post">{% csrf_token %}
 
+	<!-- -------------------------------------------------------------------------------------- -->
+	{% if messages %}
+	<ul class="messages">
+	    {% for message in messages %}
+	    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+	        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %}
+	        {{ message }}
+	    </li>
+	    {% endfor %}
+	</ul>
+	{% endif %}
 	<div class="row">
 		<div id="formRuta" class="col-xs-4 col-md-2">
-		    {{ form.non_field_errors }}
-		    {{ form2.non_field_errors }}
+		    {% if form.non_field_errors %}
+		       Errors -> {{ form.non_field_errors }}
+		    {% endif %}
+		    
+		    {{ form.errors }}
+		    
 		    <div class="fieldWrapper">
 		        {{ form.titol.errors }}
 				{{ form.titol.label_tag }}{{ form.titol }}
@@ -46,8 +61,9 @@
 		        {{ form.coordenades}}
 		    </div>
 		    <br>
-		    <p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" class="btn btn-success"/></p>
+		    <p><input type="submit" value="Confimar" class="btn btn-success"/></p>
 		</div>
+
 	
 		<!-- -------------------------------------------------------------------------------------- -->
 		
@@ -62,9 +78,9 @@
 			<div id="map-canvas"></div>
 		</div>
 	</div>
-	<!--<input type="text" id="id_coordenades" value=''>--
-	<!--p><input type="submit" href="{% url 'posts:novaRuta' %}" value="Confimar" /></p>-->
+
 </form>
+
 
 
 {% endblock %}

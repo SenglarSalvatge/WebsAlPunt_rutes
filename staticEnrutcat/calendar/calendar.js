@@ -19,5 +19,7 @@ $(function() {
 	  
 	  //miDate: fecha de comienzo D=días | M=mes | Y=año
 	  //maxDate: fecha tope D=días | M=mes | Y=año
-	  $( ".datepicker" ).datepicker({ minDate: "-1D", maxDate: "+1M +10D" });
+	  $( ".datepicker" ).datepicker({ minDate: "0D", maxDate: "+6M" });
 });
+
+

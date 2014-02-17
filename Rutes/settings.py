@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 """
 Django settings for Rutes project.
 
@@ -70,7 +71,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ca'
 
 TIME_ZONE = 'UTC'
 
@@ -79,6 +80,12 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LANGUAGES = (
+    ('es', u'Castellano' ),
+    ('ca', u'Català' ),
+)
+
 
 
 # Static files (CSS, JavaScript, Images)

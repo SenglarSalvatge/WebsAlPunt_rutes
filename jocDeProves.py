@@ -10,21 +10,7 @@ def crea_dades():
     users = [('john',
               'john@lennon.com',
               'john',
-              ),
-             ('pere',
-              'pere@peret.net',
-              'pere',
-              ),
-             ('manoli',
-              'destruccioninfernal@hotmail.es',
-              'manoli',
-              ),
-             ('elpicdesallafort',
-              None,
-              'elpicadesallafort'),
-             ('william',
-              'w12@gmail.com',
-              'william'),]
+              ),]
     
     for user in users:
         u = User.objects.create_user(username=user[0], email=user[1], password=user[2])
@@ -38,8 +24,9 @@ def crea_dades():
     categories = ['A Peu',
                   'Bicicleta',
                   '4x4',
-                  'Avioneta',
-                  'Cabra mecànica',
+                  'Moto',
+                  'Fotting',
+                  'Cavall',
                   ]
     
     for i in categories:
@@ -78,18 +65,20 @@ def crea_dades():
               'Superman!! relleno de pan!',
               'EX',
               ),]
-    
-    for post in posts:
-            p = Post()
-            p.titol = post[0]
-            p.data = post[1]
-            p.descripcio = post[2]
-            p.dificultat = post[3]
-            p.categoria = Categoria.objects.get(nom='Bicicleta');
-            p.administrador = User.objects.get( username = 'manoli').perfil
-            p.save()
-    
-    
+    import time 
+
+    for _ in range(50):
+        for post in posts:
+                p = Post()
+                p.titol = post[0]
+                p.data = post[1]
+                p.descripcio = post[2]
+                p.dificultat = post[3]
+                p.categoria = Categoria.objects.get(nom='Bicicleta');
+                p.administrador = User.objects.get( username = 'john').perfil
+                p.coordenades = '(42.57169583652935, 2.9897403717041016)(42.57125337607666, 3.0066490173339844)(42.56407875783327, 2.9998254776000977)(42.56426840593728, 2.9902124404907227)(42.56787161037666, 2.994546890258789)'
+                p.save()
+        time.sleep(1)
 
         
         

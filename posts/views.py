@@ -43,18 +43,20 @@ def calcularDistanciaMapa(frase):
                 i=i-1
                 resultado =math.sqrt((x2-x1)^2+(y2-y1)^2)
                 distancia= distancia +resultado
+            
             return distancia
         
 def calcularDuradaMapa(modo, distancia):     
             tiempo = 0
-            if modo == "andar": 
+            if modo == "Caminada": 
                 tiempo = distancia/5
-            elif modo == "bicicleta":
+            elif modo == "Bicicleta":
                 tiempo = distancia/25
-            elif modo == "correr": 
+            elif modo == "Fotting": 
                 tiempo = distancia/10
-            elif modo == "caballo": 
+            elif modo == "Cavall": 
                 tiempo = distancia/7
+            
             return tiempo
 
 def editaRuta(request, ruta_id=None):
@@ -63,28 +65,31 @@ def editaRuta(request, ruta_id=None):
         ruta=get_object_or_404(Post, pk=ruta_id)
     else:
         ruta=Post()
+        
     if request.method == 'POST':
         form=PostForm(request.POST, instance=ruta)
+       
         if form.is_valid():
             # solucion correcta:
-            r=form.save(commit=False)
+            r = form.save(commit=False)
             #agafa coordenades
-            frase=r.coordenades
-            distancia=calcularDistanciaMapa(frase);
+            frase = r.coordenades
+            distancia = calcularDistanciaMapa(frase);
             # calcular tiempo 
-            modo = ruta.categoria
-            tiempo=calcularDuradaMapa(modo, distancia)
+            modo = r.categoria
+            tiempo = calcularDuradaMapa(modo, distancia)
             #save
             r.km= distancia
+            r.administrador=request.user.perfil
+            r.apuntats= r.administrador
             r.durada = tiempo
             r.save()
     
             messages.info(request, 'Ruta guardada. ')
-            url_next= reverse('posts:mostrarRutes', kwargs={})
+            url_next= reverse('index', kwargs={})
             return HttpResponseRedirect(url_next)
         else:
-            messages.error(request, 'error en el formulari. ')
-        
+            messages.error(request, 'petada general')
     else:
         form=PostForm(instance=ruta)
     
