@@ -13,6 +13,4 @@ urlpatterns = patterns('',
     url(r'^autenticacio/$', views.login, name='login'),
     
     url(r'^loug_aut/$', views.exit_login, name='exit_login') ,
-    
-    url(r'^perfilUsuari/$', views.loginUsuari, name='iniciUsuari') ,
 )

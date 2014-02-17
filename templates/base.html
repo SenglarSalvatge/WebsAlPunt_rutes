@@ -88,9 +88,9 @@
 						  <li><a href="{% url 'usuaris:exit_login' %}">Sortir</a></li>
 			        </ul>
 			      </li>
-			    {% else %}
-			       <li><a href="{% url 'usuaris:login' %}">Uneix-te</a></li>
-			    {% endif %}
+			     {% else %}
+			       <li><a href="#" data-toggle="modal" data-target="#myModal">Uneix-te</a></li>
+			     {% endif %}
 			    </ul>
 			  </div><!-- /.navbar-collapse -->
 			</nav>
@@ -137,6 +137,30 @@
 							</section>	
 						</footer>
 					</div>
+<<<<<<< HEAD
+				</div>
+			 </div><!-- /.navbar-collapse -->  			
+		</div>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h4 class="modal-title" id="myModalLabel">Uneix-te</h4>
+		      </div>
+		      <div class="modal-body">
+
+				{% if user.is_authenticated %}
+				{% else %} 
+					<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
+					<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
+					<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
+				{% endif %}
+		      </div>
+		    </div>
+		  </div>
+		</div>
+=======
 			  </div><!-- /.navbar-collapse -->
 		</nav>			
 			<!-- Modal Informació Nostra -->
@@ -176,5 +200,6 @@
 			    </div>
 			  </div>
 			</div>  			
+>>>>>>> 78d503a104e9574d04c6b78a33264998dbb4de20
 	</body>
 </html>
