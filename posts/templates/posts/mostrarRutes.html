@@ -1,15 +1,26 @@
 {% extends "base.html" %}
-{% block title %}
-<title>Rutes</title>
-{% endblock %}
+
 {% block content %}
 <h1>Les meves rutes</h1>
 {% for ruta in Rutes %}
- 	<p></p>{{ ruta.titol }} 
- 	<a href="{% url 'posts:editaRuta' ruta.id %}"><button>Edita</button></a>
- 	<a href="{% url 'posts:eliminarRuta' ruta.id %}"><button>Delete</button></a>
- 	<a href="{% url 'posts:novaRuta' %}"><button>Crear</button></a>
- 	<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button>Apuntar-se</button></a>
+	<article class="panel panel-success">
+		    <div class="panel-heading">
+			<h3 class="panel-title">
+			    {{ruta.titol}}
+			</h3>
+		    </div>
+			<div class="panel-body">
+				<li>{{ruta.data}}</li>
+				<li>{{ruta.dificultat}}</li>
+				<li>{{ruta.categoria}}</li>
+				<li>{{ruta.descripcio}}</li>	
+			</div> 
+			<div>
+				<button class='btn btn-success'><a href="{% url 'posts:editaRuta' ruta.id %}" >Edita</a></button>
+	 			<button class='btn btn-success'><a href="{% url 'posts:eliminarRuta' ruta.id %}">Delete</a></button>
+			</div>
+		</article>
+
 {% endfor %}
 
 {% endblock %}
