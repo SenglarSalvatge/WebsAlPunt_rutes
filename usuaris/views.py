@@ -29,7 +29,7 @@ def mostrarPerfil(request):
 
 def login(request):
     #todo: fer render de login_social.html
-    return render(request, 'usuaris/login_social.html', {})
+    return render(request, 'usuaris/login_social.html', {'xrequest':request})
 
 def exit_login(request):
     logout(request)

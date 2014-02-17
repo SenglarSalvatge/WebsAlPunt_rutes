@@ -11,7 +11,11 @@
 {% if user.is_authenticated %}
 {% else %} 
 	<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
-	<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
-	<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
+	<a href="{% url 'social:begin' 'google-oauth2' %}{% if xrequest.GET.next %}?next={{ xrequest.GET.next }}{% endif %}">Login amb Google</a> <br />
+	<a href="{% url 'social:begin' 'twitter' %}{% if xrequest.GET.next %}?next={{ xrequest.GET.next }}{% endif %}">Login amb Twitter</a> <br />
 {% endif %}
+
+----------> Next {{ xrequest.GET.next }}
+
+
 {% endblock %} 
