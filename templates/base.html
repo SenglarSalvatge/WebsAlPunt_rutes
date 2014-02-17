@@ -137,12 +137,12 @@
 							</section>	
 						</footer>
 					</div>
-				
 				</div>
 			 </div><!-- /.navbar-collapse -->  			
 		</div>
 		<section>
-			<!-- Modal -->
+		<!-- Modal -->
+		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
@@ -150,19 +150,19 @@
 			        <h4 class="modal-title" id="myModalLabel">Uneix-te</h4>
 			      </div>
 			      <div class="modal-body">
-	
-					{% if user.is_authenticated %}
-					{% else %} 
-						<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
-						<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
-						<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
-					{% endif %}
-			      </div>
-			    </div>
-			  </div>
-			</div>
-				  </div><!-- /.navbar-collapse -->
-			</nav>
+					<div>
+						{% if user.is_authenticated %}
+						{% else %} 
+							<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
+							<a href="{% url 'social:begin' 'google-oauth2' %}">Login amb Google</a> <br />
+							<a href="{% url 'social:begin' 'twitter' %}">Login amb Twitter</a> <br />
+						{% endif %}
+				      </div>
+				    </div>
+				  </div>
+				</div>
+			</div><!-- /.navbar-collapse -->
+		</nav>
 		</section>						
 			<!-- Modal Informació Nostra -->
 			<div class="modal fade" id="modalInformacio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -201,5 +201,6 @@
 			    </div>
 			  </div>
 			</div>  			
+		</div>
 	</body>
 </html>
