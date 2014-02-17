@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import urllib2
 from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from posts.models import Post
@@ -10,6 +9,9 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import math
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+import json
+from django.utils.datetime_safe import datetime
 
 def mostrarRutes(request):
     Rutes = Post.objects.all()
@@ -97,37 +99,68 @@ def editaRuta(request, ruta_id=None):
         'form':form,
         })
 
-@login_required(login_url='usuaris:login') 
-def filtreDeRutes(request):
-    
-    if request.method == 'POST': 
-        form = FiltreRutaForm(request.POST) 
 
+
+def filtreDeRutes(request):
+
+    form = FiltreRutaForm()
+    
+    if request.method == 'POST':
+        #prepareu diccionari amb els parametres del post
+        form = FiltreRutaForm(request.POST)
+        
         if form.is_valid():
-            q = Q()
+            q_str = request.POST.copy()
+            q_str.pop('csrfmiddlewaretoken') #borrem el srtdgf de l'array
+            q = json.dumps(q_str)
+
+            url_next = reverse('posts:buscarRuta', kwargs={})
+        
+            return HttpResponseRedirect(url_next+"?q="+q)
+    
+    else:
+        q_str = request.GET.get('q',None)        
+        
+        if q_str:
+            q = json.loads(q_str)        
+            p = Q()
+            
+            print q
             
             #['titol', 'data', 'dificultat', 'categoria', 'administrador']
-            if form.cleaned_data['titol']:
-                q &= Q(titol = form.cleaned_data['titol'])
-                
-            if form.cleaned_data['data']:
-                q &= Q(data = form.cleaned_data['data'])
+            if 'titol' in q and q['titol']:
+                p &= Q(titol = q['titol'])
+            if 'data' in q and q['data']:
+                d = datetime.strptime(q['data'], '%d/%m/%Y')
+                p &= Q(data = d)
+            if 'dificultat' in q and q['dificultat']:
+                p &= Q(dificultat = q['dificultat'])
+
+            if 'categoria' in q and q['categoria']:
+                n = int(q['categoria'])
+                p &= Q(categoria = n)
+            if 'administrador' in q and q['administrador']:
+                n = int(q['administrador'])
+                p &= Q(administrador = n)
             
-            if form.cleaned_data['dificultat'] != '':
-                if form.cleaned_data['dificultat']:
-                    q &= Q(dificultat = form.cleaned_data['dificultat'])
-                
-            if form.cleaned_data['categoria']:
-                q &= Q(categoria = form.cleaned_data['categoria'])
-                
-            if form.cleaned_data['administrador']:
-                q &= Q(administrador = form.cleaned_data['administrador'])
-                
+            llista_rutes = Post.objects.filter( p )
+
+        else:
+            llista_rutes = Post.objects.none()
+            
+        page = request.GET.get('page')
+        rutes = paginaitor_plus(page, llista_rutes, 2)
         
-            rutes = Post.objects.filter( q )
-        
-        return render(request, 'posts/filtreDeRutes.html', {'form':form, 'rutes':rutes})
-        
-    else:
-        form = FiltreRutaForm()
-    return render(request, 'posts/filtreDeRutes.html', {'form':form})
+    return render(request, 'posts/filtreDeRutes.html', {'form':form, 'rutes':rutes, 'q':q_str})
+
+
+def paginaitor_plus(page, llista, num):
+    paginator = Paginator(llista, num) # numero d'entrades per pagina
+    try:
+        entrada = paginator.page(page)
+    except PageNotAnInteger:
+        entrada = paginator.page(1)
+    except EmptyPage:
+        entrada = paginator.page(paginator.num_pages)
+    return entrada
+
