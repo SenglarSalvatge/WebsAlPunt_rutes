@@ -22,7 +22,7 @@ class PostForm(ModelForm):
         
 class FiltreRutaForm(forms.Form):
     titol = forms.CharField(max_length=200, required=False, widget=forms.TextInput(attrs={'autocomplete':'on'}))
-    data = forms.DateField(required=False)
+    data = forms.DateField(required=False, widget=DateInput(format='%d/%m/%Y', attrs={'class':'form-control datepicker'}))
     dificultat = forms.ChoiceField(choices=Post.DIFICULTAT_CHOICES ,required=False)
     categoria = forms.ModelChoiceField(queryset=Categoria.objects.all(), required=False)
     administrador = forms.ModelChoiceField(queryset=Perfil.objects.filter(postAdministrats__isnull = False).distinct(), required=False)

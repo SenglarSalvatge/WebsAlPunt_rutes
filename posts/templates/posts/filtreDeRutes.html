@@ -1,6 +1,14 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}
 <title>Cercar Ruta</title>
+{% endblock %}
+{% block links-comple %}
+		<!-- js i css per a plugin del calendari -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script src="{% static 'calendar/calendar.js' %}"></script>
 {% endblock %}
 {% block content %}
 {% if messages %}
@@ -11,14 +19,14 @@
 </ul>
 {% endif %}
 
-<form action="" method="post">{% csrf_token %}
+<form action="" method="post" class="col-xs-4 col-md-2">{% csrf_token %}
 	    {% for field in form %}
 		    <div class="fieldWrapper">
 		        {{ field.errors }}
 				{{ field.label_tag }}{{ field }}
 			</div>
 		{% endfor %}
-	<input type="submit" value="Enviar" />
+	<input type="submit" value="Enviar" class="btn btn-success"/>
 </form>
 
 <hr>
@@ -36,7 +44,7 @@
 				<li>{{ruta.dificultat}}</li>
 				<li>{{ruta.categoria}}</li>
 				<li>{{ruta.descripcio}}</li>	
-				<a href="#"><button>edita</button></a>
+				<a href="#"><button class="btn btn-success">Edita</button></a>
 			</div> 
 		</article>
 {% endfor %}
@@ -44,7 +52,7 @@
 
 
 
-<div class="pagination">
+<div class="pagination" >
     <span class="step-links">
         {% if rutes.has_previous %}
             <a href="?page={{ rutes.previous_page_number }}&q={{q}}"><< anterior | </a>
