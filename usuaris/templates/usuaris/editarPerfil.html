@@ -2,11 +2,12 @@
 {% block title %}
 <title>Modificar Perfil</title>
 {% endblock %}
+<br><br><br><br><br>
 {% block content %}
 <h1>Modificar perfil</h1>
 <hr>
 	<form action="" method="post">{% csrf_token %}
 		{{ form.as_p }}
-		<input type="submit" value="Guardar dades" class="btn btn-success"/>
+		<button type="submit" class="btn btn-success">Desar  <span class="glyphicon glyphicon-saved"></span></button>		
 	</form>
 {% endblock %}
