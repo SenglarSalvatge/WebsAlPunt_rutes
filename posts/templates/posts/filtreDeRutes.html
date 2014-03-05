@@ -18,16 +18,20 @@
     {% endfor %}
 </ul>
 {% endif %}
-
+<blockquote>
+	<p><h1>Cercar Rutes</h1></p>
+	<footer>Cerca alguna ruta ja creada amb els criteris que vulguis:</footer> 
+</blockquote>
 <form action="" method="post" class="col-xs-4 col-md-2">{% csrf_token %}
+
 	    {% for field in form %}
 		    <div class="fieldWrapper">
 		        {{ field.errors }}
 				{{ field.label_tag }}{{ field }}
 			</div>
 		{% endfor %}
-	<br>
-	<input type="submit" value="Enviar" class="btn btn-success"/>
+	<button type="submit" class="btn btn-success">Cerca Ruta <span class="glyphicon glyphicon-search"></span></button>
+
 </form>
 
 <hr>
@@ -41,19 +45,26 @@
 			</h3>
 		    </div>
 			<div class="panel-body">
+<<<<<<< HEAD
 				<li>{{ruta.data}}</li>
 				<li>{{ruta.get_dificultat_display}}</li>
 				<li>{{ruta.categoria}}</li>
 				<li>{{ruta.descripcio}}</li>	
 				<a href="#"><button class="btn btn-success">Edita</button></a>
+=======
+				<li><label>Data:</label> {{ruta.data}}</li>
+				<li><label>Dificultat:</label> {{ruta.dificultat}}</li>
+				<li><label>Categoria:</label> {{ruta.categoria}}</li>
+				<li><label>Descripció:</label> {{ruta.descripcio}}</li>
+				<a href="#"><button class="btn btn-success">Editar Ruta <span class="glyphicon glyphicon-pencil"></button></a>
+>>>>>>> e08e8e430a9a7197a991793a61fd7bc711d713a4
 			</div> 
 		</article>
 {% endfor %}
 
 
 
-
-<div class="pagination" >
+<div class="pagination">
     <span class="step-links">
         {% if rutes.has_previous %}
             <a href="?page={{ rutes.previous_page_number }}&q={{q}}"><< anterior | </a>

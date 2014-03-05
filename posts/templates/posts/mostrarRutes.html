@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Les meves rutes</h1>
+<blockquote>
+	<p><h1>Les Meves Rutes</h1></p>
+	<footer>Aquí trobaràs les rutes que has creat. Podràs editar-les o esborrar-les</footer>
+</blockquote>
 {% for ruta in Rutes %}
 	<article class="panel panel-success">
 		    <div class="panel-heading">
@@ -10,6 +13,7 @@
 			</h3>
 		    </div>
 			<div class="panel-body">
+<<<<<<< HEAD
 				<li>{{ruta.data}}</li>
 				<li>{{ruta.get_dificultat_display}}</li>
 				<li>{{ruta.categoria}}</li>
@@ -19,6 +23,17 @@
 				<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success">Edita</a>
 	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-success">Delete</a>
 			</div>
+=======
+				<ul>
+					<li><label>Data: </label> {{ruta.data}}</li>
+					<li><label>Dificultat: </label> {{ruta.dificultat}}</li>
+					<li><label>Categoria: </label> {{ruta.categoria}}</li>
+					<li><label>Descripció: </label> {{ruta.descripcio}}</li>
+				</ul>				
+				<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
+	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-success" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>	
+			</div> 										
+>>>>>>> e08e8e430a9a7197a991793a61fd7bc711d713a4
 		</article>
 
 {% endfor %}
