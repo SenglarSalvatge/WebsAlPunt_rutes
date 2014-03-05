@@ -3,10 +3,27 @@
 	<title>Inici</title>
 {% endblock %}
 {% block content %}
-	<h1>Rutes</h1>
-	<ul>
-		{% for ruta in rutes %}
-			<li>{{ruta.titol}} ----- {{ruta.data}} ----- {{ruta.descripcio}} ----- {{ruta.categoria}} </li>
-		{% endfor %}
-	</ul>
+
+<h1>Rutes</h1>
+{% if rutes %}
+<div style="overflow:auto;height:600px;">
+	{% for ruta in rutes %}
+		<article class="panel panel-success">
+			    <div class="panel-heading">
+				<h3 class="panel-title">
+				    {{ruta.titol}}
+				</h3>
+			    </div>
+				<div class="panel-body">
+					<li>{{ruta.data}}</li>
+					<li>{{ruta.dificultat}}</li>
+					<li>{{ruta.categoria}}</li>
+					<li>{{ruta.descripcio}}</li>	
+					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button>apuntarse</button></a>
+				</div> 
+			</article>
+	{% endfor %}
+</div>
+{% endif %}
+
 {% endblock %}
