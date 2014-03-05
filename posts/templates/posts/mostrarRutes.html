@@ -16,8 +16,8 @@
 				<li>{{ruta.descripcio}}</li>	
 			</div> 
 			<div>
-				<button class='btn btn-success'><a href="{% url 'posts:editaRuta' ruta.id %}" >Edita</a></button>
-	 			<button class='btn btn-success'><a href="{% url 'posts:eliminarRuta' ruta.id %}">Delete</a></button>
+				<a href="{% url 'posts:editaRuta' ruta.id %}" >Edita</a>
+	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}">Delete</a>
 			</div>
 		</article>
 

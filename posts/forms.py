@@ -16,7 +16,7 @@ class PostForm(ModelForm):
             'dificultat': Select(attrs={'class':'form-control'}),
             'categoria': Select(attrs={'class':'form-control'}),
             'coordenades': HiddenInput(attrs={}),
-            'data': DateInput(format=['%d/%m/%Y'], attrs={'class':'form-control datepicker'}),
+            'data': DateInput(format='%d/%m/%Y', attrs={'class':'form-control datepicker'}),
         }
         
         

@@ -14,7 +14,9 @@ import json
 from django.utils.datetime_safe import datetime
 
 def mostrarRutes(request):
-    Rutes = Post.objects.filter(administrador = request.user.perfil)
+    q_admin = Q( administrador = request.user.perfil )
+    q_apuntat = Q( apuntats = request.user.perfil ) 
+    Rutes = Post.objects.filter( q_admin | q_apuntat )
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
 
 def calcularDistanciaMapa(frase):
@@ -70,9 +72,12 @@ def eliminarRuta(request, ruta_id):
     return HttpResponseRedirect(url_next)
 
 def apuntarRuta(request, ruta_id):
-    ruta=get_object_or_404(Post, pk=ruta_id)
-    ruta.apuntats = request.user.perfil
+    ruta = get_object_or_404(Post, pk=ruta_id)
+    
+    p = request.user.perfil
+    ruta.apuntats.add( p )
     ruta.save()
+    
     messages.info(request, 'Apuntat. ')
         
     url_next= reverse('posts:mostrarRutes', kwargs={})
