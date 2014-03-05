@@ -1,6 +1,14 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}
 <title>Cercar Ruta</title>
+{% endblock %}
+{% block links-comple %}
+		<!-- js i css per a plugin del calendari -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script src="{% static 'calendar/calendar.js' %}"></script>
 {% endblock %}
 {% block content %}
 {% if messages %}
@@ -14,7 +22,8 @@
 	<p><h1>Cercar Rutes</h1></p>
 	<footer>Cerca alguna ruta ja creada amb els criteris que vulguis:</footer> 
 </blockquote>
-<form action="" method="post">{% csrf_token %}
+<form action="" method="post" class="col-xs-4 col-md-2">{% csrf_token %}
+
 	    {% for field in form %}
 		    <div class="fieldWrapper">
 		        {{ field.errors }}
@@ -22,6 +31,7 @@
 			</div>
 		{% endfor %}
 	<button type="submit" class="btn btn-success">Cerca Ruta <span class="glyphicon glyphicon-search"></span></button>
+
 </form>
 
 <hr>
