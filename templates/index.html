@@ -6,6 +6,7 @@
 
 <blockquote>
 	<p><h1>Rutes</h1></p>
+	<footer>Crea, comparteix i participa en activitats esportives i de lleure amb altres persones. Disfruta del teu esport preferit!.</footer>
 </blockquote>
 
 {% if rutes %}
@@ -22,7 +23,7 @@
 					<li><label>Dificultat:</label> {{ruta.dificultat}}</li>
 					<li><label>Categoria:</label> {{ruta.categoria}}</li>
 					<li><label>Descripció:</label> {{ruta.descripcio}}</li>	
-					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't!</button></a>
+					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
 				</div> 
 			</article>
 	{% endfor %}
