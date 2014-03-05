@@ -4,19 +4,17 @@
 	height: 42px;
 	width: 42px;
 	transition: 2.5s ease;
- 	-moz-transition: 2.5s ease; /* Firefox */
  	-webkit-transition: 2.5s ease; /* Chrome - Safari */
  	-o-transition: 2.5s ease; /* Opera */
  	border-radius: 28px;
  	border-style: solid;
  	border-width: 1px;
- 	border-color: black;
+ 	border-color: #57b157;
 }
 
 #twitterLogo:hover{
 	background-image: url('../imatges/twitter-icon-inverse.jpg');
 	transform : rotate(360deg);
-	-moz-transform : rotate(360deg); /* Firefox */
 	-webkit-transform : rotate(360deg); /* Chrome - Safari */
 	-o-transform : rotate(360deg); /* Opera */
 }
@@ -27,19 +25,17 @@
 	height: 42px;
 	width: 42px;
 	transition: 2.5s ease;
- 	-moz-transition: 2.5s ease; /* Firefox */
  	-webkit-transition: 2.5s ease; /* Chrome - Safari */
  	-o-transition: 2.5s ease; /* Opera */
  	border-radius: 28px;
  	border-style: solid;
  	border-width: 1px;
- 	border-color: black;
+ 	border-color: #57b157;
 }
 
 #facebookLogo:hover{
 	background-image: url('../imatges/facebook-icon-inverse.jpg');
 	transform : rotate(360deg);
-	-moz-transform : rotate(360deg); /* Firefox */
 	-webkit-transform : rotate(360deg); /* Chrome - Safari */
 	-o-transform : rotate(360deg); /* Opera */
 }
@@ -50,19 +46,17 @@
 	height: 42px;
 	width: 42px;
 	transition: 2.5s ease;
- 	-moz-transition: 2.5s ease; /* Firefox */
  	-webkit-transition: 2.5s ease; /* Chrome - Safari */
  	-o-transition: 2.5s ease; /* Opera */
  	border-radius: 25px;
  	border-style: solid;
  	border-width: 1px;
- 	border-color: black;
+ 	border-color: #57b157;
 }
 
 #googleLogo:hover{
 	background-image: url('../imatges/google-icon-inverse.jpg');
 	transform : rotate(360deg);
-	-moz-transform : rotate(360deg); /* Firefox */
 	-webkit-transform : rotate(360deg); /* Chrome - Safari */
 	-o-transform : rotate(360deg); /* Opera */
 }

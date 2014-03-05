@@ -10,6 +10,8 @@ def entrarComentaris(request):
         form = ComentariForm(request.POST)
         if form.is_valid():
             form.save()
+            #Mensajes bonitos, descomentar y borrar siguiente
+            #messages.add_message(request, messages.SUCCESS, "Comentari Entrar Correctament")
             messages.success(request, 'Comentari entrat correctament')
             url_next = reverse('socials:entrarComentaris')            
             return HttpResponseRedirect( url_next )

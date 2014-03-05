@@ -109,11 +109,12 @@ def editaRuta(request, ruta_id=None):
             #r.apuntats= r.administrador
             r.durada = tiempo
             r.save()
-    
-            messages.info(request, 'Ruta guardada. ')
+            messages.add_message(request, messages.SUCCESS, "Ruta creada correctament")
+            #messages.info(request, 'Ruta guardada. ')
             url_next= reverse('index', kwargs={})
             return HttpResponseRedirect(url_next)
         else:
+            #messages.ad
             messages.error(request, 'petada general')
     else:
         form=PostForm(instance=ruta)

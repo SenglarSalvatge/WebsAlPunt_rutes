@@ -22,11 +22,19 @@
 		<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">
 		<!-- Link al nostre fitxer de CSS-->
+		<link rel="stylesheet" href="{% static 'bootstrap/css/css.css'%}">
+		<!-- Link al nostre fitxer de CSS-->
 		<link rel="stylesheet" href="{% static 'bootstrap/css/css.css'%}">			
-		<!-- Altres fitxers de Bootstrap -->
-		<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css'%}">		
+		<!-- Fitxer CSS de Pnotify-->
+		<link rel="stylesheet" href="{% static 'bootstrap/css/jquery.pnotify.default.css'%}">
+		<!-- Fitxer de icones de Pnotify-->
+		<link rel="stylesheet" href="{% static 'bootstrap/css/jquery.pnotify.default.icons.css'%}">		
 		<!-- Link al nostre fitxer de JavaScript-->
-		<script src="{% static 'bootstrap/js/js.js' %}"></script>		
+		<script src="{% static 'bootstrap/js/js.js' %}"></script>
+		<!-- Link al fitxer de JavaScript de Pnotify-->
+		<script src="{% static 'bootstrap/js/jquery.pnotify.js' %}"></script>	
+		<!-- Link al fitxer MIN de JavaScript de Pontify-->
+		<script src="{% static 'bootstrap/js/jquery.pnotify.min.js' %}"></script>			
 		{% block links-comple %}
 		
 		{% endblock %}
@@ -44,7 +52,7 @@
 			      <span class="icon-bar"></span>
 			      <span class="icon-bar"></span>
 			    </button>
-			    <a class="navbar-brand" href="/">Enrutcat</a>
+			    <a class="navbar-brand" href="{% url 'index' %}">Enrutcat</a>
 			  </div>
 			  <!-- Collect the nav links, forms, and other content for toggling -->
 			  <div class="collapse navbar-collapse" id="bs-navbar-collapse-1">
@@ -87,7 +95,7 @@
 			        </ul>
 			      </li>
 			     {% else %}
-			       <li><a href="#" data-toggle="modal" data-target="#myModal">Uneix-te</a></li>
+			       <li><a href="#" data-toggle="modal" data-target="#myModal">Accedeix</a></li>
 			     {% endif %}
 			    </ul>
 			  </div><!-- /.navbar-collapse -->
@@ -123,7 +131,7 @@
 			  <div class="collapse navbar-collapse" id="bs-navbar-collapse-2">
 					<div class="container">
 						<footer class="row">
-							<section class="col-xs-12 col-sd-2 col-sd-offset-2 col-md-4 col-md-offset-2" class="textoBlanco centrarText">								
+							<section class="col-xs-12 col-sd-2 col-sd-offset-2 col-md-4 col-md-offset-3" class="textoBlanco centrarText">								
 								 <ul class="nav navbar-nav" class="centrarText">										
 									<li><a data-toggle="modal" data-target="#modalInformacio">&copy; Copyright  by Enrut.cat , 2014</a></li>
 								</ul>	
@@ -156,8 +164,8 @@
 						{% if user.is_authenticated %}
 						{% else %} 
 							<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
-							<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-danger btn-lg centrarText" >Accedeix amb Google</button></a><br /><hr>
-							<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-info btn-lg centrarText">Accedeix amb Twitter</button></a> 
+							<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-danger btn-lg centrarText" >Accedeix amb Google</button></a><h5>Inicia sessió amb el teu compte de <abbr title="Correu De Google">GMAIL</abbr></h5><hr>
+							<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-info btn-lg centrarText">Accedeix amb Twitter</button></a><h5>Inicia sessió amb el teu compte de Twitter</h5>
 						{% endif %}
 				      </div>
 				    </div>
@@ -175,26 +183,75 @@
 			        <h4 class="modal-title" id="myModalLabel">Enrut.cat</h4>
 			      </div>
 			      <div class="modal-body">
-			       	<span>
-			       		<h4>
-			       			Aquest projecte forma part del concurs <a href="http://websalpunt.cat/">Webs Al Punt</a>.<br>
-			       			El tema triat, és la creació d'una aplicació web que permeti a un usuari crear 
-			       			rutes (Per córrer, per fer a peu, amb bicicleta etc...). A aquestes rutes, s'hi podràn 
-			       			apuntar altres usuaris de l'aplicació.
-			       			També es podrà comentar una activitat, generar debat entre usuaris, modificar-la etc...
-			       		</h4>
-			       		<hr>
-			       		<h4>
-			       			L'aplicació està desenvolupada amb el Framework de Python Django (v. 1.6) per a la creació dels models, els formularis
-			       			d'entrada de dades i la gestió d'usuaris.<br>
-			       			El disseny està fet amb Twiter Bootstrap 3.			       			
-			       		</h4>
-			       		<hr>
-			       		<h4>
-			       			Aplicació creada pels alumnes Álex Ramírez, Darwin López, Martí Peris i Rodrigo Saulis. <br>
-			       			Actualment cursant segón de CFGS de Desenvolupament D'Aplicacions Web (DAW) a l'INS Cendrassos de Figueres
-			       			(17600, Girona).
-			       		</h4>			       		
+			       	<span>			       		
+			       		<div class="panel-group" id="accordion">
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+						          enrut.cat: Projecte.
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseOne" class="panel-collapse collapse in">
+						      <div class="panel-body">
+						        Aquest projecte forma part del concurs <a href="http://websalpunt.cat/">Webs Al Punt</a>.<br>
+								El tema triat, és la creació d'una aplicació web que permeti a un usuari crear 
+								rutes (Per córrer, per fer a peu, amb bicicleta etc...). A aquestes rutes, s'hi podràn 
+								apuntar altres usuaris de l'aplicació.
+								També es podrà comentar una activitat, generar debat entre usuaris, modificar-la etc...
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+						          enrut.cat: Creació
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseTwo" class="panel-collapse collapse">
+						      <div class="panel-body">
+						        L'aplicació està desenvolupada amb el Framework de Python Django (v. 1.6) per a la creació dels models, els formularis
+								d'entrada de dades i la gestió d'usuaris.<br>
+								El disseny està fet amb Twiter Bootstrap 3.
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+						          enrut.cat: Desenvolupadors.
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseThree" class="panel-collapse collapse">
+						      <div class="panel-body">
+						        Aplicació creada pels alumnes Álex Ramírez, Darwin López, Martí Peris i Rodrigo Saulis. <br>
+								Actualment cursant segón de CFGS de Desenvolupament D'Aplicacions Web (DAW) a l'INS Cendrassos de Figueres
+								(17600, Girona).
+						      </div>
+						    </div>
+						  </div>
+						  <div class="panel panel-default">
+						    <div class="panel-heading">
+						      <h4 class="panel-title">
+						        <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">
+						          enrut.cat: Llicències D'Ús.
+						        </a>
+						      </h4>
+						    </div>
+						    <div id="collapseFour" class="panel-collapse collapse">
+						      <div class="panel-body">
+						         <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca">
+									<img alt="Llicència de Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/InteractiveResource" property="dct:title" rel="dct:type">Enrut.cat</span> de <a xmlns:cc="http://creativecommons.org/ns#" href="http://www.enrut.cat" property="cc:attributionName" rel="cc:attributionURL">Projecte Enrut.cat de WebsAlPunt! 2014.</a> està subjecta a una llicència de <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/4.0/deed.ca">
+									Reconeixement-NoComercial-SenseObraDerivada 4.0 Internacional de Creative Commons</a>
+						      </div>
+						    </div>
+						  </div>
+						</div>			       		
 			       	</span>
 			      </div>
 			      <div class="modal-footer">
@@ -204,6 +261,22 @@
 			  </div>
 			</div>  			
 		</div>
-
+		{% if messages %}
+		<script>
+			$.pnotify.defaults.history = false;
+			$.pnotify.defaults.delay = 3000;
+			$(document).ready(function(){
+				{% for message in messages %}
+				$.pnotify({
+					text: '{{message}}',
+					type: '{{message.tags}}',
+					animation: 'show',
+					hide: true,
+					styling: 'bootstrap'
+				});
+				{% endfor %}
+			});
+		</script>
+		{% endif %}
 	</body>
 </html>
