@@ -26,7 +26,7 @@
 <div id="amagar">
 	<button class="btn btn-success" id="botoDesplegar" style="position: absolute; margin-left: -110px" ><span class="glyphicon glyphicon-chevron-right"></span></button>
 </div>
-<div class="row col-md-2" id="formulariCerca">
+<div class="row col-md-2" id="formulariCerca" style="display: none">
 	<form action="" method="post">{% csrf_token %}
 	
 		    {% for field in form %}
@@ -43,7 +43,7 @@
 
 {% if rutes %} 
 {% for ruta in rutes %}
-<div class="row col-md-9 col-md-offset-1" id="rutesTrobades">
+<div class="row col-md-12" id="rutesTrobades">
 	<article class="panel panel-success">
 	    <div class="panel-heading">
 			<h3 class="panel-title">
@@ -63,7 +63,7 @@
 
 
 
-<div class="row col-md-3 col-md-offset-4 pagination">
+<div class="row col-md-2 col-md-offset-6 pagination">
     <span class="step-links">
         {% if rutes.has_previous %}
             <a href="?page={{ rutes.previous_page_number }}&q={{q}}"><< anterior | </a>

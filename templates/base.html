@@ -7,10 +7,9 @@
 		{% block title%}
 		
 		{% endblock %}
-		<meta name="description" content="">
+		<meta name="description" content="">		
 		<meta name="author" content="Rodrigo">
-		<!--{% block redirect %}
-		{% endblock %}-->
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
 		<!-- Llibreria jQuery per a Bootstrap -->
 	    <script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 	    <!-- JavaScript de Bootstrap -->
@@ -287,9 +286,22 @@
 		</script>
 		{% endif %}
 		<script>
-			$("#botoDesplegar").click(function(){
-				$("#formulariCerca").toggle("slow");
-			});
+			$(document).ready(function(){
+				$("#botoDesplegar").click(function(){
+					$("#formulariCerca").toggle("slow");
+					$("#rutesTrobades").removeClass("col-md-12");
+					$("#rutesTrobades").addClass("col-md-9");
+					$("#rutesTrobades").addClass("col-md-offset-1");
+					$("#botoDesplegar").attr("id", "botoPlegar");
+				});	
+			});			
+			$(document).ready(function(){
+				$("#botoPlegar").click(function(){				
+					$("#formulariCerca").toggle("slow");				
+					$("#rutesTrobades").addClass("col-md-12");
+					$("#botoDesplegar").attr("id","botoDesplegar");					
+				});
+			});			
 		</script>
 	</body>
 </html>
