@@ -128,11 +128,9 @@ def editaRuta(request, ruta_id=None):
 def filtreDeRutes(request):
 
     form = FiltreRutaForm()
-    
     if request.method == 'POST':
         #prepareu diccionari amb els parametres del post
-        form = FiltreRutaForm(request.POST)
-        
+        form = FiltreRutaForm(request.POST)        
         if form.is_valid():
             q_str = request.POST.copy()
             q_str.pop('csrfmiddlewaretoken') #borrem el srtdgf de l'array
