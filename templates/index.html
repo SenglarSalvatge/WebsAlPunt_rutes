@@ -6,7 +6,7 @@
 
 <blockquote>
 	<p><h1>Rutes</h1></p>
-	<footer>Crea, comparteix i participa en activitats esportives i de lleure amb altres persones. Disfruta del teu esport preferit!.</footer>
+	<small>Crea, comparteix i participa en activitats esportives i de lleure amb altres persones. Disfruta del teu esport preferit!.</small>
 </blockquote>
 
 {% if rutes %}
@@ -23,7 +23,12 @@
 					<li><label>Dificultat:</label> {{ruta.get_dificultat_display}}</li>
 					<li><label>Categoria:</label> {{ruta.categoria}}</li>
 					<li><label>Descripció:</label> {{ruta.descripcio}}</li>	
-					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+					{% if ruta.administrador == user.perfil %}
+				<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
+	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
+				{% elif ruta.administrador != user.perfil %}
+				<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+				{% endif %}
 				</div> 
 			</article>
 	{% endfor %}

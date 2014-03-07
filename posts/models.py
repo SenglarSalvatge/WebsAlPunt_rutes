@@ -22,7 +22,7 @@ class Post(models.Model):
     titol = models.CharField(max_length=200, help_text="Títol")
     data = models.DateField(help_text="Data")
     descripcio = models.CharField(max_length=800, blank=True, null=True, help_text="Descripció")
-    dificultat = models.CharField(max_length=2, blank=True, choices=DIFICULTAT_CHOICES, help_text="Dificultat")
+    dificultat = models.CharField(max_length=2, null=True, choices=DIFICULTAT_CHOICES, help_text="Dificultat")
     
     categoria = models.ForeignKey(Categoria, help_text="Categoria")
     administrador = models.ForeignKey(Perfil, help_text="Administrador", related_name="postAdministrats")

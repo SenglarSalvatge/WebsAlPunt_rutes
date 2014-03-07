@@ -11,13 +11,18 @@ from django.db.models import Q
 import math
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
-from django.utils.datetime_safe import datetime
+from django.utils.datetime_safe import datetime, date
 
 def mostrarRutes(request):
     q_admin = Q( administrador = request.user.perfil )
     q_apuntat = Q( apuntats = request.user.perfil ) 
     Rutes = Post.objects.filter( q_admin | q_apuntat )
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
+
+def mostrarRutesAcabades(request):    
+    dataRuta = date.today()
+    Rutes = Post.objects.filter(data__lt = dataRuta)    
+    return render(request, 'posts/mostrarRutesAcabades.html', {'Rutes':Rutes})
 
 def calcularDistanciaMapa(frase):
             listCoordenades = list()  
@@ -78,7 +83,7 @@ def apuntarRuta(request, ruta_id):
     ruta.apuntats.add( p )
     ruta.save()
     
-    messages.info(request, 'Apuntat. ')
+    messages.info(request, 'T\'has apuntat correctament a aquesta ruta. ')
         
     url_next= reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)

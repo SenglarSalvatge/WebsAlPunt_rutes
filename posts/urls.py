@@ -14,5 +14,6 @@ urlpatterns = patterns('',
     url(r'^apuntarRuta/(?P<ruta_id>\d+)/$', views.apuntarRuta, name='apuntarRuta'),
     # buscar ruta
     url(r'^buscarRuta/$', views.filtreDeRutes, name='buscarRuta'),
-
+    # ruta acabada
+    url(r'^rutaAcabada/$', views.mostrarRutesAcabades, name='mostrarRutesAcabades'),
 )

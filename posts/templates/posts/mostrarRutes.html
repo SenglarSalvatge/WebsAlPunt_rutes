@@ -1,9 +1,11 @@
 {% extends "base.html" %}
-
+{% block title %}
+<title>Les Meves Rutes</title>
+{% endblock %}
 {% block content %}
 <blockquote>
 	<p><h1>Les Meves Rutes</h1></p>
-	<footer>Aquí trobaràs les rutes que has creat. Podràs editar-les o esborrar-les</footer>
+	<small>Aquí trobaràs les rutes que has creat. Podràs editar-les o esborrar-les</small>
 </blockquote>
 {% for ruta in Rutes %}
 	<article class="panel panel-success">
@@ -18,9 +20,13 @@
 					<li><label>Dificultat: </label> {{ruta.get_dificultat_display}}</li>
 					<li><label>Categoria: </label> {{ruta.categoria}}</li>
 					<li><label>Descripció: </label> {{ruta.descripcio}}</li>
-				</ul>				
+				</ul>
+				{% if ruta.administrador == user.perfil %}
 				<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
-	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-success" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>	
+	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
+				{% elif ruta.administrador != user.perfil %}
+				<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+				{% endif %}	
 			</div> 										
 		</article>
 
