@@ -12,6 +12,8 @@ urlpatterns = patterns('',
     url(r'^eliminarRuta/(?P<ruta_id>\d+)/$', views.eliminarRuta, name='eliminarRuta'),
     # apuntar-se ruta
     url(r'^apuntarRuta/(?P<ruta_id>\d+)/$', views.apuntarRuta, name='apuntarRuta'),
+    # desapuntar-se ruta
+    url(r'^desapuntarRuta/(?P<ruta_id>\d+)/$', views.desapuntarRuta, name='desapuntarRuta'),
     # buscar ruta
     url(r'^buscarRuta/$', views.filtreDeRutes, name='buscarRuta'),
     # ruta acabada

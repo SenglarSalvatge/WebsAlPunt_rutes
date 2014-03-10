@@ -26,8 +26,8 @@
 <div id="amagar">
 	<button class="btn btn-success" id="botoDesplegar" style="position: absolute; margin-left: -110px" ><span class="glyphicon glyphicon-chevron-right"></span></button>
 </div>
-<div class="row col-md-2" id="formulariCerca" style="display: none">
-	<form action="" method="post">{% csrf_token %}
+<div class="row col-md-12" id="formulariCerca" style="display: none">
+	<form class="form-horizontal" role="form" action="" method="post">{% csrf_token %}
 	
 		    {% for field in form %}
 			    <div class="fieldWrapper">
@@ -37,13 +37,14 @@
 			{% endfor %}
 		<br>		
 		<button type="submit" id="botoCercaRuta" class="btn btn-success">Cerca Ruta <span class="glyphicon glyphicon-search"></span></button>
-	
+		
 	</form>
+	<br>
 </div>
 
 {% if rutes %} 
 {% for ruta in rutes %}
-<div class="row col-md-12" id="rutesTrobades">
+<div class="row col-md-12" class="rutesTrobades">
 	<article class="panel panel-success">
 	    <div class="panel-heading">
 			<h3 class="panel-title">
@@ -60,15 +61,17 @@
 	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
 				{% elif ruta.administrador != user.perfil %}
 				<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
-				{% endif %}	
-			</div> 
+				{% endif %}					
+			</div> 			
 	</article>
+	
 </div>
+
 {% endfor %}
 
 
 
-<div class="row col-md-2 col-md-offset-6 pagination">
+<div class="row col-md-3 col-md-offset-6 pagination">
     <span class="step-links">
         {% if rutes.has_previous %}
             <a href="?page={{ rutes.previous_page_number }}&q={{q}}"><< anterior | </a>
@@ -82,6 +85,7 @@
             <a href="?page={{ rutes.next_page_number }}&q={{q}}"> | següent >></a>
         {% endif %}
     </span>
+    <br><br><br><br><br><br>
 </div>
 
 {% endif %}

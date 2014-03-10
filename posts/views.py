@@ -88,6 +88,17 @@ def apuntarRuta(request, ruta_id):
     url_next= reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
+def desapuntarRuta(request, ruta_id):
+    ruta = get_object_or_404(Post, pk=ruta_id)
+    
+    p = request.user.perfil
+    ruta.apuntats.delete( p )
+    ruta.save()
+    
+    messages.add_message(request, messages.ERROR, "T\'has desapuntat d'aquesta ruta. ")
+    
+    url_next = reverse('post:mostrarRutes', kwargs={})
+    return HttpResponseRedirect(url_next)
 
 def editaRuta(request, ruta_id=None):
 
