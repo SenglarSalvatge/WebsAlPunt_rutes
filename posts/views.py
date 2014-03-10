@@ -16,7 +16,7 @@ from django.utils.datetime_safe import datetime, date
 def mostrarRutes(request):
     q_admin = Q( administrador = request.user.perfil )
     q_apuntat = Q( apuntats = request.user.perfil ) 
-    Rutes = Post.objects.filter( q_admin | q_apuntat )
+    Rutes = Post.objects.filter( q_admin | q_apuntat )    
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
 
 def mostrarRutesAcabades(request):    
@@ -92,12 +92,11 @@ def desapuntarRuta(request, ruta_id):
     ruta = get_object_or_404(Post, pk=ruta_id)
     
     p = request.user.perfil
-    ruta.apuntats.delete( p )
-    ruta.save()
+    ruta.apuntats.remove( p )
     
-    messages.add_message(request, messages.ERROR, "T\'has desapuntat d'aquesta ruta. ")
+    messages.error(request, 'T\'has desapuntat d\'aquesta ruta. ')
     
-    url_next = reverse('post:mostrarRutes', kwargs={})
+    url_next = reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
 def editaRuta(request, ruta_id=None):
