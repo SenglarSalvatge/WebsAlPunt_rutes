@@ -23,6 +23,11 @@
 					<li><label>Categoria:</label> {{ruta.categoria}}</li>
 					<li><label>Descripció:</label> {{ruta.descripcio}}</li>	
 					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't!</button></a>
+					<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+					<!-- Modal -->
+					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					    
+					</div>
 				</div> 
 			</article>
 	{% endfor %}

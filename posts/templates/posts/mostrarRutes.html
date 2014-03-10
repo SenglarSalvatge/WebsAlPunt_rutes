@@ -21,6 +21,11 @@
 				</ul>				
 				<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
 	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-success" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>	
+				<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    
+				</div>
 			</div> 										
 		</article>
 

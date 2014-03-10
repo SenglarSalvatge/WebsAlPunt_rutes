@@ -14,7 +14,7 @@
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
 {% endif %}
@@ -23,19 +23,16 @@
 	<footer>Cerca alguna ruta ja creada amb els criteris que vulguis:</footer> 
 </blockquote>
 <form action="" method="post" class="col-xs-4 col-md-2">{% csrf_token %}
-
 	    {% for field in form %}
 		    <div class="fieldWrapper">
 		        {{ field.errors }}
 				{{ field.label_tag }}{{ field }}
 			</div>
 		{% endfor %}
+		<br>
 	<button type="submit" class="btn btn-success">Cerca Ruta <span class="glyphicon glyphicon-search"></span></button>
-
 </form>
-
 <hr>
-
 {% if rutes %} 
 {% for ruta in rutes %}
 	<article class="panel panel-success">
@@ -50,12 +47,14 @@
 				<li><label>Categoria:</label> {{ruta.categoria}}</li>
 				<li><label>Descripció:</label> {{ruta.descripcio}}</li>
 				<a href="#"><button class="btn btn-success">Editar Ruta <span class="glyphicon glyphicon-pencil"></button></a>
+				<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    
+				</div>
 			</div> 
 		</article>
 {% endfor %}
-
-
-
 <div class="pagination">
     <span class="step-links">
         {% if rutes.has_previous %}
@@ -71,10 +70,5 @@
         {% endif %}
     </span>
 </div>
-
 {% endif %}
-
-
-
-
 {% endblock %}
