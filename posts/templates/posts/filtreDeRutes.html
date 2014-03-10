@@ -17,45 +17,61 @@
     	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
+
 {% endif %}
 <blockquote>
 	<p><h1>Cercar Rutes</h1></p>
-	<footer>Cerca alguna ruta ja creada amb els criteris que vulguis:</footer> 
+	<small>Cerca alguna ruta ja creada amb els criteris que vulguis:</small> 
 </blockquote>
-<form action="" method="post" class="col-xs-4 col-md-2">{% csrf_token %}
-	    {% for field in form %}
-		    <div class="fieldWrapper">
-		        {{ field.errors }}
-				{{ field.label_tag }}{{ field }}
-			</div>
-		{% endfor %}
-		<br>
-	<button type="submit" class="btn btn-success">Cerca Ruta <span class="glyphicon glyphicon-search"></span></button>
-</form>
-<hr>
+<div id="amagar">
+	<button class="btn btn-success" id="botoDesplegar" style="position: absolute; margin-left: -110px" ><span class="glyphicon glyphicon-chevron-right"></span></button>
+</div>
+<div class="row col-md-2" id="formulariCerca" style="display: none">
+	<form action="" method="post">{% csrf_token %}
+	
+		    {% for field in form %}
+			    <div class="fieldWrapper">
+			        {{ field.errors }}
+					{{ field.label_tag }}{{ field }}
+				</div>
+			{% endfor %}
+		<br>		
+		<button type="submit" id="botoCercaRuta" class="btn btn-success">Cerca Ruta <span class="glyphicon glyphicon-search"></span></button>
+	
+	</form>
+</div>
+
 {% if rutes %} 
 {% for ruta in rutes %}
+<div class="row col-md-12" id="rutesTrobades">
 	<article class="panel panel-success">
-		    <div class="panel-heading">
+	    <div class="panel-heading">
 			<h3 class="panel-title">
-			    {{ruta.titol}}
+		    	{{ruta.titol}}
 			</h3>
-		    </div>
+	    	</div>
 			<div class="panel-body">
 				<li><label>Data:</label> {{ruta.data}}</li>
 				<li><label>Dificultat:</label> {{ruta.get_dificultat_display}}</li>
 				<li><label>Categoria:</label> {{ruta.categoria}}</li>
 				<li><label>Descripció:</label> {{ruta.descripcio}}</li>
-				<a href="#"><button class="btn btn-success">Editar Ruta <span class="glyphicon glyphicon-pencil"></button></a>
+				{% if ruta.administrador == user.perfil %}
+					<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
+		 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
+				{% elif ruta.administrador != user.perfil %}
+					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+				{% endif %}	
 				<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
 				<!-- Modal -->
 				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				    
 				</div>
 			</div> 
-		</article>
+	</article>
+</div>
 {% endfor %}
-<div class="pagination">
+
+<div class="row col-md-2 col-md-offset-6 pagination">
     <span class="step-links">
         {% if rutes.has_previous %}
             <a href="?page={{ rutes.previous_page_number }}&q={{q}}"><< anterior | </a>

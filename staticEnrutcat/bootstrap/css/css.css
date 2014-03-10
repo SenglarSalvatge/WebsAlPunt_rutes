@@ -54,11 +54,39 @@
  	border-color: #57b157;
 }
 
+#seccioSocials{
+	margin-top: 10px;
+}
+
+#seccioDrets{
+	margin-top: 20px;
+}
+
 #googleLogo:hover{
 	background-image: url('../imatges/google-icon-inverse.jpg');
 	transform : rotate(360deg);
 	-webkit-transform : rotate(360deg); /* Chrome - Safari */
 	-o-transform : rotate(360deg); /* Opera */
+}
+
+#logoPuntCat{
+	display: inline-block;
+	vertical-align: middle;
+	background-image: url('../imatges/puntcat1.png');
+	background-repeat: no-repeat;
+	height: 67px;
+	width: 67px;
+}
+
+#logoDinaHosting{
+	display: inline-block;
+	vertical-align: middle;
+	margin-top: 25px;
+	margin-left: 10px;
+	background-image: url('../imatges/dinaHosting.png');
+	background-repeat: no-repeat;
+	height: 67px;
+	width: 180px;
 }
 
 .centrarText{
