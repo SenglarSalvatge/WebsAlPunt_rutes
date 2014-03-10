@@ -31,8 +31,21 @@ class Post(models.Model):
     km = models.CharField(max_length=100, help_text="Kilometres de distancia")
     durada = models.CharField(max_length=50000, help_text="Durada de la ruta")
     
-    puntuacions = models.ForeignKey(Puntuacio, blank = True, help_text="Puntuacions", null=True)
+    puntuacions = models.ManyToManyField(Perfil, through='socials.Puntuacio', related_name="puntuacioPost")
     comentaris = models.ManyToManyField(Perfil, through='socials.Comentari', related_name="comentariPost")
     
     def __unicode__(self):  
         return self.titol
+    
+    @property
+    def mitjana(self):
+        from django.db.models import Avg, Sum
+        calcula = Puntuacio.objects.filter( post= self).aggregate(mitjana = Avg('puntuacio'), suma = Sum('puntuacio'))
+        return calcula['mitjana']
+    
+    #@property
+    #def total_mitjana_puntuacio(self):
+    #    return 100
+
+
+

@@ -4,7 +4,7 @@ from usuaris.models import Perfil
 
 class Comentari(models.Model):
     comentari = models.CharField(max_length=800)
-    post = models.ForeignKey('posts.Post', related_name="Ruta")
+    post = models.ForeignKey('posts.Post', related_name="RutatoComentari")
     perfil = models.ForeignKey(Perfil, related_name="comentariUsuari")
     
     class Meta:
@@ -13,12 +13,17 @@ class Comentari(models.Model):
 class Puntuacio(models.Model):
     
     PUNTUACIO_CHOICES = (
-        ('1', '1'),
-        ('2', '2'),
-        ('3', '3'),
-        ('4', '4'),
-        ('5', '5'),
+        (1, '1'),
+        (2, '2'),
+        (3, '3'),
+        (4, '4'),
+        (5, '5'),
     )
     
-    puntuacio = models.CharField(max_length=1, choices=PUNTUACIO_CHOICES, help_text="Puntuació")
+    puntuacio = models.IntegerField( choices=PUNTUACIO_CHOICES, help_text="Puntuació")
+    post = models.ForeignKey('posts.Post', related_name="RutatoPuntuacio")
+    perfil = models.ForeignKey(Perfil, related_name="puntuacioUsuari")
+    
+    class Meta:
+        app_label = 'socials'
 

@@ -1,3 +1,7 @@
+body{
+	background-image: url('../imatges/fonsPantalla.png');
+}
+
 #twitterLogo{
 	display: inline-block;
 	background-image: url('../imatges/twitter-icon.jpg');
@@ -72,6 +76,7 @@
 #logoPuntCat{
 	display: inline-block;
 	vertical-align: middle;
+	margin-top: 20px;
 	background-image: url('../imatges/puntcat1.png');
 	background-repeat: no-repeat;
 	height: 67px;
@@ -93,8 +98,8 @@
 	text-align: center;
 }
 
-.textoBlanco{
-	color: white;
+.textBlanc{
+	color: #9fDc9f;
 	display: inline-block;
 }
 

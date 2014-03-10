@@ -26,8 +26,8 @@
 <div id="amagar">
 	<button class="btn btn-success" id="botoDesplegar" style="position: absolute; margin-left: -110px" ><span class="glyphicon glyphicon-chevron-right"></span></button>
 </div>
-<div class="row col-md-2" id="formulariCerca" style="display: none">
-	<form action="" method="post">{% csrf_token %}
+<div class="row col-md-12" id="formulariCerca" style="display: none">
+	<form class="form-horizontal" role="form" action="" method="post">{% csrf_token %}
 	
 		    {% for field in form %}
 			    <div class="fieldWrapper">
@@ -37,17 +37,18 @@
 			{% endfor %}
 		<br>		
 		<button type="submit" id="botoCercaRuta" class="btn btn-success">Cerca Ruta <span class="glyphicon glyphicon-search"></span></button>
-	
+		
 	</form>
+	<br>
 </div>
 
 {% if rutes %} 
 {% for ruta in rutes %}
-<div class="row col-md-12" id="rutesTrobades">
+<div class="row col-md-12" class="rutesTrobades">
 	<article class="panel panel-success">
 	    <div class="panel-heading">
 			<h3 class="panel-title">
-		    	{{ruta.titol}}
+			    <a href="{% url 'posts:detall' ruta.id %}">{{ruta.titol}}</a>
 			</h3>
 	    	</div>
 			<div class="panel-body">
@@ -81,14 +82,20 @@
 				</div>
 			</div>
 	</article>
+	
 </div>
 
 {% endfor %}
 
-<div class="row col-md-2 col-md-offset-6 pagination">
-    <span class="step-links">
+
+
+<div class="row col-md-4 col-md-offset-6 pagination">
+
+    <ul class="pager">
         {% if rutes.has_previous %}
-            <a href="?page={{ rutes.previous_page_number }}&q={{q}}"><< anterior | </a>
+            <li class="previous"><a href="?page={{ rutes.previous_page_number }}&q={{q}}">&larr; Anterior</a></li>
+        {% else %}
+        	<li class="previous disabled"><a href="#">&larr; Anterior</a></li>
         {% endif %}
 
         <span class="current">
@@ -96,9 +103,12 @@
         </span>
 
         {% if rutes.has_next %}
-            <a href="?page={{ rutes.next_page_number }}&q={{q}}"> | següent >></a>
+            <li class="next"><a href="?page={{ rutes.next_page_number }}&q={{q}}"> Següent &rarr;</a></li>
+        {% else %}
+        	<li class="next disabled"><a href="#"> Següent &rarr;</a></li>
         {% endif %}
-    </span>
+    </ul>
+    <br><br><br><br><br><br>
 </div>
 {% endif %}
 {% endblock %}

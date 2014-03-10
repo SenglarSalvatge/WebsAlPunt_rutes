@@ -61,6 +61,7 @@
 				      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rutes<b class="caret"></b></a>
 					    <ul class="dropdown-menu">
 						    <li><a href="{% url 'posts:novaRuta' %}">Crear Ruta</a></li>
+						    <li class="divider"></li>
 						    <li><a href="{% url 'posts:buscarRuta' %}">Cerca Ruta</a></li>
 					    </ul>
 					  </li>
@@ -68,7 +69,9 @@
 					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">La meva activitat<b class="caret"></b></a>
 					    <ul class="dropdown-menu">
 						    <li><a href="{% url 'posts:mostrarRutes' %}">Les meves rutes</a></li>
+						    <li class="divider"></li>
 						    <li><a href="#">Rutes on participaré</a></li>
+						    <li class="divider"></li>
 						    <li><a href="{% url 'posts:mostrarRutesAcabades' %}">Rutes finalitzades</a></li>
 					    </ul>
 					  </li>
@@ -108,7 +111,7 @@
 				{% block mostrarRequest %}
 				{% endblock %}
 			</div>
-			<br><br><br><br><br><br>
+			<br><br><br><br><br><br><br><br>
 			<nav class="navbar navbar-default navbar-fixed-bottom navbar-inverse" role="navigation">
 			  <!-- Brand and toggle get grouped for better mobile display -->
 			  <div class="navbar-header">
@@ -123,14 +126,14 @@
 			  <div class="collapse navbar-collapse" id="bs-navbar-collapse-2">
 					<div class="container">
 						<footer class="row">
-							<section class="col-xs-12 col-sd-2 col-md-4 col-md-offset-1" id="seccioDrets" class="textoBlanco centrarText">								
+							<section class="col-xs-12 col-sd-4 col-md-4 col-md-offset-1" id="seccioDrets" class="textoBlanco centrarText">								
 								 <ul class="nav navbar-nav" class="centrarText">										
 									<li><a data-toggle="modal" data-target="#modalInformacio">&copy; Copyright  by Enrut.cat , 2014</a></li>
 								</ul>	
 							</section>
-							<section class="col-xs-12 col-sd-2 col-md-3 " id="seccioSocials" class="centrarText" >
+							<section class="col-xs-12 col-sd-4 col-md-3" id="seccioSocials" class="centrarText" >
 								<ul class="listadoFooter">
-									<li><b class="textoBlanco">Segueix-nos!</b></li>									
+									<li><b class="textBlanc">Segueix-nos!</b></li>									
 									<li id="facebookLogo"><a href="https://twitter.com/EnrutCat"></a></li>
 									<li id="twitterLogo"><a href="https://twitter.com/EnrutCat"></a></li>
 									<li id="googleLogo"><a href="https://plus.google.com/u/0/105295444224518300998/posts"></a></li>									
@@ -140,7 +143,7 @@
 								<li id="logoPuntCat"><a href="http://websalpunt.cat/"></a></li>
 								<li id="logoDinaHosting"><a href="https://ca.dinahosting.com/"></a></li>
 							</section>
-							<section class="col-xs-12 col-sd-2 col-md-4 centrarText">
+							<section class="col-xs-12 col-sd-4 col-md-4 centrarText">
 								<ul class="nav navbar-nav">
 									
 								</ul>
@@ -283,16 +286,16 @@
 			$(document).ready(function(){
 				$("#botoDesplegar").click(function(){
 					$("#formulariCerca").toggle("slow");
-					$("#rutesTrobades").removeClass("col-md-12");
-					$("#rutesTrobades").addClass("col-md-9");
-					$("#rutesTrobades").addClass("col-md-offset-1");
+					$(".rutesTrobades").removeClass("col-md-12");
+					$(".rutesTrobades").addClass("col-md-9");
+					$(".rutesTrobades").addClass("col-md-offset-1");
 					$("#botoDesplegar").attr("id", "botoPlegar");
 				});	
 			});			
 			$(document).ready(function(){
 				$("#botoPlegar").click(function(){				
-					$("#formulariCerca").toggle("slow");				
-					$("#rutesTrobades").addClass("col-md-12");
+					$(".formulariCerca").toggle("slow");				
+					$(".rutesTrobades").addClass("col-md-12");
 					$("#botoDesplegar").attr("id","botoDesplegar");					
 				});
 			});			
