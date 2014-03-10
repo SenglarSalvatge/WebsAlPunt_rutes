@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.http.response import HttpResponse
 from django.shortcuts import render, get_object_or_404
 from posts.models import Post
+from socials.models import Puntuacio
 from posts.forms import PostForm, FiltreRutaForm
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
@@ -26,6 +26,7 @@ from django.contrib.auth.decorators import permission_required
 def participaRuta(request):
     Rutes = Post.objects.filter( apuntats = request.user.perfil )
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
+
 
 @login_required
 def mevaRuta(request):
@@ -52,8 +53,8 @@ def calcularDistanciaMapa(frase):
                 listCoordenades.append(coordenada1)
                 listCoordenades.append(coordenada2)
             # calculo la distancia    
-            i =0
-            distancia=0
+            i = 0
+            distancia = 0
             while i < len(listCoordenades)-3:
                 x1 = float(listCoordenades[i])
                 i=i+1
@@ -88,7 +89,6 @@ def eliminarRuta(request, ruta_id):
     if ruta.administrador != request.user.perfil:
             url_next= reverse('index', kwargs={})
             return HttpResponseRedirect(url_next)
-        
     ruta.delete()
     
     url_next= reverse('posts:mostrarRutes', kwargs={})
@@ -107,18 +107,19 @@ def apuntarRuta(request, ruta_id):
     url_next= reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
- 
-#  
-# def soy_admin(request, ruta_id=None):
-#     ruta = get_object_or_404(Post, pk=ruta_id)
-#     if  ruta.administrador == request.user.perfil:
-#         return True
-#     else:
-#         return False
-# 
-# @permission_required('soy_admin', login_url='posts:novaRuta')
 
-@login_required
+def desapuntarRuta(request, ruta_id):
+    ruta = get_object_or_404(Post, pk=ruta_id)
+    
+    p = request.user.perfil
+    ruta.apuntats.delete( p )
+    ruta.save()
+    
+    messages.add_message(request, messages.ERROR, "T\'has desapuntat d'aquesta ruta. ")
+    
+    url_next = reverse('post:mostrarRutes', kwargs={})
+    return HttpResponseRedirect(url_next)
+
 def editaRuta(request, ruta_id=None):
 
     if ruta_id is not None:
@@ -163,7 +164,9 @@ def editaRuta(request, ruta_id=None):
         'form':form,
         })
 
-
+def detall_ruta(request, ruta_id):
+    ruta = Post.objects.filter(pk = ruta_id)
+    return render(request, 'posts/detall.html', {'ruta':ruta})
 
 def filtreDeRutes(request):
 
@@ -216,8 +219,35 @@ def filtreDeRutes(request):
     return render(request, 'posts/filtreDeRutes.html', {'form':form, 'rutes':rutes, 'q':q_str})
 
 
+def puntuar(request):
+    punts = request.GET.get('punts')
+    ruta_id = request.GET.get('ruta_id')
+    
+    
+    usuari = request.user.perfil
+    
+    q = Q()
+    q = Q(apuntats = usuari)
+    q &= Q(pk = ruta_id)
+    buscador = Post.objects.filter(q).first()
+    
+    if buscador is not None:
+        p = Puntuacio.objects.get( q );
+            
+    else:
+        p = Puntuacio()
+        p.perfil = usuari
+        ruta = Post.objects.get(pk = ruta_id)
+        p.post = ruta
+    
+    p.puntuacio = punts
+    p.save()
+    
+    return HttpResponse(content='OK')
+
+
 def paginaitor_plus(page, llista, num):
-    paginator = Paginator(llista, num) # numero d'entrades per pagina
+    paginator = Paginator(llista, num) # numero d'entrades per pàgina
     try:
         entrada = paginator.page(page)
     except PageNotAnInteger:
