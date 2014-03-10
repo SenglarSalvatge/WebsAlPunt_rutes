@@ -57,7 +57,7 @@
 			},
 			function(){
 				id_bota = $(this).attr('id');
-				canviOpacitat(id_bota, 0.6);
+				canviOpacitat('bota5', 0.6);
 			});
 	});
 	
@@ -75,10 +75,12 @@
 		var parametres = 'ruta_id='+ruta_id+'&punts='+punts[1];
 		
 		$.ajax({
-			url: "/rutes/puntuar?"+parametres
-		}).done(function() {
-			alert( "success" );
-			
+			url: "/rutes/puntuar?"+parametres,
+			data: 'json'
+		}).done(function(data) {
+			$('#mitjana').text(parseFloat(data.mitjana));
+			canviOpacitat('bota5', 0.6);
+			canviOpacitat('bota'+data.punts, 1);
 		}).fail(function() {
 			alert( "error" );
 		});
