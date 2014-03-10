@@ -1,50 +1,86 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}
 <title>Cercar Ruta</title>
+{% endblock %}
+{% block links-comple %}
+		<!-- js i css per a plugin del calendari -->
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+		<script src="//code.jquery.com/jquery-1.9.1.js"></script>
+		<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+		<script src="{% static 'calendar/calendar.js' %}"></script>
 {% endblock %}
 {% block content %}
 {% if messages %}
 <ul class="messages">
     {% for message in messages %}
-    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    	<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
     {% endfor %}
 </ul>
+
 {% endif %}
-
-<form action="" method="post">{% csrf_token %}
-	    {% for field in form %}
-		    <div class="fieldWrapper">
-		        {{ field.errors }}
-				{{ field.label_tag }}{{ field }}
-			</div>
-		{% endfor %}
-	<input type="submit" value="Enviar" />
-</form>
-
-<hr>
+<blockquote>
+	<p><h1>Cercar Rutes</h1></p>
+	<small>Cerca alguna ruta ja creada amb els criteris que vulguis:</small> 
+</blockquote>
+<div id="amagar">
+	<button class="btn btn-success" id="botoDesplegar" style="position: absolute; margin-left: -110px" ><span class="glyphicon glyphicon-chevron-right"></span></button>
+</div>
+<div class="row col-md-12" id="formulariCerca" style="display: none">
+	<form class="form-horizontal" role="form" action="" method="post">{% csrf_token %}
+	
+		    {% for field in form %}
+			    <div class="fieldWrapper">
+			        {{ field.errors }}
+					{{ field.label_tag }}{{ field }}
+				</div>
+			{% endfor %}
+		<br>		
+		<button type="submit" id="botoCercaRuta" class="btn btn-success">Cerca Ruta <span class="glyphicon glyphicon-search"></span></button>
+		
+	</form>
+	<br>
+</div>
 
 {% if rutes %} 
 {% for ruta in rutes %}
+<div class="row col-md-12" class="rutesTrobades">
 	<article class="panel panel-success">
-		    <div class="panel-heading">
+	    <div class="panel-heading">
 			<h3 class="panel-title">
 			    <a href="{% url 'posts:detall' ruta.id %}">{{ruta.titol}}</a>
 			</h3>
-		    </div>
+	    	</div>
 			<div class="panel-body">
-				<li>{{ruta.data}}</li>
-				<li>{{ruta.dificultat}}</li>
-				<li>{{ruta.categoria}}</li>
-				<li>{{ruta.descripcio}}</li>	
-				<a href="#"><button>edita</button></a>
+				<li><label>Data:</label> {{ruta.data}}</li>
+				<li><label>Dificultat:</label> {{ruta.get_dificultat_display}}</li>
+				<li><label>Categoria:</label> {{ruta.categoria}}</li>
+				<li><label>Descripció:</label> {{ruta.descripcio}}</li>
+				{% if ruta.administrador == user.perfil %}
+					<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
+		 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
+				{% elif ruta.administrador != user.perfil %}
+				<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+				{% endif %}					
+			</div> 			
+					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+				{% endif %}	
+				<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    
+				</div>
 			</div> 
-		</article>
+	</article>
+	
+</div>
+
 {% endfor %}
 
 
 
+<div class="row col-md-3 col-md-offset-6 pagination">
 
-<div class="pagination">
     <span class="step-links">
         {% if rutes.has_previous %}
             <a href="?page={{ rutes.previous_page_number }}&q={{q}}"><< anterior | </a>
@@ -58,11 +94,7 @@
             <a href="?page={{ rutes.next_page_number }}&q={{q}}"> | següent >></a>
         {% endif %}
     </span>
+    <br><br><br><br><br><br>
 </div>
-
 {% endif %}
-
-
-
-
 {% endblock %}

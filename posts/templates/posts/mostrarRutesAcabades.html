@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}
+	<title>Rutes Acabades</title>
+{% endblock %}
+{% block content %}
+	<blockquote>
+		<h1>Rutes acabades</h1>
+		<small>Aqui podràs veure un llistat amb les rutes en les quals has participat</small>
+	</blockquote>
+{% for ruta in Rutes %}
+	<article class="panel panel-success">
+		    <div class="panel-heading">
+			<h3 class="panel-title">
+			    {{ruta.titol}}
+			</h3>
+		    </div>
+			<div class="panel-body">
+				<ul>
+					<li><label>Data: </label> {{ruta.data}}</li>
+					<li><label>Dificultat: </label> {{ruta.get_dificultat_display}}</li>
+					<li><label>Categoria: </label> {{ruta.categoria}}</li>
+					<li><label>Descripció: </label> {{ruta.descripcio}}</li>
+				</ul>				
+			</div> 										
+		</article>
+{% endfor %}
+{% endblock %}
+

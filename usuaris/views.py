@@ -14,11 +14,12 @@ def editarPerfil(request):
         form = PerfilForm(request.POST, instance = perfil)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Perfil entrat correctament')
+            messages.add_message(request, messages.SUCCESS, "Perfil Modificat Correctament")
             url_next = reverse('usuaris:mostrarPerfil')            
             return HttpResponseRedirect( url_next )
         else:
-            messages.error(request, 'Error')            
+            messages.add_message(request, messages.ERROR, "Error Modificant El Perfil")
+            #messages.error(request, 'Error Modificant El Perfil')            
     else:
         form = PerfilForm(instance = perfil)
 

@@ -5,19 +5,24 @@ from posts.forms import PostForm, FiltreRutaForm
 from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.contrib import messages
 from django.core.urlresolvers import reverse
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 import math
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
-from django.utils.datetime_safe import datetime
-from socials.models import Puntuacio
+from django.utils.datetime_safe import datetime, date
+
 
 def mostrarRutes(request):
     q_admin = Q( administrador = request.user.perfil )
     q_apuntat = Q( apuntats = request.user.perfil ) 
     Rutes = Post.objects.filter( q_admin | q_apuntat )
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
+
+def mostrarRutesAcabades(request):    
+    dataRuta = date.today()
+    Rutes = Post.objects.filter(data__lt = dataRuta)    
+    return render(request, 'posts/mostrarRutesAcabades.html', {'Rutes':Rutes})
 
 def calcularDistanciaMapa(frase):
             listCoordenades = list()  
@@ -84,11 +89,22 @@ def apuntarRuta(request, ruta_id):
     ruta.apuntats.add( p )
     ruta.save()
     
-    messages.info(request, 'Apuntat. ')
+    messages.info(request, 'T\'has apuntat correctament a aquesta ruta. ')
         
     url_next= reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
+def desapuntarRuta(request, ruta_id):
+    ruta = get_object_or_404(Post, pk=ruta_id)
+    
+    p = request.user.perfil
+    ruta.apuntats.delete( p )
+    ruta.save()
+    
+    messages.add_message(request, messages.ERROR, "T\'has desapuntat d'aquesta ruta. ")
+    
+    url_next = reverse('post:mostrarRutes', kwargs={})
+    return HttpResponseRedirect(url_next)
 
 def editaRuta(request, ruta_id=None):
 
@@ -115,11 +131,12 @@ def editaRuta(request, ruta_id=None):
             #r.apuntats= r.administrador
             r.durada = tiempo
             r.save()
-    
-            messages.info(request, 'Ruta guardada. ')
+            messages.add_message(request, messages.SUCCESS, "Ruta creada correctament")
+            #messages.info(request, 'Ruta guardada. ')
             url_next= reverse('index', kwargs={})
             return HttpResponseRedirect(url_next)
         else:
+            #messages.ad
             messages.error(request, 'petada general')
     else:
         form=PostForm(instance=ruta)
@@ -135,11 +152,9 @@ def detall_ruta(request, ruta_id):
 def filtreDeRutes(request):
 
     form = FiltreRutaForm()
-    
     if request.method == 'POST':
         #prepareu diccionari amb els parametres del post
-        form = FiltreRutaForm(request.POST)
-        
+        form = FiltreRutaForm(request.POST)        
         if form.is_valid():
             q_str = request.POST.copy()
             q_str.pop('csrfmiddlewaretoken') #borrem el srtdgf de l'array
