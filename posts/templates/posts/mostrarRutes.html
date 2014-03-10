@@ -27,10 +27,22 @@
 				{% elif ruta.administrador != user.perfil %}
 					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
 				{% endif %}	
-				<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+				<a data-toggle="modal" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
 				<!-- Modal -->
 				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				    
+				    <div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                 <h4 class="modal-title">Entra un comentaris</h4>
+				            </div>
+				            <div class="modal-body" style="height: 300px">
+								<iframe style="height: 300px" src="{% url 'socials:entrarComentaris' %}" frameborder="0" scrolling="no"></iframe>
+						  	</div>
+					        <div class="modal-footer">
+					        	<button type="button" data-dismiss="modal" class="btn btn-success">Cancelar</button>
+					        </div>
+						</div> 
+					</div>
 				</div>
 			</div> 										
 		</article>
