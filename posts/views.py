@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, get_object_or_404
 from posts.models import Post
+from socials.models import Puntuacio
 from posts.forms import PostForm, FiltreRutaForm
 from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.contrib import messages
@@ -11,13 +12,17 @@ import math
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
 from django.utils.datetime_safe import datetime, date
-from socials.models import Puntuacio
 
 
-def mostrarRutes(request):
-    q_admin = Q( administrador = request.user.perfil )
-    q_apuntat = Q( apuntats = request.user.perfil ) 
-    Rutes = Post.objects.filter( q_admin | q_apuntat )
+@login_required
+def participaRuta(request):
+    Rutes = Post.objects.filter( apuntats = request.user.perfil )
+    return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
+
+
+@login_required
+def mevaRuta(request):
+    Rutes = Post.objects.filter(administrador=request.user.perfil)
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
 
 def mostrarRutesAcabades(request):    
@@ -69,20 +74,19 @@ def calcularDuradaMapa(modo, distancia):
             
             return tiempo
 
-#@permission_required('polls.can_vote', login_url='/loginpage/')
 @login_required
 def eliminarRuta(request, ruta_id):
     ruta=get_object_or_404(Post, pk=ruta_id)
-    
-    #seguretat:
+    #seguretat
     if ruta.administrador != request.user.perfil:
-        return Http404
-    
+            url_next= reverse('index', kwargs={})
+            return HttpResponseRedirect(url_next)
     ruta.delete()
     
     url_next= reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
+@login_required
 def apuntarRuta(request, ruta_id):
     ruta = get_object_or_404(Post, pk=ruta_id)
     
@@ -95,22 +99,27 @@ def apuntarRuta(request, ruta_id):
     url_next= reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
+
 def desapuntarRuta(request, ruta_id):
     ruta = get_object_or_404(Post, pk=ruta_id)
     
     p = request.user.perfil
-    ruta.apuntats.delete( p )
-    ruta.save()
+    ruta.apuntats.remove( p )
     
-    messages.add_message(request, messages.ERROR, "T\'has desapuntat d'aquesta ruta. ")
+    messages.error(request, 'T\'has desapuntat d\'aquesta ruta. ')
     
-    url_next = reverse('post:mostrarRutes', kwargs={})
+    url_next = reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
 def editaRuta(request, ruta_id=None):
 
     if ruta_id is not None:
         ruta=get_object_or_404(Post, pk=ruta_id)
+        #seguretat
+        if ruta.administrador != request.user.perfil:
+            messages.add_message(request, messages.ERROR , "No pots modificar aquesta ruta!")
+            url_next= reverse('index', kwargs={})
+            return HttpResponseRedirect(url_next)
     else:
         ruta=Post()
         

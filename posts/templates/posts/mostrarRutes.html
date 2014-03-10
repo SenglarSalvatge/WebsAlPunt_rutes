@@ -25,9 +25,13 @@
 					<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
 	 				<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
 				{% elif ruta.administrador != user.perfil %}
+					{% if user.perfil in ruta.apuntats.all %}					
+					<a href="{% url 'posts:desapuntarRuta' ruta.id %}"><button class="btn btn-danger">Desapunta't <span class="glyphicon glyphicon-remove"></span></button></a>
+					{% else %}
 					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+					{% endif %}
 				{% endif %}	
-				<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+				<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari <span class="glyphicon glyphicon-comment"></span> </a>
 				<!-- Modal -->
 				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				    
