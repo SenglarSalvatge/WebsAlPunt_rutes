@@ -1,21 +1,6 @@
 
-
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                 <h4 class="modal-title">Entra un comentaris</h4>
-            </div>
-            <div class="modal-body">
 			<form action="" method="post">{% csrf_token %}
 				{{ form.as_p }}
-				<input type="submit" value="Guardar comentari" class="btn btn-success"/>		
+				<input type="submit"  value="Guardar comentari" class="btn btn-success"/>		
 			</form>
-	
-    		</div>
     		
-            <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-success">Cancelar</button>
-            </div>
-        </div>
-    </div>
