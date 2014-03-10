@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block title %}
+<title>Detall Ruta</title>
+{% endblock %}
+
+{% block links-comple %}
+		<!-- js i css per a mapa de API google MAPS-->	
+		<link rel="stylesheet" href="{% static 'maps/maps.css' %}">
+		<link rel="stylesheet" href="{% static 'css/votacio.css' %}">
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClNhahi1_H8Tmdb7_WeuGpd4YA1cfOPwk&sensor=false"></script>
+		<script src="{% static 'maps/pinta_mapa.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<h1>Les meves rutes</h1>
+{% for r in ruta %}
+	<article class="panel panel-success">
+		    <div class="panel-heading">
+			<h3 class="panel-title">
+			    {{ruta.titol}}
+			</h3>
+		    </div>
+			<div class="panel-body">
+				<li>{{r.data}}</li>
+				<li>{{r.dificultat}}</li>
+				<li>{{r.categoria}}</li>
+				<li>{{r.descripcio}}</li>	
+				<li id="mitjana">{{r.mitjana}}</li>	
+				
+				
+				
+				<div id="votacio">
+					<a><img id="bota1"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);" /></a>
+					<a><img id="bota2"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);"/></a>
+					<a><img id="bota3"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);"/></a>
+					<a><img id="bota4"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);"/></a>
+					<a><img id="bota5"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);"/></a>
+				</div>
+			</div> 
+		</article>
+		
+		<input type="hidden" id="coordenades" value="{{r.coordenades}}"/>
+
+{% endfor %}
+
+<div id="map-canvas"></div>
+
+<script>
+
+	//CONTROL VISUAL DE LA VOTACIO
+	$(document).ready(function(){
+		$('#votacio a img').hover(
+			function(){
+				id_bota = $(this).attr('id');
+				canviOpacitat(id_bota, 1);
+			},
+			function(){
+				id_bota = $(this).attr('id');
+				canviOpacitat(id_bota, 0.6);
+			});
+	});
+	
+	function canviOpacitat(id, valor) {
+		iterable = id.split('bota');
+		
+		for(var i = 1; i <= parseInt(iterable[1]); i++) {
+			$('#bota'+i).css('opacity',valor);
+		}
+	}
+	
+	//AJAX PER PUNTUAR
+	function puntuar(ruta_id, valor){
+		var punts = valor.split('bota');
+		var parametres = 'ruta_id='+ruta_id+'&punts='+punts[1];
+		
+		$.ajax({
+			url: "/rutes/puntuar?"+parametres
+		}).done(function() {
+			alert( "success" );
+			
+		}).fail(function() {
+			alert( "error" );
+		});
+	}
+	
+</script>
+
+{% endblock %}
