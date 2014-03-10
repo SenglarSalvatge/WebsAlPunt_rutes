@@ -23,6 +23,7 @@
 					<li><label>Dificultat:</label> {{ruta.get_dificultat_display}}</li>
 					<li><label>Categoria:</label> {{ruta.categoria}}</li>
 					<li><label>Descripció:</label> {{ruta.descripcio}}</li>	
+<<<<<<< HEAD
 				{% if ruta.administrador == user.perfil %}
 				<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
 	 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
@@ -30,6 +31,19 @@
 					{% if ruta.apuntats %}
 				<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
 				{% endif %}
+=======
+					{% if ruta.administrador == user.perfil %}
+						<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
+		 				<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
+					{% elif ruta.administrador != user.perfil %}
+						<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+					{% endif %}
+					<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+					<!-- Modal -->
+					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ 
+					</div>
+>>>>>>> 0ffd3f6b8e02f45da0575ad98132d449d408650e
 				</div> 
 			</article>
 	{% endfor %}
