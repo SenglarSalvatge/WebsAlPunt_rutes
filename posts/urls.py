@@ -3,9 +3,13 @@ from django.conf.urls import patterns, url
 from posts import views
 
 urlpatterns = patterns('',
-    url(r'^ruta/$', views.mostrarRutes, name='mostrarRutes'),
+    url(r'^ruta/$', views.mevaRuta, name='mostrarRutes'),
     # crear ruta
     url(r'^novaRuta/$', views.editaRuta, name='novaRuta'),
+    # les meves rutes 
+    url(r'^mevaRuta/$', views.mevaRuta, name='mevaRuta'),
+    # rutes on participare
+    url(r'^participaRuta/$', views.participaRuta, name='participaRuta'),
     # edita ruta
     url(r'^editaRuta/(?P<ruta_id>\d+)/$', views.editaRuta, name='editaRuta'),
     # eliminar ruta

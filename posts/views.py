@@ -12,11 +12,24 @@ import math
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
 from django.utils.datetime_safe import datetime, date
+from django.views.decorators.http import condition
+from django.contrib.auth.decorators import permission_required
 
-def mostrarRutes(request):
-    q_admin = Q( administrador = request.user.perfil )
-    q_apuntat = Q( apuntats = request.user.perfil ) 
-    Rutes = Post.objects.filter( q_admin | q_apuntat )
+# @login_required
+# def mostrarRutes(request):
+#     q_admin = Q( administrador = request.user.perfil )
+#     q_apuntat = Q( apuntats = request.user.perfil ) 
+#     Rutes = Post.objects.filter( q_admin | q_apuntat )
+#     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
+
+@login_required
+def participaRuta(request):
+    Rutes = Post.objects.filter( apuntats = request.user.perfil )
+    return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
+
+@login_required
+def mevaRuta(request):
+    Rutes = Post.objects.filter(administrador=request.user.perfil)
     return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
 
 def mostrarRutesAcabades(request):    
@@ -68,14 +81,20 @@ def calcularDuradaMapa(modo, distancia):
             
             return tiempo
 
-
+@login_required
 def eliminarRuta(request, ruta_id):
     ruta=get_object_or_404(Post, pk=ruta_id)
+    #seguretat
+    if ruta.administrador != request.user.perfil:
+            url_next= reverse('index', kwargs={})
+            return HttpResponseRedirect(url_next)
+        
     ruta.delete()
     
     url_next= reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
+@login_required
 def apuntarRuta(request, ruta_id):
     ruta = get_object_or_404(Post, pk=ruta_id)
     
@@ -88,11 +107,27 @@ def apuntarRuta(request, ruta_id):
     url_next= reverse('posts:mostrarRutes', kwargs={})
     return HttpResponseRedirect(url_next)
 
+ 
+#  
+# def soy_admin(request, ruta_id=None):
+#     ruta = get_object_or_404(Post, pk=ruta_id)
+#     if  ruta.administrador == request.user.perfil:
+#         return True
+#     else:
+#         return False
+# 
+# @permission_required('soy_admin', login_url='posts:novaRuta')
 
+@login_required
 def editaRuta(request, ruta_id=None):
 
     if ruta_id is not None:
         ruta=get_object_or_404(Post, pk=ruta_id)
+        #seguretat
+        if ruta.administrador != request.user.perfil:
+            messages.add_message(request, messages.ERROR , "No pots modificar aquesta ruta!")
+            url_next= reverse('index', kwargs={})
+            return HttpResponseRedirect(url_next)
     else:
         ruta=Post()
         
