@@ -25,7 +25,8 @@
 				<li><label>Data:</label> {{r.data}}</li>
 				<li><label>Dificultat:</label> {{r.get_dificultat_display}}</li>
 				<li><label>Categoria:</label> {{r.categoria}}</li>
-				<li><label>Descripció:</label> {{r.descripcio}}</li>	
+				<li><label>Descripció:</label> {{r.descripcio}}</li>
+				<a href="{% url 'posts:comentariRuta' r.id %}">Comentaris</a>	
 				{% if r.administrador == user.perfil %}
 					<a href="{% url 'posts:editaRuta' r.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
 		 			<a href="{% url 'posts:eliminarRuta' r.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
@@ -41,7 +42,7 @@
 				                 <h4 class="modal-title">Entra un comentaris</h4>
 				            </div>
 				            <div class="modal-body" style="height: 300px">
-								<iframe style="height: 300px" src="{% url 'socials:entrarComentaris' %}" frameborder="0" scrolling="no">
+								<iframe style="height: 300px" src="{% url 'socials:entrarComentaris' r.id %}" frameborder="0" scrolling="no">
 									
 									
 								</iframe>
