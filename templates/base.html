@@ -58,7 +58,7 @@
 			    <ul class="nav navbar-nav">	
 			    	{% if user.is_authenticated %}
 				      <li class="dropdown">
-				      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rutes<b class="caret"></b></a>
+				      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rutes<b class="caret"></b> <span class="glyphicon glyphicon-road"></span></a>
 					    <ul class="dropdown-menu">
 						    <li><a href="{% url 'posts:novaRuta' %}">Crear Ruta</a></li>
 						    <li class="divider"></li>
@@ -66,11 +66,11 @@
 					    </ul>
 					  </li>
 					  <li class="dropdown">
-					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">La meva activitat<b class="caret"></b></a>
+					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">La meva activitat<b class="caret"></b> <span><img src="{% static 'img/icon/glyphicons/png/glyphicons_431_shoe_steps.png' %}" /></span></a>
 					    <ul class="dropdown-menu">
 						    <li><a href="{% url 'posts:mostrarRutes' %}">Les meves rutes</a></li>
 						    <li class="divider"></li>
-						    <li><a href="#">Rutes on participaré</a></li>
+						    <li><a href="'posts:participaRuta'">Rutes on participaré</a></li>
 						    <li class="divider"></li>
 						    <li><a href="{% url 'posts:mostrarRutesAcabades' %}">Rutes finalitzades</a></li>
 					    </ul>
@@ -83,15 +83,15 @@
 				{% endif %}
 				{% if user.is_authenticated %}
 			      <li class="dropdown">
-			        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Configuració<b class="caret"></b></a>
+			        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Configuració<b class="caret"></b></a>
 			        <ul class="dropdown-menu">
-			         	  <li><a href="{% url 'usuaris:mostrarPerfil' %}">Perfil</a></li>
+			         	  <li><a href="{% url 'usuaris:mostrarPerfil' %}">Perfil <span><img src="{% static 'img/icon/glyphicons/png/glyphicons_431_shoe_steps.png' %}" /></span></a></li>
 			          	  <li class="divider"></li>
-						  <li><a href="{% url 'usuaris:exit_login' %}">Sortir</a></li>
+						  <li><a href="{% url 'usuaris:exit_login' %}">Sortir <span class="glyphicon glyphicon-log-out"></span></a></li>
 			        </ul>
 			      </li>
 			     {% else %}
-			       <li><a href="#" data-toggle="modal" data-target="#myModal">Accedeix</a></li>
+			       <li><a href="#" data-toggle="modal" data-target="#myModal">Accedeix <span class="glyphicon glyphicon-log-in"></span> </a></li>
 			     {% endif %}
 			    </ul>
 			  </div><!-- /.navbar-collapse -->

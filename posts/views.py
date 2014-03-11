@@ -27,7 +27,9 @@ def mevaRuta(request):
 
 def mostrarRutesAcabades(request):    
     dataRuta = date.today()
-    Rutes = Post.objects.filter(data__lt = dataRuta)    
+    rutes = Post.objects.filter(data__lt = dataRuta)        
+    page = request.GET.get('page')
+    Rutes = paginaitor_plus(page, rutes, 3)    
     return render(request, 'posts/mostrarRutesAcabades.html', {'Rutes':Rutes})
 
 def calcularDistanciaMapa(frase):
@@ -190,7 +192,8 @@ def filtreDeRutes(request):
                 d = datetime.strptime(q['data'], '%d/%m/%Y')
                 p &= Q(data = d)
             if 'dificultat' in q and q['dificultat']:
-                p &= Q(dificultat = q['dificultat'])
+                if q['dificultat'] != '------':
+                    p &= Q(dificultat = q['dificultat'])
 
             if 'categoria' in q and q['categoria']:
                 n = int(q['categoria'])
@@ -206,6 +209,8 @@ def filtreDeRutes(request):
             
         page = request.GET.get('page')
         rutes = paginaitor_plus(page, llista_rutes, 2)
+        
+        form.fields['dificultat'].widget.choices = [ (0,'------') ] + list(form.fields['dificultat'].widget.choices)
         
     return render(request, 'posts/filtreDeRutes.html', {'form':form, 'rutes':rutes, 'q':q_str})
 
