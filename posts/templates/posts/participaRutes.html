@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}
+<title>Les Meves Rutes</title>
+{% endblock %}
+{% block content %}
+<blockquote>
+	<p><h1>Les Meves Rutes</h1></p>
+	<small>Aquí trobaràs les rutes on participaràs. Podràs desapuntar-te.</small>
+</blockquote>
+{% for ruta in Rutes %}
+	<article class="panel panel-success">
+		    <div class="panel-heading">
+			<h3 class="panel-title">
+			    <a href="{% url 'posts:detall' ruta.id %}">{{ruta.titol}}</a>
+			</h3>
+		    </div>
+			<div class="panel-body">
+				<ul>
+					<li><label>Data: </label> {{ruta.data}}</li>
+					<li><label>Dificultat: </label> {{ruta.get_dificultat_display}}</li>
+					<li><label>Categoria: </label> {{ruta.categoria}}</li>
+					<li><label>Descripció: </label> {{ruta.descripcio}}</li>
+				</ul>				
+				{% if ruta.administrador == user.perfil %}
+					<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
+	 				<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
+				{% elif ruta.administrador != user.perfil %}
+					{% if user.perfil in ruta.apuntats.all %}					
+					<a href="{% url 'posts:desapuntarRuta' ruta.id %}"><button class="btn btn-danger">Desapunta't <span class="glyphicon glyphicon-remove"></span></button></a>
+					{% else %}
+					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+					{% endif %}
+				{% endif %}	
+				<a data-toggle="modal" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    <div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                 <h4 class="modal-title">Entra un comentaris</h4>
+				            </div>
+				            <div class="modal-body" style="height: 300px">
+								<iframe style="height: 300px" src="{% url 'socials:entrarComentaris' %}" frameborder="0" scrolling="no"></iframe>
+						  	</div>
+					        <div class="modal-footer">
+					        	<button type="button" data-dismiss="modal" class="btn btn-success">Cancelar</button>
+					        </div>
+						</div> 
+					</div>
+				</div>
+			</div> 										
+		</article>
+
+{% endfor %}
+
+{% endblock %}
