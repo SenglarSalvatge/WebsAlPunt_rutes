@@ -13,29 +13,44 @@
 <div style="overflow:auto;height:600px;">
 	{% for ruta in rutes %}
 		<article class="panel panel-success">
-			    <div class="panel-heading">
+			<div class="panel-heading">
 				<h3 class="panel-title">
 				    <a href="{% url 'posts:detall' ruta.id %}">{{ruta.titol}}</a>
 				</h3>
-			    </div>
-				<div class="panel-body">
-					<li><label>Data:</label> {{ruta.data}}</li>
-					<li><label>Dificultat:</label> {{ruta.get_dificultat_display}}</li>
-					<li><label>Categoria:</label> {{ruta.categoria}}</li>
-					<li><label>Descripció:</label> {{ruta.descripcio}}</li>	
-					{% if ruta.administrador == user.perfil %}
-						<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
-		 				<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
-					{% elif ruta.administrador != user.perfil %}
-						<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
-					{% endif %}
-					<a data-toggle="modal" href="/socials/comentari/" data-target="#myModal2" class="btn btn-success">Afegir Comentari <span class="glyphicon glyphicon-comment"></span></a>
-					<!-- Modal -->
-					<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
- 
+			</div>
+			<div class="panel-body">
+				<li><label>Data:</label> {{ruta.data}}</li>
+				<li><label>Dificultat:</label> {{ruta.get_dificultat_display}}</li>
+				<li><label>Categoria:</label> {{ruta.categoria}}</li>
+				<li><label>Descripció:</label> {{ruta.descripcio}}</li>	
+				{% if ruta.administrador == user.perfil %}
+					<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
+		 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
+				{% elif ruta.administrador != user.perfil %}
+					<a href="{% url 'posts:apuntarRuta' ruta.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+				{% endif %}
+				<a data-toggle="modal" data-target="#myModal2" class="btn btn-success">Afegir Comentari</a>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    <div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                 <h4 class="modal-title">Entra un comentaris</h4>
+				            </div>
+				            <div class="modal-body" style="height: 300px">
+								<iframe style="height: 300px" src="{% url 'socials:entrarComentaris' %}" frameborder="0" scrolling="no">
+									
+									
+								</iframe>
+						  	</div>
+					        <div class="modal-footer">
+					        	<button type="button" data-dismiss="modal" class="btn btn-success">Cancelar</button>
+					        </div>
+						</div> 
 					</div>
-				</div> 
-			</article>
+				</div>
+			</div>
+		</article>
 	{% endfor %}
 </div>
 {% endif %}

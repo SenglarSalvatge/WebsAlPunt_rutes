@@ -24,6 +24,11 @@ class Puntuacio(models.Model):
     post = models.ForeignKey('posts.Post', related_name="RutatoPuntuacio")
     perfil = models.ForeignKey(Perfil, related_name="puntuacioUsuari")
     
+    def __unicode__(self):  
+        return self.puntuacio+' '+self.perfil
+    
     class Meta:
         app_label = 'socials'
+        
+    
 
