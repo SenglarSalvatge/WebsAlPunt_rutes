@@ -17,7 +17,7 @@ from django.utils.datetime_safe import datetime, date
 @login_required
 def participaRuta(request):
     Rutes = Post.objects.filter( apuntats = request.user.perfil )
-    return render(request, 'posts/mostrarRutes.html', {'Rutes':Rutes})
+    return render(request, 'posts/participaRutes.html', {'Rutes':Rutes})
 
 
 @login_required
