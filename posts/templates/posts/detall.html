@@ -6,7 +6,7 @@
 
 {% block links-comple %}
 		<!-- js i css per a mapa de API google MAPS-->	
-		<link rel="stylesheet" href="{% static 'maps/maps.css' %}">
+		<link rel="stylesheet" href="{% static 'maps/pinta_mapa.css' %}">
 		<link rel="stylesheet" href="{% static 'css/votacio.css' %}">
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyClNhahi1_H8Tmdb7_WeuGpd4YA1cfOPwk&sensor=false"></script>
 		<script src="{% static 'maps/pinta_mapa.js' %}"></script>
@@ -16,31 +16,54 @@
 <h1>Les meves rutes</h1>
 {% for r in ruta %}
 	<article class="panel panel-success">
-		    <div class="panel-heading">
-			<h3 class="panel-title">
-			    {{ruta.titol}}
-			</h3>
-		    </div>
+			<div class="panel-heading">
+				<h3 class="panel-title">
+				    <a href="{% url 'posts:detall' r.id %}">{{r.titol}}</a>
+				</h3>
+			</div>
 			<div class="panel-body">
-				<li>{{r.data}}</li>
-				<li>{{r.dificultat}}</li>
-				<li>{{r.categoria}}</li>
-				<li>{{r.descripcio}}</li>	
-				<li id="mitjana">{{r.mitjana}}</li>	
-				
-				
-				
+				<li><label>Data:</label> {{r.data}}</li>
+				<li><label>Dificultat:</label> {{r.get_dificultat_display}}</li>
+				<li><label>Categoria:</label> {{r.categoria}}</li>
+				<li><label>Descripció:</label> {{r.descripcio}}</li>	
+				{% if r.administrador == user.perfil %}
+					<a href="{% url 'posts:editaRuta' r.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
+		 			<a href="{% url 'posts:eliminarRuta' r.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				
+				{% elif r.administrador != user.perfil %}
+					<a href="{% url 'posts:apuntarRuta' r.id %}"><button class="btn btn-success">Apunta't! <span class="glyphicon glyphicon-ok"></span></button></a>
+				{% endif %}
+				<a data-toggle="modal" data-target="#myModal2" class="btn btn-success">Afegir Comentari <span class="glyphicon glyphicon-comment"></span></a>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+				    <div class="modal-dialog">
+				        <div class="modal-content">
+				            <div class="modal-header">
+				                 <h4 class="modal-title">Entra un comentaris</h4>
+				            </div>
+				            <div class="modal-body" style="height: 300px">
+								<iframe style="height: 300px" src="{% url 'socials:entrarComentaris' %}" frameborder="0" scrolling="no">
+									
+									
+								</iframe>
+						  	</div>
+					        <div class="modal-footer">
+					        	<button type="button" data-dismiss="modal" class="btn btn-success">Cancelar</button>
+					        </div>
+						</div> 
+					</div>
+				</div>
 				<div id="votacio">
+					<p id="mitjana">{{r.mitjana}}</p>	
 					<a><img id="bota1"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);" /></a>
 					<a><img id="bota2"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);"/></a>
 					<a><img id="bota3"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);"/></a>
 					<a><img id="bota4"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);"/></a>
 					<a><img id="bota5"  src="{% static 'img/icon/bota.png' %}" onclick="javascript:puntuar({{r.id}},this.id);"/></a>
 				</div>
-			</div> 
-		</article>
-		
-		<input type="hidden" id="coordenades" value="{{r.coordenades}}"/>
+			</div>
+	</article>
+
+	<input type="hidden" id="coordenades" value="{{r.coordenades}}"/>
 
 {% endfor %}
 

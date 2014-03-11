@@ -27,7 +27,9 @@ def mevaRuta(request):
 
 def mostrarRutesAcabades(request):    
     dataRuta = date.today()
-    Rutes = Post.objects.filter(data__lt = dataRuta)    
+    rutes = Post.objects.filter(data__lt = dataRuta)        
+    page = request.GET.get('page')
+    Rutes = paginaitor_plus(page, rutes, 3)    
     return render(request, 'posts/mostrarRutesAcabades.html', {'Rutes':Rutes})
 
 def calcularDistanciaMapa(frase):
