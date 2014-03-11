@@ -1,6 +1,7 @@
 
 			<form action="" method="post">{% csrf_token %}
 				{{ form.as_p }}
-				<input type="submit"  value="Guardar comentari" class="btn btn-success"/>		
+				<input type="submit" value="Guardar comentari" class="btn btn-success"/>
+				<input type="hidden" name="id_ruta" value="{{ ruta.id_ruta }}">		
 			</form>
     		
