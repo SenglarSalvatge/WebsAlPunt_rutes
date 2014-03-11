@@ -1,0 +1,24 @@
+
+#map-canvas { 
+	height: 100px;
+  	width: 50%;
+  	border: 1px solid black;
+}
+
+#panel {
+    top: 5px;
+    z-index: 5;
+    background-color: transparent;
+    padding: 5px;
+    text-align: center;
+}
+
+#mapaDiv {
+    float: left;
+    width: 100%;
+}
+
+#formRuta {
+	float: left;
+}
+

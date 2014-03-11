@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 from django.db import models
 from usuaris.models import Perfil
-from socials.models import Puntuacio
+from socials.models import Puntuacio, Comentari
 
 class Categoria(models.Model):
     nom = models.CharField(max_length=200, help_text="Nom de la Categoria")
@@ -39,13 +39,23 @@ class Post(models.Model):
     
     @property
     def mitjana(self):
-        from django.db.models import Avg, Sum
-        calcula = Puntuacio.objects.filter( post= self).aggregate(mitjana = Avg('puntuacio'), suma = Sum('puntuacio'))
+        from django.db.models import Avg
+        calcula = Puntuacio.objects.filter( post= self).aggregate(mitjana = Avg('puntuacio'))
         return calcula['mitjana']
     
-    #@property
-    #def total_mitjana_puntuacio(self):
-    #    return 100
+    @property
+    def contador_comentaris(self):
+        from django.db.models import Sum
+        calcula = Comentari.objects.filter( post= self).aggregate( suma = Sum('comentari'))
+        return calcula['suma']
+    
+    @property
+    def contador_participants(self):
+        from django.db.models import Sum
+        calcula = Post.objects.filter( apuntats = self).aggregate( suma = Sum('apuntats'))
+        return calcula['suma']
+    
+    
 
 
 
