@@ -60,9 +60,9 @@
 				      <li class="dropdown">
 				      	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Rutes<b class="caret"></b> <span class="glyphicon glyphicon-road"></span></a>
 					    <ul class="dropdown-menu">
-						    <li><a href="{% url 'posts:novaRuta' %}">Crear Ruta</a></li>
+						    <li><a href="{% url 'posts:novaRuta' %}">Crear Ruta <span class="glyphicon glyphicon-plus"></span></a></li>
 						    <li class="divider"></li>
-						    <li><a href="{% url 'posts:buscarRuta' %}">Cerca Ruta</a></li>
+						    <li><a href="{% url 'posts:buscarRuta' %}">Cerca Ruta <span class="glyphicon glyphicon-search"></span></a></li>
 					    </ul>
 					  </li>
 					  <li class="dropdown">
@@ -85,7 +85,7 @@
 			      <li class="dropdown">
 			        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> Configuració<b class="caret"></b></a>
 			        <ul class="dropdown-menu">
-			         	  <li><a href="{% url 'usuaris:mostrarPerfil' %}">Perfil <span><img src="{% static 'img/icon/glyphicons/png/glyphicons_431_shoe_steps.png' %}" /></span></a></li>
+			         	  <li><a href="{% url 'usuaris:mostrarPerfil' %}">Perfil <span class="glyphicon glyphicon-wrench"></span></a></li>
 			          	  <li class="divider"></li>
 						  <li><a href="{% url 'usuaris:exit_login' %}">Sortir <span class="glyphicon glyphicon-log-out"></span></a></li>
 			        </ul>
