@@ -159,7 +159,11 @@ def editaRuta(request, ruta_id=None):
 
 def detall_ruta(request, ruta_id):
     ruta = Post.objects.filter(pk = ruta_id)
-    comentaris = Comentari.objects.filter(post = ruta_id)
+    try:
+        comentaris = Comentari.objects.filter(post = ruta_id)
+    except:
+        comentaris = None
+        
     return render(request, 'posts/detall.html', {'ruta':ruta, 'cometaris':comentaris})
 
 def comentariRuta(request, ruta_id):
