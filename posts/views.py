@@ -183,8 +183,6 @@ def filtreDeRutes(request):
             q = json.loads(q_str)        
             p = Q()
             
-            print q
-            
             #['titol', 'data', 'dificultat', 'categoria', 'administrador']
             if 'titol' in q and q['titol']:
                 p &= Q(titol = q['titol'])
@@ -202,7 +200,7 @@ def filtreDeRutes(request):
                 n = int(q['administrador'])
                 p &= Q(administrador = n)
             
-            llista_rutes = Post.objects.filter( p )
+            llista_rutes = Post.objects.filter( p ).order_by('-data')
 
         else:
             llista_rutes = Post.objects.none()
