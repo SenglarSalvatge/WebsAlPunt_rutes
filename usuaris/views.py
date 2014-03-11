@@ -2,6 +2,7 @@
 from django.shortcuts import render
 from django.contrib.auth import logout
 from models import Perfil
+from socials.models import Comentari
 from django.http.response import HttpResponseRedirect
 from usuaris.forms import PerfilForm
 from django.contrib import messages
@@ -26,7 +27,9 @@ def editarPerfil(request):
     return render(request, 'usuaris/editarPerfil.html', {'form':form})
 
 def mostrarPerfil(request):
-    return render(request, 'usuaris/mostrarPerfil.html')
+    comentaris = Comentari.objects.filter(perfil = request.user.perfil) 
+    return render(request, 'usuaris/mostrarPerfil.html', {'comentaris':comentaris})
+
 
 def login(request):
     #todo: fer render de login_social.html

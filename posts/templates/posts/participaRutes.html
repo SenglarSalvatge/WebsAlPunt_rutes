@@ -40,7 +40,7 @@
 				                 <h4 class="modal-title">Entra un comentaris</h4>
 				            </div>
 				            <div class="modal-body" style="height: 300px">
-								<iframe style="height: 300px" src="{% url 'socials:entrarComentaris' %}" frameborder="0" scrolling="no"></iframe>
+								<iframe style="height: 300px" src="{% url 'socials:entrarComentaris' r.pk  %}" frameborder="0" scrolling="no"></iframe>
 						  	</div>
 					        <div class="modal-footer">
 					        	<button type="button" data-dismiss="modal" class="btn btn-success">Cancelar</button>

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, get_object_or_404
 from posts.models import Post
-from socials.models import Puntuacio
+from socials.models import Puntuacio, Comentari
 from posts.forms import PostForm, FiltreRutaForm
 from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.contrib import messages
@@ -159,7 +159,15 @@ def editaRuta(request, ruta_id=None):
 
 def detall_ruta(request, ruta_id):
     ruta = Post.objects.filter(pk = ruta_id)
-    return render(request, 'posts/detall.html', {'ruta':ruta})
+    comentaris = Comentari.objects.filter(post = ruta_id)
+    return render(request, 'posts/detall.html', {'ruta':ruta, 'cometaris':comentaris})
+
+def comentariRuta(request, ruta_id):
+    ruta=get_object_or_404(Post, pk=ruta_id)
+    comentaris = Comentari.objects.filter(post = ruta) 
+    page = request.GET.get('page')
+    coments = paginaitor_plus(page, comentaris, 4)
+    return render(request, 'posts/comentaris.html', {'comentaris':coments})
 
 def filtreDeRutes(request):
 
