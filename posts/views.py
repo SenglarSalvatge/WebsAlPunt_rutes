@@ -12,8 +12,7 @@ import math
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 import json
 from django.utils.datetime_safe import datetime, date
-from django.views.decorators.http import condition
-from django.contrib.auth.decorators import permission_required
+
 
 @login_required
 def participaRuta(request):
@@ -193,7 +192,8 @@ def filtreDeRutes(request):
                 d = datetime.strptime(q['data'], '%d/%m/%Y')
                 p &= Q(data = d)
             if 'dificultat' in q and q['dificultat']:
-                p &= Q(dificultat = q['dificultat'])
+                if q['dificultat'] != '------':
+                    p &= Q(dificultat = q['dificultat'])
 
             if 'categoria' in q and q['categoria']:
                 n = int(q['categoria'])
@@ -210,38 +210,31 @@ def filtreDeRutes(request):
         page = request.GET.get('page')
         rutes = paginaitor_plus(page, llista_rutes, 2)
         
+        form.fields['dificultat'].widget.choices = [ (0,'------') ] + list(form.fields['dificultat'].widget.choices)
+        
     return render(request, 'posts/filtreDeRutes.html', {'form':form, 'rutes':rutes, 'q':q_str})
 
 
 def puntuar(request):
     punts = request.GET.get('punts')
     ruta_id = request.GET.get('ruta_id')
-    
-    
+    ruta = get_object_or_404(Post, id = ruta_id )
     usuari = request.user.perfil
     
-    q = Q()
-    q = Q(apuntats = usuari)
-    q &= Q(pk = ruta_id)
-    buscador = Post.objects.filter(q).first()
-    
-    if buscador is not None:
-        p = Puntuacio.objects.get( q );
-            
-    else:
-        p = Puntuacio()
-        p.perfil = usuari
-        ruta = Post.objects.get(pk = ruta_id)
-        p.post = ruta
-    
+    p, created = Puntuacio.objects.get_or_create( post = ruta, perfil = usuari , defaults={'puntuacio':punts})
     p.puntuacio = punts
-    p.save()
+    p.save() 
     
-    return HttpResponse(content='OK')
+    resposta = dict()
+    resposta['resultat'] = 'OK'
+    resposta['mitjana'] = ruta.mitjana
+    resposta['punts'] = p.puntuacio
+    
+    return HttpResponse(json.dumps(resposta), content_type='application/json')
 
 
 def paginaitor_plus(page, llista, num):
-    paginator = Paginator(llista, num) # numero d'entrades per pàgina
+    paginator = Paginator(llista, num) #numero d'entrades per pàgina
     try:
         entrada = paginator.page(page)
     except PageNotAnInteger:
