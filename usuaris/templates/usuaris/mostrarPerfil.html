@@ -13,4 +13,11 @@
 	<p>Descripció del usuari => {{user.perfil.descripcio}}</p><br>
 	<p>Nick del usuari => {{user.perfil.nick}}</p><br>
 	<a href="{% url 'usuaris:editarPerfil' %}"><button type="submit" class="btn btn-success">Modificar perfil</button></a>
+
+	{% for c in comentaris %}
+		{{c.comentari}}
+		<a href="{% url 'usuaris:eliminarComentari' c.id %}" class="btn btn-danger" >Esborra Comentari <span class="glyphicon glyphicon-trash"></span></a>
+	{% endfor %}
+		
 {% endblock %}
+
