@@ -1,7 +1,5 @@
 from django.shortcuts import render
 from socials.forms import ComentariForm
-from django.core.urlresolvers import reverse
-from django.http.response import HttpResponseRedirect
 from django.contrib import messages
 from socials.models import Comentari
 from posts.models import Post

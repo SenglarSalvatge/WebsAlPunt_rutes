@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404
 from posts.models import Post
 from socials.models import Puntuacio, Comentari
 from posts.forms import PostForm, FiltreRutaForm
-from django.http.response import HttpResponseRedirect, HttpResponse, Http404
+from django.http.response import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required

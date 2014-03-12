@@ -106,3 +106,12 @@ body{
 .listadoFooter{
 	padding: 0px;
 }
+
+.votacio {
+	float: right;
+}
+
+.votacio .mitjana {
+    font-weight: bold;
+    text-align: center;
+}
