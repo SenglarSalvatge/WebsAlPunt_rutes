@@ -1,24 +1,27 @@
 
 #map-canvas { 
-	height: 100px;
+	height: 400px;
   	width: 50%;
   	border: 1px solid black;
+  	float: right;
 }
 
-#panel {
-    top: 5px;
-    z-index: 5;
-    background-color: transparent;
-    padding: 5px;
-    text-align: center;
-}
 
 #mapaDiv {
-    float: left;
     width: 100%;
 }
 
-#formRuta {
-	float: left;
+#votacio {
+    display:block;
 }
+
+#mitjana {
+    font-weight: bold;
+    text-align: center;
+}
+
+#paneleitor2000 {
+	float:left;
+}
+
 

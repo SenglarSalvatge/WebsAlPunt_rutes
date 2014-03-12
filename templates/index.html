@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load staticfiles %}
 {% block title %}
 	<title>Inici</title>
 {% endblock %}
@@ -10,7 +11,7 @@
 </blockquote>
 
 {% if rutes %}
-<div style="overflow:auto;height:600px;">
+<div id="ultime_rutes">
 	{% for ruta in rutes %}
 		<article class="panel panel-success">
 			<div class="panel-heading">
@@ -57,10 +58,15 @@
 						</div> 
 					</div>
 				</div>
+				<div class="votacio" data-ruta="ruta_{{ruta.id}}">
+					<p class="mitjana" data-ruta="ruta_{{ruta.id}}">Puntuació de la ruta : <button class="btn btn-success">{% if ruta.mitjana != None %}{{ruta.mitjana}}{% else %}0{% endif %}</button></p>	
+				</div>
 			</div>
 		</article>
 	{% endfor %}
 </div>
 {% endif %}
+
+
 
 {% endblock %}
