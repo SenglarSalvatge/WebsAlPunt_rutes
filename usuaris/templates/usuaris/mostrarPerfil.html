@@ -10,7 +10,27 @@
 </blockquote>
 
 	<br>
-	<p>Descripció del usuari => {{user.perfil.descripcio}}</p><br>
-	<p>Nick del usuari => {{user.perfil.nick}}</p><br>
+	<h3><strong>Nick del usuari:</strong> {{user.perfil.nick}}</h3><br>
+	<h3><strong>Descripció del usuari:</strong> {{user.perfil.descripcio}}</h3><br>
+	
 	<a href="{% url 'usuaris:editarPerfil' %}"><button type="submit" class="btn btn-success">Modificar perfil</button></a>
+	<br>
+	<br>
+	{% for c in comentaris %}
+		<article class="panel panel-success">
+	    <div class="panel-heading">
+			<h3 class="panel-title">
+			    Comentari a {{c.post}}
+			</h3>
+	    </div>
+		<div class="panel-body">
+				{{c.comentari}}
+				<br>
+				<br>
+				<a href="{% url 'usuaris:eliminarComentari' c.id %}" class="btn btn-danger" >Esborra Comentari <span class="glyphicon glyphicon-trash"></span></a>
+		</div>
+		</article>
+	{% endfor %}
+		
 {% endblock %}
+

@@ -20,10 +20,15 @@
 				</h3>
 			</div>
 			<div class="panel-body">
+				<div class="imatgeRuta">
+					{{ruta.categoria_set.foto}}
+				</div>
 				<li><label>Data:</label> {{ruta.data}}</li>
 				<li><label>Dificultat:</label> {{ruta.get_dificultat_display}}</li>
 				<li><label>Categoria:</label> {{ruta.categoria}}</li>
 				<li><label>Descripció:</label> {{ruta.descripcio}}</li>	
+				<li><label>Participants:</label>{{ruta.contador_participants}}</li>
+				<li><label>Comentaris:</label>{{ruta.contador_comentaris}}</li>
 				{% if ruta.administrador == user.perfil %}
 					<a href="{% url 'posts:editaRuta' ruta.id %}" class="btn btn-success" >Edita Ruta <span class="glyphicon glyphicon-pencil"></span></a>
 		 			<a href="{% url 'posts:eliminarRuta' ruta.id %}" class="btn btn-danger" >Esborra Ruta <span class="glyphicon glyphicon-trash"></span></a>				

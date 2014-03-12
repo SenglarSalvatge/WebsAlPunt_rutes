@@ -97,6 +97,10 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "staticEnrutcat"),
 )
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
 
 #Correus que ens voldrem fer login
 AUTHENTICATION_BACKENDS = (

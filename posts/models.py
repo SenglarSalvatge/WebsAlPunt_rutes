@@ -5,6 +5,7 @@ from socials.models import Puntuacio, Comentari
 
 class Categoria(models.Model):
     nom = models.CharField(max_length=200, help_text="Nom de la Categoria")
+    foto = models.ImageField(upload_to='categoria_img', verbose_name='imatge', blank=True)
     
     def __unicode__(self):  
         return self.nom
@@ -23,7 +24,7 @@ class Post(models.Model):
     data = models.DateField(help_text="Data")
     descripcio = models.CharField(max_length=800, blank=True, null=True, help_text="Descripció")
     dificultat = models.CharField(max_length=2, null=True, choices=DIFICULTAT_CHOICES, help_text="Dificultat")
-    
+        
     categoria = models.ForeignKey(Categoria, help_text="Categoria")
     administrador = models.ForeignKey(Perfil, help_text="Administrador", related_name="postAdministrats")
     apuntats = models.ManyToManyField(Perfil, blank = True, help_text="Apuntats", related_name="postOnEsticApuntat")
@@ -43,16 +44,14 @@ class Post(models.Model):
         calcula = Puntuacio.objects.filter( post= self).aggregate(mitjana = Avg('puntuacio'))
         return calcula['mitjana']
     
-    @property
     def contador_comentaris(self):
         from django.db.models import Sum
-        calcula = Comentari.objects.filter( post= self).aggregate( suma = Sum('comentari'))
+        calcula = Comentari.objects.filter( pk = self).aggregate( suma = Sum('comentari'))
         return calcula['suma']
     
-    @property
     def contador_participants(self):
         from django.db.models import Sum
-        calcula = Post.objects.filter( apuntats = self).aggregate( suma = Sum('apuntats'))
+        calcula = Post.objects.filter( pk = self).aggregate( suma = Sum('apuntats'))
         return calcula['suma']
     
     

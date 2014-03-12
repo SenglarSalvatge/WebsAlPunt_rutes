@@ -2,6 +2,10 @@ body{
 	background-image: url('../imatges/fonsPantalla.png');
 }
 
+.panellPrincipal{
+	background-color:#9FDC9F;
+	opacity: 0.9;
+}
 #twitterLogo{
 	display: inline-block;
 	background-image: url('../imatges/twitter-icon.jpg');
