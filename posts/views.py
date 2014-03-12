@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render, get_object_or_404
 from posts.models import Post
-from socials.models import Puntuacio
+from socials.models import Puntuacio, Comentari
 from posts.forms import PostForm, FiltreRutaForm
 from django.http.response import HttpResponseRedirect, HttpResponse, Http404
 from django.contrib import messages
@@ -159,22 +159,32 @@ def editaRuta(request, ruta_id=None):
 
 def detall_ruta(request, ruta_id):
     ruta = Post.objects.filter(pk = ruta_id)
-    return render(request, 'posts/detall.html', {'ruta':ruta})
+    try:
+        comentaris = Comentari.objects.filter(post = ruta_id)
+    except:
+        comentaris = None
+        
+    return render(request, 'posts/detall.html', {'ruta':ruta, 'cometaris':comentaris})
+
+def comentariRuta(request, ruta_id):
+    ruta=get_object_or_404(Post, pk=ruta_id)
+    comentaris = Comentari.objects.filter(post = ruta) 
+    page = request.GET.get('page')
+    coments = paginaitor_plus(page, comentaris, 4)
+    return render(request, 'posts/comentaris.html', {'comentaris':coments})
 
 def filtreDeRutes(request):
 
     form = FiltreRutaForm()
     if request.method == 'POST':
         #prepareu diccionari amb els parametres del post
-        form = FiltreRutaForm(request.POST)        
-        if form.is_valid():
-            q_str = request.POST.copy()
-            q_str.pop('csrfmiddlewaretoken') #borrem el srtdgf de l'array
-            q = json.dumps(q_str)
+        q_str = request.POST.copy()
+        q_str.pop('csrfmiddlewaretoken') #borrem el srtdgf de l'array
+        q = json.dumps(q_str)
 
-            url_next = reverse('posts:buscarRuta', kwargs={})
-        
-            return HttpResponseRedirect(url_next+"?q="+q)
+        url_next = reverse('posts:buscarRuta', kwargs={})
+    
+        return HttpResponseRedirect(url_next+"?q="+q)
     
     else:
         q_str = request.GET.get('q',None)        
@@ -183,8 +193,6 @@ def filtreDeRutes(request):
             q = json.loads(q_str)        
             p = Q()
             
-            print q
-            
             #['titol', 'data', 'dificultat', 'categoria', 'administrador']
             if 'titol' in q and q['titol']:
                 p &= Q(titol = q['titol'])
@@ -192,7 +200,7 @@ def filtreDeRutes(request):
                 d = datetime.strptime(q['data'], '%d/%m/%Y')
                 p &= Q(data = d)
             if 'dificultat' in q and q['dificultat']:
-                if q['dificultat'] != '------':
+                if q['dificultat'] != '0':
                     p &= Q(dificultat = q['dificultat'])
 
             if 'categoria' in q and q['categoria']:
@@ -202,7 +210,7 @@ def filtreDeRutes(request):
                 n = int(q['administrador'])
                 p &= Q(administrador = n)
             
-            llista_rutes = Post.objects.filter( p )
+            llista_rutes = Post.objects.filter( p ).order_by('-data')
 
         else:
             llista_rutes = Post.objects.none()
