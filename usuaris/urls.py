@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     #mostrem l'autenticacio per social auth: /usuaris/autenticacio
     url(r'^autenticacio/$', views.login, name='login'),
     # eliminar coment
-    url(r'^eliminarComnetari/(?P<comentari_id>\d+)/$', views.eliminarComentari, name='eliminarComnetari'),
+    url(r'^eliminarComnetari/(?P<comentari_id>\d+)/$', views.eliminarComentari, name='eliminarComentari'),
+    
     url(r'^loug_aut/$', views.exit_login, name='exit_login') ,
 )
