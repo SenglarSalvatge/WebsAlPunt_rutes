@@ -1,6 +1,24 @@
+{% load staticfiles %}
+<!-- Llibreria jQuery per a Bootstrap -->
+<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+<!-- JavaScript de Bootstrap -->
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<!-- Fitxer amb última versió de jQuery -->
+<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css'%}">		
+<!-- Fitxer CSS de Pnotify-->
+<link rel="stylesheet" href="{% static 'bootstrap/css/jquery.pnotify.default.css'%}">
+<!-- Fitxer de icones de Pnotify-->
+<link rel="stylesheet" href="{% static 'bootstrap/css/jquery.pnotify.default.icons.css'%}">		
+<!-- Link al nostre fitxer de JavaScript-->
+<script src="{% static 'bootstrap/js/js.js' %}"></script>
+<!-- Link al fitxer de JavaScript de Pnotify-->
+<script src="{% static 'bootstrap/js/jquery.pnotify.js' %}"></script>	
+<!-- Link al fitxer MIN de JavaScript de Pontify-->
+<script src="{% static 'bootstrap/js/jquery.pnotify.min.js' %}"></script>
 
-			<form action="" method="post">{% csrf_token %}
-				{{ form.as_p }}
-				<button type="submit" class="btn btn-success">Comentar <span class="glyphicon glyphicon-comment"></span></button>		
-			</form>
-    		
+<form action="" method="post">{% csrf_token %}
+	{{ form.as_p }}
+	<input type="submit" value="Guardar comentari" class="btn btn-success"/>
+	<input type="hidden" name="id_ruta" value="{{ ruta.id_ruta }}">		
+</form>
