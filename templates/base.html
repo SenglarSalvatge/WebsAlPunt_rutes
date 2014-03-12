@@ -68,7 +68,7 @@
 					  <li class="dropdown">
 					  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">La meva activitat<b class="caret"></b> <span><img src="{% static 'img/icon/glyphicons/png/glyphicons_431_shoe_steps.png' %}" /></span></a>
 					    <ul class="dropdown-menu">
-						    <li><a href="{% url 'posts:mostrarRutes' %}">Les meves rutes</a></li>
+						    <li><a href="{% url 'posts:mostrarRutes' %}">Les meves rutes <span><img src="{% static 'img/icon/glyphicons/png/glyphicons_039_notes.png' %}" /></span></a></li>
 						    <li class="divider"></li>
 						    <li><a href="'posts:participaRuta'">Rutes on participaré <span><img src="{% static 'img/icon/glyphicons/png/glyphicons_043_group.png' %}" /></span></a></li>
 						    <li class="divider"></li>
@@ -99,14 +99,34 @@
 			</header>
 			<br>
 			<br>
-
-			<h1></h1>
-
+			<br>			
 
 			<div>
+				{% if user.is_authenticated %}
+				
 				{% block content %}
 				{% endblock %}
-			</div>
+				{% else %}
+					<div class="jumbotron panellPrincipal">
+					  <span class="textePanell">	
+					  <h1>Projecte enrut.cat</h1>
+					  <p>Aquest és el projecte d'un grup d'estudiants de l'Institut Cendrassos de Figueres.
+					  	La idea principal amb la que creem aquest projecte és que qualsevol persona, sigui esportista
+					  	o no, pugui practicar un esport a l'aire lliure, ja sigui sol, amb amics o amb un gran grup de persones.
+					  	<hr>
+					  	<strong>Característiques principals del projecte:</strong><br>
+					  	Tot el que trobareu, ha estat creat i dissenyat des de zero. Utilitzem el framework de Python Django per a la creació
+					  	i inserció de dades.
+					  	Les imatges que trobeu, són de llicència lliure i aptes per a la reutilització.
+					  	</p>
+					  	<strong>Tutorial:</strong>
+					  	<p>Aprén a utilitzar la nostra aplicació. És fàcil, senzill i divertit!
+					  		</p>
+					  <p><a href="#" class="btn btn-success btn-lg" role="button" data-toggle="modal" data-target="#myModal">Accedeix i participa!</a></p>
+					  </span>
+					</div>
+				{% endif %}
+			</div>			
 			<div>
 				{% block mostrarRequest %}
 				{% endblock %}

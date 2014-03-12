@@ -6,3 +6,4 @@ local_settings.py
 setting_local.py
 db.sqlite3
 reiniciarDB
+categoria_img
