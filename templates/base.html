@@ -167,9 +167,7 @@
 					<div>
 						{% if user.is_authenticated %}
 						{% else %} 
-							<!--<a href="{% url 'social:begin' 'facebook' %}">Login amb Facebook</a> <br /-->
 							<a href="{% url 'social:begin' 'google-oauth2' %}"><button class="btn btn-danger btn-lg centrarText" >Accedeix amb Google</button></a><h5>Inicia sessió amb el teu compte de <abbr title="Correu De Google">GMAIL</abbr></h5><hr>
-							<a href="{% url 'social:begin' 'twitter' %}"><button class="btn btn-info btn-lg centrarText">Accedeix amb Twitter</button></a><h5>Inicia sessió amb el teu compte de Twitter</h5>
 						{% endif %}
 				      </div>
 				    </div>
