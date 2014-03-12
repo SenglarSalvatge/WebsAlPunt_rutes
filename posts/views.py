@@ -178,15 +178,13 @@ def filtreDeRutes(request):
     form = FiltreRutaForm()
     if request.method == 'POST':
         #prepareu diccionari amb els parametres del post
-        form = FiltreRutaForm(request.POST)        
-        if form.is_valid():
-            q_str = request.POST.copy()
-            q_str.pop('csrfmiddlewaretoken') #borrem el srtdgf de l'array
-            q = json.dumps(q_str)
+        q_str = request.POST.copy()
+        q_str.pop('csrfmiddlewaretoken') #borrem el srtdgf de l'array
+        q = json.dumps(q_str)
 
-            url_next = reverse('posts:buscarRuta', kwargs={})
-        
-            return HttpResponseRedirect(url_next+"?q="+q)
+        url_next = reverse('posts:buscarRuta', kwargs={})
+    
+        return HttpResponseRedirect(url_next+"?q="+q)
     
     else:
         q_str = request.GET.get('q',None)        
@@ -202,7 +200,7 @@ def filtreDeRutes(request):
                 d = datetime.strptime(q['data'], '%d/%m/%Y')
                 p &= Q(data = d)
             if 'dificultat' in q and q['dificultat']:
-                if q['dificultat'] != '------':
+                if q['dificultat'] != '0':
                     p &= Q(dificultat = q['dificultat'])
 
             if 'categoria' in q and q['categoria']:
